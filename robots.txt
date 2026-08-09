@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://browarpogorza.pl/sitemap.xml
+Sitemap: https://browarpogorza.pl/sitemap-images.xml

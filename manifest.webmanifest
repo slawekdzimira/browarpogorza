@@ -1,0 +1,33 @@
+{
+  "name": "Browar Pogórza",
+  "short_name": "Browar Pogórza",
+  "description": "Rzemieślniczy browar z Pogórza Dynowsko-Przemyskiego — zaSZCZYTne Piwo z doliny Sanu",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFF9EC",
+  "theme_color": "#2D7A3D",
+  "lang": "pl-PL",
+  "categories": ["food", "lifestyle", "shopping"],
+  "icons": [
+    {
+      "src": "/images/logo-black.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo-black.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo-black.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
