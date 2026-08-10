@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://browarpogorza.pl/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://browarpogorza.pl/dobierz-piwo.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://browarpogorza.pl/blog/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://browarpogorza.pl/blog/co-to-jest-porter-baltycki.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/blog/jak-smakuje-foreign-extra-stout.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
