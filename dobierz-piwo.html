@@ -129,20 +129,27 @@
         .tile:active { transform: translateY(-2px) scale(0.985); }
         .tile.is-picked { border-color: var(--sun); background: rgba(255, 192, 46, 0.18); }
 
-        .tile__icon {
-            font-size: 2.1rem; line-height: 1;
-            width: 68px; height: 68px; display: grid; place-items: center;
-            border-radius: 50%; background: rgba(255, 192, 46, 0.14);
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.28s ease;
+        .tile__photo {
+            display: block; overflow: hidden;
+            width: 96px; height: 96px; border-radius: 50%;
+            background: rgba(255, 192, 46, 0.14);
+            border: 2px solid rgba(255, 249, 236, 0.18);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+            transition: border-color 0.28s ease, box-shadow 0.28s ease;
         }
-        .tile:hover .tile__icon { transform: scale(1.12) rotate(-6deg); background: rgba(255, 192, 46, 0.26); }
+        .tile__photo img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .tile:hover .tile__photo { border-color: var(--sun); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.36); }
+        .tile:hover .tile__photo img { transform: scale(1.1); }
         .tile__label { font-size: 1.02rem; }
         .tile__sub { font-size: 0.84rem; color: var(--text-light-muted); font-weight: 400; }
 
         @keyframes tileIn { from { opacity: 0; transform: translateY(22px) scale(0.96); } to { opacity: 1; transform: none; } }
 
         .tile--big { padding: 44px 26px; }
-        .tile--big .tile__icon { width: 84px; height: 84px; font-size: 2.7rem; }
+        .tile--big .tile__photo { width: 136px; height: 136px; }
         .tile--big .tile__label { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; }
 
         /* --- wynik --- */
@@ -324,85 +331,85 @@
 
     var ANSWERS = {
         food: [
-            { icon: '🔥', label: 'Grill i kiełbasa',      sub: 'karkówka, boczek, ognisko',
+            { photo: 'grill', label: 'Grill i kiełbasa',      sub: 'karkówka, boczek, ognisko',
               beer: 'hills-pils', alts: ['blue-sky', 'san-lajt'],
               why: 'Do tłustego mięsa z rusztu chcesz czegoś czystego i wytrawnego, co przepłucze podniebienie przed kolejnym kęsem. Pils robi dokładnie to.',
               pairing: 'Im prostsze mięso, tym lepiej to działa: kiełbasa, karkówka, kaszanka z grilla.' },
-            { icon: '🍔', label: 'Burgery i pizza',       sub: 'fast food, frytki, ser',
+            { photo: 'burger', label: 'Burgery i pizza',       sub: 'fast food, frytki, ser',
               beer: 'blue-sky', alts: ['hills-pils', 'herb-apa'],
               why: 'Tłusty ser i sos potrzebują owocowego kontrastu. Blue Sky daje mango i marakuję zamiast ostrej goryczki, więc nie bije się z jedzeniem.',
               pairing: 'Najlepiej z burgerem z cheddarem, pizzą pepperoni i frytkami z sosem.' },
-            { icon: '🌶️', label: 'Ostre jedzenie',        sub: 'meksyk, tajskie, curry',
+            { photo: 'ostre', label: 'Ostre jedzenie',        sub: 'meksyk, tajskie, curry',
               beer: 'san-lajt', alts: ['wheat-valley', 'herb-apa'],
               why: 'Owocowa słodycz mango studzi kapsaicynę szybciej niż woda, a lekkie ciało nie dokłada ciężaru do i tak intensywnego dania.',
               pairing: 'Tacos, curry, pikantne skrzydełka, kuchnia tajska.' },
-            { icon: '🐟', label: 'Ryby i owoce morza',    sub: 'grillowane, smażone, sushi',
+            { photo: 'ryby', label: 'Ryby i owoce morza',    sub: 'grillowane, smażone, sushi',
               beer: 'wheat-valley', alts: ['green-hills', 'san-lajt'],
               why: 'Delikatna ryba przegrywa z każdym mocnym piwem. Pszenica jest miękka, lekko owocowa i zostawia jedzeniu miejsce.',
               pairing: 'Pstrąg z grilla, ryba smażona, krewetki, sushi.' },
-            { icon: '🥟', label: 'Kuchnia polska',        sub: 'pierogi, schabowy, żurek',
+            { photo: 'polska', label: 'Kuchnia polska',        sub: 'pierogi, schabowy, żurek',
               beer: 'hills-pils', alts: ['wheat-valley', 'dark-sky'],
               why: 'Klasyka lubi klasykę. Wytrawny finisz pilsa radzi sobie z panierką i masłem, a nic nie zagłusza smaku dania.',
               pairing: 'Pierogi ruskie, schabowy, żurek, gołąbki.' },
-            { icon: '🥩', label: 'Pieczone mięso',        sub: 'wołowina, dziczyzna, gulasz',
+            { photo: 'pieczen', label: 'Pieczone mięso',        sub: 'wołowina, dziczyzna, gulasz',
               beer: 'dark-sky', alts: ['coffee-fes', 'hills-pils'],
               why: 'Porter ma palone słody i śliwkę, które grają z przypieczoną skórką i ciemnym sosem. To jedyne połączenie z tej listy, gdzie piwo jest równie mocne co danie.',
               pairing: 'Pieczona wołowina, dziczyzna, gulasz, żeberka.' },
-            { icon: '🧀', label: 'Deska serów',           sub: 'kozi, pleśniowy, dojrzewający',
+            { photo: 'sery', label: 'Deska serów',           sub: 'kozi, pleśniowy, dojrzewający',
               beer: 'herb-apa', alts: ['dark-sky', 'blue-sky'],
               why: 'Bergamotka z Earl Greya i cytrusowe chmiele przecinają tłustość sera, zamiast się z nią kleić.',
               pairing: 'Kozi ser i sery dojrzewające do Herb APA, pleśniowe raczej do portera.' },
-            { icon: '🍫', label: 'Deser i czekolada',     sub: 'ciasto, lody, tiramisu',
+            { photo: 'deser', label: 'Deser i czekolada',     sub: 'ciasto, lody, tiramisu',
               beer: 'dark-sky-coconut-coffee', alts: ['coffee-fes', 'dark-sky'],
               why: 'To piwo samo w sobie jest deserem — kokos, kawa i czekolada. Do słodkiego podawaj je zamiast kawy albo razem z ciastem.',
               pairing: 'Brownie, tiramisu, lody waniliowe, sernik.' },
-            { icon: '🍳', label: 'Śniadanie i brunch',    sub: 'jajka, owoce, kanapki',
+            { photo: 'sniadanie', label: 'Śniadanie i brunch',    sub: 'jajka, owoce, kanapki',
               beer: 'beerba', alts: ['wheat-valley', 'green-hills'],
               why: 'Zero alkoholu, ziołowa yerba i odrobina soku — o jedenastej rano to ma sens, a mocne piwo nie ma.',
               pairing: 'Jajka, owoce, lekkie sałatki, deska serów.' },
-            { icon: '🥗', label: 'Sałatki i lekkie dania', sub: 'warzywa, kuchnia śródziemnomorska',
+            { photo: 'salatka', label: 'Sałatki i lekkie dania', sub: 'warzywa, kuchnia śródziemnomorska',
               beer: 'green-hills', alts: ['herb-apa', 'wheat-valley'],
               why: 'Lekkie jedzenie i lekkie piwo. Cytrusowa goryczka podbija warzywa i oliwę, a 0,5% nie zamyka dnia.',
               pairing: 'Sałatki, warzywa z pieca, hummus, kuchnia śródziemnomorska.' }
         ],
         occasion: [
-            { icon: '☀️', label: 'Upał nad wodą',         sub: 'plaża, kajaki, San',
+            { photo: 'woda', label: 'Upał nad wodą',         sub: 'plaża, kajaki, San',
               beer: 'san-lajt', alts: ['wheat-valley', 'hills-pils'],
               why: 'Trzydzieści stopni to nie moment na eksperymenty. Lekkie, mocno schłodzone, owocowe — wypijesz i sięgniesz po drugie.',
               pairing: 'Jak coś jesz, niech to będzie grill albo owoce.' },
-            { icon: '🍖', label: 'Grill ze znajomymi',    sub: 'ogród, ekipa, cały dzień',
+            { photo: 'znajomi', label: 'Grill ze znajomymi',    sub: 'ogród, ekipa, cały dzień',
               beer: 'hills-pils', alts: ['san-lajt', 'blue-sky'],
               why: 'Piwo na kilka godzin musi być pijalne, a nie efektowne. Pils nie męczy po trzeciej butelce i pasuje wszystkim.',
               pairing: 'Wszystko z rusztu, frytki, sałatka ziemniaczana.' },
-            { icon: '🏃', label: 'Po treningu',           sub: 'bieg, rower, szlak',
+            { photo: 'trening', label: 'Po treningu',           sub: 'bieg, rower, szlak',
               beer: 'podium', alts: ['green-hills', 'beerba'],
               why: 'Chmielowy aromat i smak piwa bez alkoholu, który zepsułby regenerację. Po to je zrobiliśmy.',
               pairing: 'Makaron, kurczak z grilla, cokolwiek lekkiego po wysiłku.' },
-            { icon: '🚗', label: 'Wracam autem',          sub: 'obiad, spotkanie, wyjazd',
+            { photo: 'auto', label: 'Wracam autem',          sub: 'obiad, spotkanie, wyjazd',
               beer: 'green-hills', alts: ['podium', 'beerba'],
               why: 'Chmielowy charakter IPA i bergamotka z Earl Greya przy 0,5%. Nie musisz pić coli, żeby dojechać do domu.',
               pairing: 'Lunch, kanapki, sushi, kuchnia śródziemnomorska.' },
-            { icon: '🔥', label: 'Wieczór przy ognisku',  sub: 'jesień, koc, gitara',
+            { photo: 'ognisko', label: 'Wieczór przy ognisku',  sub: 'jesień, koc, gitara',
               beer: 'dark-sky', alts: ['coffee-fes', 'blue-sky'],
               why: 'Gęste, ciemne, 9,5% i ciepło, które przychodzi po chwili. Jedna butelka na cały wieczór.',
               pairing: 'Kiełbasa z ogniska, gorzka czekolada, ser pleśniowy.' },
-            { icon: '❄️', label: 'Zimowy wieczór w domu', sub: 'mróz za oknem, nigdzie nie idziesz',
+            { photo: 'zima', label: 'Zimowy wieczór w domu', sub: 'mróz za oknem, nigdzie nie idziesz',
               beer: 'coffee-fes', alts: ['dark-sky', 'dark-sky-coconut-coffee'],
               why: 'Kawa z Kenii, palone słody i pełne ciało. Można podać na ciepło, jak grzańca — wtedy działa najlepiej.',
               pairing: 'Brownie, dziczyzna, dojrzewające sery.' },
-            { icon: '🎬', label: 'Film i kanapa',         sub: 'nikt nigdzie nie wychodzi',
+            { photo: 'film', label: 'Film i kanapa',         sub: 'nikt nigdzie nie wychodzi',
               beer: 'blue-sky', alts: ['herb-apa', 'coffee-fes'],
               why: 'Soczyste, kremowe, bez gryzącej goryczki. Piwo, które pije się samo, kiedy uwaga jest gdzie indziej.',
               pairing: 'Popcorn, nachosy, pizza, skrzydełka.' },
-            { icon: '🌅', label: 'Poranek i praca',       sub: 'brunch, biuro, upał',
+            { photo: 'poranek', label: 'Poranek i praca',       sub: 'brunch, biuro, upał',
               beer: 'beerba', alts: ['green-hills', 'podium'],
               why: '0,0% i kofeina z yerba mate. Zamiast kawy mrożonej, tylko ciekawiej.',
               pairing: 'Śniadanie, owoce, lekka sałatka.' },
-            { icon: '🎁', label: 'Prezent',               sub: 'coś na specjalną okazję',
+            { photo: 'prezent', label: 'Prezent',               sub: 'coś na specjalną okazję',
               beer: 'dark-sky-coconut-coffee', alts: ['dark-sky', 'coffee-fes'],
               why: 'Puszka 330 ml, imperialny porter z kokosem i brazylijską kawą. Wygląda i smakuje jak rzecz, którą się daje, a nie kupuje na co dzień.',
               pairing: 'Do ciasta czekoladowego albo zamiast espresso po obiedzie.' },
-            { icon: '🍺', label: 'Pierwszy craft',        sub: 'dla kogoś, kto nie lubi goryczy',
+            { photo: 'craft', label: 'Pierwszy craft',        sub: 'dla kogoś, kto nie lubi goryczy',
               beer: 'wheat-valley', alts: ['san-lajt', 'hills-pils'],
               why: 'Bananowo-goździkowy aromat, prawie zero goryczki, miękkie ciało. Najłatwiejsze wejście w piwo rzemieślnicze, jakie mamy.',
               pairing: 'Sałatki, ryby, brunch, sery.' }
@@ -410,8 +417,8 @@
     };
 
     var MODES = [
-        { mode: 'food',     icon: '🍽️', label: 'Coś zjem',   sub: 'dobierzemy piwo do dania' },
-        { mode: 'occasion', icon: '⛰️', label: 'Mam okazję', sub: 'dobierzemy piwo do sytuacji' }
+        { mode: 'food',     photo: 'mode-jedzenie', label: 'Coś zjem',   sub: 'dobierzemy piwo do dania' },
+        { mode: 'occasion', photo: 'mode-okazja', label: 'Mam okazję', sub: 'dobierzemy piwo do sytuacji' }
     ];
 
     var stage = document.getElementById('stage');
@@ -424,6 +431,13 @@
 
     function setProgress(index) {
         dots.forEach(function (dot, i) { dot.classList.toggle('is-on', i <= index); });
+    }
+
+    function photoTile(name, alt) {
+        return '<span class="tile__photo"><picture>' +
+            '<source srcset="/images/pairing/' + name + '.webp" type="image/webp">' +
+            '<img src="/images/pairing/' + name + '.jpg" alt="' + alt + '" loading="lazy" width="440" height="440">' +
+            '</picture></span>';
     }
 
     function picture(beer, className) {
@@ -457,7 +471,7 @@
     function stepMode() {
         var tiles = MODES.map(function (item, i) {
             return '<button class="tile tile--big" data-mode="' + item.mode + '" style="--i:' + i + '">' +
-                '<span class="tile__icon">' + item.icon + '</span>' +
+                photoTile(item.photo, item.label) +
                 '<span class="tile__label">' + item.label + '</span>' +
                 '<span class="tile__sub">' + item.sub + '</span>' +
                 '</button>';
@@ -479,7 +493,7 @@
 
         var tiles = list.map(function (item, i) {
             return '<button class="tile" data-answer="' + i + '" style="--i:' + i + '">' +
-                '<span class="tile__icon">' + item.icon + '</span>' +
+                photoTile(item.photo, item.label) +
                 '<span class="tile__label">' + item.label + '</span>' +
                 '<span class="tile__sub">' + item.sub + '</span>' +
                 '</button>';
