@@ -181,19 +181,13 @@
             <a href="/es/#galeria">Galería</a>
             <a href="/es/#kontakt" class="nav__cta">Contacto</a>
         </nav>
-        <details class="langswitch">
-            <summary class="langswitch__toggle" title="Idioma" aria-label="Idioma">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9z"/></svg>
-                <span class="langswitch__now">ES</span>
-            </summary>
-            <ul class="langswitch__list">
-                <li><a class="langswitch__item" href="/piwa/coffee-fes.html" hreflang="pl" lang="pl"><span class="langswitch__code">PL</span>Polski</a></li>
-                <li><a class="langswitch__item" href="/en/beers/coffee-fes.html" hreflang="en" lang="en"><span class="langswitch__code">EN</span>English</a></li>
-                <li><a class="langswitch__item" href="/uk/pyva/coffee-fes.html" hreflang="uk" lang="uk"><span class="langswitch__code">UA</span>Українська</a></li>
-                <li><a class="langswitch__item is-current" href="/es/cervezas/coffee-fes.html" hreflang="es" lang="es" aria-current="true"><span class="langswitch__code">ES</span>Español</a></li>
-                <li><a class="langswitch__item" href="/de/biere/coffee-fes.html" hreflang="de" lang="de"><span class="langswitch__code">DE</span>Deutsch</a></li>
-            </ul>
-        </details>
+        <nav class="langswitch" aria-label="Idioma">
+            <a class="langswitch__lang" href="/piwa/coffee-fes.html" hreflang="pl" lang="pl" title="Polski" aria-label="Polski">PL</a>
+            <a class="langswitch__lang" href="/en/beers/coffee-fes.html" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
+            <a class="langswitch__lang" href="/uk/pyva/coffee-fes.html" hreflang="uk" lang="uk" title="Українська" aria-label="Українська">UA</a>
+            <a class="langswitch__lang is-current" href="/es/cervezas/coffee-fes.html" hreflang="es" lang="es" title="Español" aria-label="Español" aria-current="true">ES</a>
+            <a class="langswitch__lang" href="/de/biere/coffee-fes.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
+        </nav>
         <button class="nav__toggle" id="nav-toggle" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>

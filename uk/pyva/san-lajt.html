@@ -181,19 +181,13 @@
             <a href="/uk/#galeria">Галерея</a>
             <a href="/uk/#kontakt" class="nav__cta">Контакти</a>
         </nav>
-        <details class="langswitch">
-            <summary class="langswitch__toggle" title="Мова" aria-label="Мова">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9z"/></svg>
-                <span class="langswitch__now">UA</span>
-            </summary>
-            <ul class="langswitch__list">
-                <li><a class="langswitch__item" href="/piwa/san-lajt.html" hreflang="pl" lang="pl"><span class="langswitch__code">PL</span>Polski</a></li>
-                <li><a class="langswitch__item" href="/en/beers/san-lajt.html" hreflang="en" lang="en"><span class="langswitch__code">EN</span>English</a></li>
-                <li><a class="langswitch__item is-current" href="/uk/pyva/san-lajt.html" hreflang="uk" lang="uk" aria-current="true"><span class="langswitch__code">UA</span>Українська</a></li>
-                <li><a class="langswitch__item" href="/es/cervezas/san-lajt.html" hreflang="es" lang="es"><span class="langswitch__code">ES</span>Español</a></li>
-                <li><a class="langswitch__item" href="/de/biere/san-lajt.html" hreflang="de" lang="de"><span class="langswitch__code">DE</span>Deutsch</a></li>
-            </ul>
-        </details>
+        <nav class="langswitch" aria-label="Мова">
+            <a class="langswitch__lang" href="/piwa/san-lajt.html" hreflang="pl" lang="pl" title="Polski" aria-label="Polski">PL</a>
+            <a class="langswitch__lang" href="/en/beers/san-lajt.html" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
+            <a class="langswitch__lang is-current" href="/uk/pyva/san-lajt.html" hreflang="uk" lang="uk" title="Українська" aria-label="Українська" aria-current="true">UA</a>
+            <a class="langswitch__lang" href="/es/cervezas/san-lajt.html" hreflang="es" lang="es" title="Español" aria-label="Español">ES</a>
+            <a class="langswitch__lang" href="/de/biere/san-lajt.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
+        </nav>
         <button class="nav__toggle" id="nav-toggle" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>

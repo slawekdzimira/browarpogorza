@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bp-v6';
+const CACHE_NAME = 'bp-v7';
 const LANG_DIRS = ['/en/', '/uk/', '/es/', '/de/'];
 const CORE = [
     '/images/logo-black.png',
