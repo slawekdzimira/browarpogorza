@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Consent Mode v2 — default deny -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+            analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted',
+            wait_for_update: 500
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J"></script>
+    <script>
+        gtag('js', new Date());
+        gtag('config', 'G-BE132JG40J', {
+            'page_title': 'Bier finden',
+            'content_group': 'picker'
+        });
+    </script>
+
+    <title>Bier finden — der Bierfinder von Browar Pogórza</title>
+    <meta name="description" content="Sagen Sie uns, was Sie essen oder heute vorhaben — wir finden das passende Bier von Browar Pogórza. Food-Pairing und Vorschläge für jeden Anlass: Grillen, Hitze am Fluss, Abend am Lagerfeuer, Heimfahrt mit dem Auto.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://browarpogorza.pl/de/bier-finden.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Browar Pogórza">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:title" content="Bier finden — der Bierfinder von Browar Pogórza">
+    <meta property="og:description" content="Klicken Sie an, was Sie essen oder heute vorhaben — wir sagen Ihnen, welches Bier Sie öffnen sollten.">
+    <meta property="og:url" content="https://browarpogorza.pl/de/bier-finden.html">
+    <meta property="og:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bier finden — der Bierfinder von Browar Pogórza">
+    <meta name="twitter:description" content="Klicken Sie an, was Sie essen oder heute vorhaben — wir sagen Ihnen, welches Bier Sie öffnen sollten.">
+    <meta name="twitter:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
+
+    <link rel="icon" type="image/png" href="/images/logo-black.png">
+    <link rel="apple-touch-icon" href="/images/logo-black.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="/fonts/fonts.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* ====== SELEKTOR PIW ====== */
+        .picker {
+            padding: calc(var(--nav-h) + 48px) 0 96px;
+            background:
+                radial-gradient(1100px 520px at 78% -8%, rgba(255, 192, 46, 0.16), transparent 62%),
+                linear-gradient(170deg, var(--green-forest) 0%, var(--green-deep) 58%, #14512F 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        .picker__head { text-align: center; max-width: 720px; margin: 0 auto 44px; }
+        .picker__kicker {
+            font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase;
+            color: var(--sun-bright); margin-bottom: 14px;
+        }
+        .picker h1 {
+            font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 500; line-height: 1.05; margin-bottom: 16px; color: var(--cream);
+        }
+        .picker__lead { color: var(--text-light-muted); font-size: 1.08rem; line-height: 1.65; }
+
+        /* --- pasek postępu --- */
+        .picker__progress {
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+            margin-bottom: 40px;
+        }
+        .picker__dot {
+            width: 9px; height: 9px; border-radius: 50%;
+            background: rgba(255, 249, 236, 0.22);
+            transition: transform 0.35s ease, background 0.35s ease, width 0.35s ease;
+        }
+        .picker__dot.is-on { background: var(--sun); width: 30px; border-radius: 6px; }
+
+        /* --- sceny --- */
+        .picker__stage { position: relative; }
+        .step { display: none; }
+        .step.is-active { display: block; animation: stepIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .step.is-leaving { animation: stepOut 0.22s ease forwards; }
+
+        @keyframes stepIn  { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+        @keyframes stepOut { to   { opacity: 0; transform: translateY(-12px); } }
+
+        .step__title {
+            font-family: var(--font-display); font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+            font-weight: 500; text-align: center; color: var(--cream); margin-bottom: 8px;
+        }
+        .step__hint {
+            text-align: center; color: var(--text-light-muted);
+            font-size: 0.95rem; margin-bottom: 36px;
+        }
+
+        /* --- kafelki --- */
+        .tiles {
+            display: grid; gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            max-width: 940px; margin: 0 auto;
+        }
+        .tiles--duo { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 720px; }
+
+        .tile {
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column; align-items: center; gap: 14px;
+            padding: 30px 20px; border: 1px solid rgba(255, 249, 236, 0.16);
+            border-radius: var(--radius-lg); background: rgba(255, 249, 236, 0.06);
+            color: var(--cream); font-family: var(--font-sans); font-size: 1rem; font-weight: 500;
+            cursor: pointer; text-align: center;
+            backdrop-filter: blur(4px);
+            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.28s ease,
+                        border-color 0.28s ease, box-shadow 0.28s ease;
+            animation: tileIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: calc(var(--i, 0) * 45ms);
+        }
+        .tile:hover, .tile:focus-visible {
+            transform: translateY(-6px);
+            background: rgba(255, 249, 236, 0.13);
+            border-color: var(--sun);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+            outline: none;
+        }
+        .tile:active { transform: translateY(-2px) scale(0.985); }
+        .tile.is-picked { border-color: var(--sun); background: rgba(255, 192, 46, 0.18); }
+
+        .tile__photo {
+            display: block; overflow: hidden;
+            width: 96px; height: 96px; border-radius: 50%;
+            background: rgba(255, 192, 46, 0.14);
+            border: 2px solid rgba(255, 249, 236, 0.18);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+            transition: border-color 0.28s ease, box-shadow 0.28s ease;
+        }
+        .tile__photo img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .tile:hover .tile__photo { border-color: var(--sun); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.36); }
+        .tile:hover .tile__photo img { transform: scale(1.1); }
+        .tile__label { font-size: 1.02rem; }
+        .tile__sub { font-size: 0.84rem; color: var(--text-light-muted); font-weight: 400; }
+
+        @keyframes tileIn { from { opacity: 0; transform: translateY(22px) scale(0.96); } to { opacity: 1; transform: none; } }
+
+        .tile--big { padding: 44px 26px; }
+        .tile--big .tile__photo { width: 136px; height: 136px; }
+        .tile--big .tile__label { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; }
+
+        /* --- wynik --- */
+        .result {
+            max-width: 940px; margin: 0 auto;
+            display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 40px;
+            align-items: center;
+            background: rgba(255, 249, 236, 0.07);
+            border: 1px solid rgba(255, 249, 236, 0.16);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            position: relative; overflow: hidden;
+        }
+        .result::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(520px 340px at 18% 50%, var(--accent, var(--sun)), transparent 70%);
+            opacity: 0.24; pointer-events: none;
+        }
+        .result > * { position: relative; }
+
+        .result__photo { display: grid; place-items: center; min-height: 300px; }
+        .result__photo img {
+            max-height: 340px; width: auto; filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.45));
+            animation: bottleIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes bottleIn { from { opacity: 0; transform: translateY(34px) scale(0.9); } to { opacity: 1; transform: none; } }
+
+        .result__match {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.76rem; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--sun-bright); margin-bottom: 12px;
+        }
+        .result__name {
+            font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 500; color: var(--cream); line-height: 1.05; margin-bottom: 6px;
+        }
+        .result__style { color: var(--text-light-muted); margin-bottom: 22px; font-size: 0.98rem; }
+        .result__why { font-size: 1.08rem; line-height: 1.7; color: var(--cream); margin-bottom: 18px; }
+        .result__pairing { font-size: 0.98rem; line-height: 1.65; color: var(--text-light-muted); margin-bottom: 26px; }
+
+        .result__meta { display: flex; gap: 26px; flex-wrap: wrap; margin-bottom: 28px; }
+        .result__meta div { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light-muted); }
+        .result__meta strong { display: block; font-size: 1.4rem; letter-spacing: 0; text-transform: none; color: var(--sun); font-family: var(--font-display); }
+
+        .result__actions { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-gold, .btn-ghost {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 26px; border-radius: 100px; font-family: var(--font-sans);
+            font-size: 0.94rem; font-weight: 600; cursor: pointer; border: 1px solid transparent;
+            transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+            text-decoration: none;
+        }
+        .btn-gold { background: var(--sun); color: var(--ink); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(255, 192, 46, 0.32); }
+        .btn-ghost { background: transparent; color: var(--cream); border-color: rgba(255, 249, 236, 0.32); }
+        .btn-ghost:hover { transform: translateY(-2px); border-color: var(--sun); color: var(--sun-bright); }
+
+        /* --- alternatywy --- */
+        .alts { max-width: 940px; margin: 34px auto 0; text-align: center; }
+        .alts__title { font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-light-muted); margin-bottom: 16px; }
+        .alts__row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .alt {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 10px 18px 10px 10px; border-radius: 100px;
+            background: rgba(255, 249, 236, 0.07); border: 1px solid rgba(255, 249, 236, 0.16);
+            color: var(--cream); cursor: pointer; font-family: var(--font-sans); font-size: 0.92rem;
+            transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+        }
+        .alt:hover { transform: translateY(-3px); border-color: var(--sun); background: rgba(255, 249, 236, 0.12); }
+        .alt img { width: 34px; height: 34px; object-fit: contain; }
+
+        @media (max-width: 760px) {
+            .result { grid-template-columns: 1fr; padding: 28px; gap: 24px; text-align: center; }
+            .result__meta, .result__actions { justify-content: center; }
+            .result__photo { min-height: 220px; }
+            .result__photo img { max-height: 240px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .picker *, .picker *::before { animation: none !important; transition: none !important; }
+        }
+    </style>
+
+
+
+
+    <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/dobierz-piwo.html">
+    <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/beer-finder.html">
+    <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/pidbir-pyva.html">
+    <link rel="alternate" hreflang="es" href="https://browarpogorza.pl/es/elige-tu-cerveza.html">
+    <link rel="alternate" hreflang="de" href="https://browarpogorza.pl/de/bier-finden.html">
+    <link rel="alternate" hreflang="x-default" href="https://browarpogorza.pl/dobierz-piwo.html">
+</head>
+<body>
+
+<header class="nav is-scrolled" id="nav">
+    <div class="container nav__inner">
+        <a href="/de/" class="nav__brand"><img width="2166" height="2166" class="nav__logo" src="/images/logo-black.png" alt="Browar Pogórza"></a>
+        <nav class="nav__menu" id="nav-menu">
+            <a href="/de/#o-nas">Über uns</a>
+            <a href="/de/#tradycja">Tradition</a>
+            <a href="/de/#biznes">Business</a>
+            <a href="/de/#sport">Sport</a>
+            <a href="/de/#piwa">Biere</a>
+            <a href="/de/bier-finden.html">Bier finden</a>
+            <a href="/de/#galeria">Galerie</a>
+            <a href="/de/#kontakt" class="nav__cta">Kontakt</a>
+        </nav>
+        <details class="langswitch">
+            <summary class="langswitch__toggle" title="Sprache" aria-label="Sprache">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9z"/></svg>
+                <span class="langswitch__now">DE</span>
+            </summary>
+            <ul class="langswitch__list">
+                <li><a class="langswitch__item" href="/dobierz-piwo.html" hreflang="pl" lang="pl"><span class="langswitch__code">PL</span>Polski</a></li>
+                <li><a class="langswitch__item" href="/en/beer-finder.html" hreflang="en" lang="en"><span class="langswitch__code">EN</span>English</a></li>
+                <li><a class="langswitch__item" href="/uk/pidbir-pyva.html" hreflang="uk" lang="uk"><span class="langswitch__code">UA</span>Українська</a></li>
+                <li><a class="langswitch__item" href="/es/elige-tu-cerveza.html" hreflang="es" lang="es"><span class="langswitch__code">ES</span>Español</a></li>
+                <li><a class="langswitch__item is-current" href="/de/bier-finden.html" hreflang="de" lang="de" aria-current="true"><span class="langswitch__code">DE</span>Deutsch</a></li>
+            </ul>
+        </details>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+</header>
+
+<main class="picker">
+    <div class="container">
+        <div class="picker__head">
+            <p class="picker__kicker">Bierfinder</p>
+            <h1>Bier finden</h1>
+            <p class="picker__lead">Sie müssen nicht wissen, wie sich ein NEIPA von einem Pils unterscheidet. Sagen Sie uns, was Sie essen oder vorhaben — den Rest übernehmen wir.</p>
+        </div>
+
+        <div class="picker__progress" aria-hidden="true">
+            <span class="picker__dot is-on" data-dot="0"></span>
+            <span class="picker__dot" data-dot="1"></span>
+            <span class="picker__dot" data-dot="2"></span>
+        </div>
+
+        <div class="picker__stage" id="stage" aria-live="polite"></div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container footer__inner">
+        <div class="footer__col">
+            <div class="footer__brand">
+                <span class="footer__logo"><img width="2166" height="2166" src="/images/logo-black.png" alt="Browar Pogórza"></span>
+                <span class="footer__brand-text">Browar Pogórza</span>
+            </div>
+            <p class="footer__tag">Aus dem Pogórze, nicht aus der Eile</p>
+        </div>
+        <div class="footer__col">
+            <h3>Schnelllinks</h3>
+            <ul>
+                <li><a href="/de/#o-nas">Über uns</a></li>
+                <li><a href="/de/#piwa">Unsere Biere</a></li>
+                <li><a href="/de/bier-finden.html">Bier finden</a></li>
+                <li><a href="/de/#kontakt">Kontakt</a></li>
+                <li><a href="/polityka-prywatnosci.html">Datenschutz (PL)</a></li>
+                <li><a href="/regulamin.html">AGB (PL)</a></li>
+                <li><a href="/cookies.html">Cookie-Richtlinie (PL)</a></li>
+            </ul>
+        </div>
+        <div class="footer__col">
+            <h3>Kontakt</h3>
+            <ul>
+                <li>Przedmieście Dubieckie 15A</li>
+                <li><a href="tel:+48734180172">+48 734 180 172</a></li>
+                <li><a href="mailto:slawek@browarpogorza.pl">slawek@browarpogorza.pl</a></li>
+            </ul>
+        </div>
+        <div class="footer__col">
+            <h3>Verantwortung</h3>
+            <p class="footer__small">Wir stehen für verantwortungsvollen Alkoholkonsum. Abgabe nur an Volljährige.</p>
+        </div>
+    </div>
+    <div class="footer__bottom">
+        <div class="container">
+            <span>© <span id="year"></span> Browar Pogórza · Alle Rechte vorbehalten</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    var BEERS = {
+        'hills-pils':              { name: 'Hills Pils',                style: 'Pils',                          abv: '5,0%', bitter: '3/5',   img: 'beer-hills-pils',              accent: '#5FA53D' },
+        'wheat-valley':            { name: 'Wheat Valley',              style: 'Weizenbier',                    abv: '6,0%', bitter: '1/5',   img: 'beer-wheat-valley',            accent: '#1E7AC8' },
+        'herb-apa':                { name: 'Herb APA',                  style: 'Earl Grey APA',                 abv: '5,5%', bitter: '2,5/5', img: 'beer-herb-apa',                accent: '#4FB52E' },
+        'san-lajt':                { name: 'San Lajt',                  style: 'Mango American Wheat',          abv: '5,0%', bitter: '1/5',   img: 'beer-san-lajt',                accent: '#FFAA20' },
+        'green-hills':             { name: 'Green Hills',               style: 'Earl Grey IPA · alkoholfrei', abv: '0,5%', bitter: '1/5',   img: 'beer-green-hills',             accent: '#2D7A3D' },
+        'podium':                  { name: 'Podium',                    style: 'Alkoholfreies IPA',             abv: '0,5%', bitter: '1/5',   img: 'beer-podium',                  accent: '#FFC02E' },
+        'blue-sky':                { name: 'Blue Sky',                  style: 'New England IPA · Dose',      abv: '6,2%', bitter: '2/5',   img: 'puszka-blue-sky',              accent: '#1E7AC8' },
+        'beerba':                  { name: 'BEERBA',                    style: 'Yerbamate & Beer · 0,0%',       abv: '0,0%', bitter: '2/5',   img: 'beer-beerba',                  accent: '#5FA53D' },
+        'coffee-fes':              { name: 'Coffee Fes',                style: 'Foreign Extra Stout',           abv: '7,5%', bitter: '4/5',   img: 'beer-coffee-fes',              accent: '#3A2618', ext: 'jpg' },
+        'dark-sky':                { name: 'Dark Sky',                  style: 'Baltischer Porter',               abv: '9,5%', bitter: '4/5',   img: 'beer-dark-sky',                accent: '#1A1A2E' },
+        'dark-sky-coconut-coffee': { name: 'Dark Sky Coconut & Coffee', style: 'Baltischer Porter · Kokos & Kaffee', abv: '9,5%', bitter: '4/5',  img: 'beer-dark-sky-coconut-coffee', accent: '#3A2618' }
+    };
+
+    var ANSWERS = {
+        food: [
+            { photo: 'grill', label: 'Grill und Wurst',      sub: 'Schweinenacken, Bauchspeck, Lagerfeuer',
+              beer: 'hills-pils', alts: ['blue-sky', 'san-lajt'],
+              why: 'Fettes Fleisch vom Rost verlangt nach etwas Klarem und Trockenem, das den Gaumen vor dem nächsten Bissen spült. Genau das leistet ein Pils.',
+              pairing: 'Je einfacher das Fleisch, desto besser: Wurst, Schweinenacken, Blutwurst vom Grill.' },
+            { photo: 'burger', label: 'Burger und Pizza',       sub: 'Fast Food, Pommes, Käse',
+              beer: 'blue-sky', alts: ['hills-pils', 'herb-apa'],
+              why: 'Fetter Käse und Sauce brauchen einen fruchtigen Kontrast. Blue Sky bringt Mango und Maracuja statt schneidender Bittere und kämpft deshalb nicht gegen das Essen.',
+              pairing: 'Am besten zu Cheddar-Burger, Pepperoni-Pizza und Pommes mit Dip.' },
+            { photo: 'ostre', label: 'Scharfes Essen',        sub: 'mexikanisch, thailändisch, Curry',
+              beer: 'san-lajt', alts: ['wheat-valley', 'herb-apa'],
+              why: 'Die fruchtige Mangosüße kühlt Capsaicin schneller als Wasser, und der leichte Körper legt einem ohnehin intensiven Gericht kein Gewicht auf.',
+              pairing: 'Tacos, Curry, scharfe Chicken Wings, thailändische Küche.' },
+            { photo: 'ryby', label: 'Fisch und Meeresfrüchte',    sub: 'gegrillt, gebraten, Sushi',
+              beer: 'wheat-valley', alts: ['green-hills', 'san-lajt'],
+              why: 'Zarter Fisch verliert gegen jedes kräftige Bier. Ein Weizen ist weich, leicht fruchtig und lässt dem Essen Raum.',
+              pairing: 'Gegrillte Forelle, gebratener Fisch, Garnelen, Sushi.' },
+            { photo: 'polska', label: 'Polnische Küche',        sub: 'Piroggen, Schnitzel, Sauermehlsuppe',
+              beer: 'hills-pils', alts: ['wheat-valley', 'dark-sky'],
+              why: 'Klassik mag Klassik. Der trockene Abgang des Pils kommt mit Panade und Butter zurecht, ohne das Gericht zu übertönen.',
+              pairing: 'Piroggen mit Kartoffel und Quark, Schnitzel, Sauermehlsuppe, Kohlrouladen.' },
+            { photo: 'pieczen', label: 'Braten',        sub: 'Rind, Wild, Gulasch',
+              beer: 'dark-sky', alts: ['coffee-fes', 'hills-pils'],
+              why: 'Die Röstmalze und die Pflaume des Porters spielen mit der gebräunten Kruste und der dunklen Sauce. Es ist die einzige Kombination dieser Liste, in der das Bier so kräftig ist wie das Gericht.',
+              pairing: 'Rinderbraten, Wild, Gulasch, Rippchen.' },
+            { photo: 'sery', label: 'Käseplatte',           sub: 'Ziege, Blauschimmel, gereift',
+              beer: 'herb-apa', alts: ['dark-sky', 'blue-sky'],
+              why: 'Bergamotte aus dem Earl Grey und Zitrushopfen durchschneiden die Fettigkeit des Käses, statt an ihr zu kleben.',
+              pairing: 'Ziegen- und gereifte Käse passen zu Herb APA, Blauschimmel eher zum Porter.' },
+            { photo: 'deser', label: 'Dessert und Schokolade',     sub: 'Kuchen, Eis, Tiramisu',
+              beer: 'dark-sky-coconut-coffee', alts: ['coffee-fes', 'dark-sky'],
+              why: 'Dieses Bier ist selbst ein Dessert — Kokos, Kaffee und Schokolade. Servieren Sie es statt des Kaffees oder zum Kuchen.',
+              pairing: 'Brownie, Tiramisu, Vanilleeis, Käsekuchen.' },
+            { photo: 'sniadanie', label: 'Frühstück und Brunch',    sub: 'Eier, Obst, Sandwiches',
+              beer: 'beerba', alts: ['wheat-valley', 'green-hills'],
+              why: 'Null Alkohol, krautige Yerba und ein Schuss Saft — um elf Uhr morgens ergibt das Sinn, ein starkes Bier nicht.',
+              pairing: 'Eier, Obst, leichte Salate, Käseplatte.' },
+            { photo: 'salatka', label: 'Salate und leichte Gerichte', sub: 'Gemüse, mediterrane Küche',
+              beer: 'green-hills', alts: ['herb-apa', 'wheat-valley'],
+              why: 'Leichtes Essen, leichtes Bier. Die zitrische Bittere hebt Gemüse und Olivenöl, und 0,5% beenden den Tag nicht.',
+              pairing: 'Salate, Ofengemüse, Hummus, mediterrane Küche.' }
+        ],
+        occasion: [
+            { photo: 'woda', label: 'Hitze am Wasser',         sub: 'Strand, Kajaks, der San',
+              beer: 'san-lajt', alts: ['wheat-valley', 'hills-pils'],
+              why: 'Dreißig Grad sind kein Moment für Experimente. Leicht, gut gekühlt, fruchtig — ausgetrunken und man greift zum nächsten.',
+              pairing: 'Wenn Sie etwas essen, dann Gegrilltes oder Obst.' },
+            { photo: 'znajomi', label: 'Grillen mit Freunden',    sub: 'Garten, Runde, ganzer Tag',
+              beer: 'hills-pils', alts: ['san-lajt', 'blue-sky'],
+              why: 'Ein Bier für mehrere Stunden muss süffig sein, nicht spektakulär. Ein Pils ermüdet auch bei der dritten Flasche nicht und passt allen.',
+              pairing: 'Alles vom Rost, Pommes, Kartoffelsalat.' },
+            { photo: 'trening', label: 'Nach dem Training',           sub: 'Lauf, Rad, Trail',
+              beer: 'podium', alts: ['green-hills', 'beerba'],
+              why: 'Hopfenaroma und Biergeschmack ohne den Alkohol, der die Regeneration stören würde. Genau dafür haben wir es gebraut.',
+              pairing: 'Pasta, gegrilltes Hähnchen, alles Leichte nach der Anstrengung.' },
+            { photo: 'auto', label: 'Ich fahre mit dem Auto',          sub: 'Mittagessen, Termin, Ausflug',
+              beer: 'green-hills', alts: ['podium', 'beerba'],
+              why: 'Der hopfige Charakter eines IPA und Earl-Grey-Bergamotte bei 0,5%. Sie müssen keine Cola trinken, um heimzufahren.',
+              pairing: 'Lunch, Sandwiches, Sushi, mediterrane Küche.' },
+            { photo: 'ognisko', label: 'Abend am Lagerfeuer',  sub: 'Herbst, Decke, Gitarre',
+              beer: 'dark-sky', alts: ['coffee-fes', 'blue-sky'],
+              why: 'Dicht, dunkel, 9,5% und eine Wärme, die erst nach einem Moment kommt. Eine Flasche für den ganzen Abend.',
+              pairing: 'Wurst vom Lagerfeuer, Zartbitterschokolade, Blauschimmelkäse.' },
+            { photo: 'zima', label: 'Winterabend zu Hause', sub: 'Frost draußen, Sie bleiben daheim',
+              beer: 'coffee-fes', alts: ['dark-sky', 'dark-sky-coconut-coffee'],
+              why: 'Kenianischer Kaffee, Röstmalze und voller Körper. Man kann es warm servieren wie Glühwein — dann wirkt es am besten.',
+              pairing: 'Brownie, Wild, gereifte Käse.' },
+            { photo: 'film', label: 'Film und Sofa',         sub: 'niemand geht mehr raus',
+              beer: 'blue-sky', alts: ['herb-apa', 'coffee-fes'],
+              why: 'Saftig, cremig, ohne beißende Bittere. Ein Bier, das sich von selbst trinkt, während die Aufmerksamkeit woanders ist.',
+              pairing: 'Popcorn, Nachos, Pizza, Wings.' },
+            { photo: 'poranek', label: 'Morgen und Arbeit',       sub: 'Brunch, Büro, Hitze',
+              beer: 'beerba', alts: ['green-hills', 'podium'],
+              why: '0,0% und Koffein aus Yerba Mate. Wie Eiskaffee, nur spannender.',
+              pairing: 'Frühstück, Obst, ein leichter Salat.' },
+            { photo: 'prezent', label: 'Geschenk',               sub: 'etwas für einen besonderen Anlass',
+              beer: 'dark-sky-coconut-coffee', alts: ['dark-sky', 'coffee-fes'],
+              why: 'Eine 330-ml-Dose, ein Imperial Porter mit Kokos und brasilianischem Kaffee. Sieht aus und schmeckt wie etwas, das man verschenkt, nicht wie ein Alltagskauf.',
+              pairing: 'Zum Schokoladenkuchen oder statt des Espresso nach dem Essen.' },
+            { photo: 'craft', label: 'Erstes Craft Beer',        sub: 'für alle, die Bittere nicht mögen',
+              beer: 'wheat-valley', alts: ['san-lajt', 'hills-pils'],
+              why: 'Aroma von Banane und Nelke, kaum Bittere, weicher Körper. Der einfachste Einstieg ins Craft Beer, den wir haben.',
+              pairing: 'Salate, Fisch, Brunch, Käse.' }
+        ]
+    };
+
+    var MODES = [
+        { mode: 'food',     photo: 'mode-jedzenie', label: 'Ich esse etwas',   sub: 'wir finden das Bier zum Gericht' },
+        { mode: 'occasion', photo: 'mode-okazja', label: 'Ich habe einen Anlass', sub: 'wir finden das Bier zum Moment' }
+    ];
+
+    var stage = document.getElementById('stage');
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.picker__dot'));
+    var state = { mode: null, answer: null };
+
+    function track(name, params) {
+        if (typeof gtag === 'function') { gtag('event', name, params); }
+    }
+
+    function setProgress(index) {
+        dots.forEach(function (dot, i) { dot.classList.toggle('is-on', i <= index); });
+    }
+
+    function photoTile(name, alt) {
+        return '<span class="tile__photo"><picture>' +
+            '<source srcset="/images/pairing/' + name + '.webp" type="image/webp">' +
+            '<img src="/images/pairing/' + name + '.jpg" alt="' + alt + '" loading="lazy" width="440" height="440">' +
+            '</picture></span>';
+    }
+
+    function picture(beer, className) {
+        return '<picture>' +
+            '<source srcset="/images/' + beer.img + '.webp" type="image/webp">' +
+            '<img src="/images/' + beer.img + '.' + (beer.ext || 'png') + '" alt="' + beer.name + '"' +
+            (className ? ' class="' + className + '"' : '') + ' loading="lazy">' +
+            '</picture>';
+    }
+
+    function swap(html, step) {
+        var current = stage.firstElementChild;
+        if (current) {
+            current.classList.add('is-leaving');
+            window.setTimeout(function () { render(html, step); }, 180);
+            return;
+        }
+        render(html, step);
+    }
+
+    function render(html, step) {
+        stage.innerHTML = html;
+        setProgress(step);
+        bind();
+        if (step > 0) {
+            var top = stage.getBoundingClientRect().top + window.pageYOffset - 140;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+    }
+
+    function stepMode() {
+        var tiles = MODES.map(function (item, i) {
+            return '<button class="tile tile--big" data-mode="' + item.mode + '" style="--i:' + i + '">' +
+                photoTile(item.photo, item.label) +
+                '<span class="tile__label">' + item.label + '</span>' +
+                '<span class="tile__sub">' + item.sub + '</span>' +
+                '</button>';
+        }).join('');
+
+        swap('<section class="step is-active">' +
+            '<h2 class="step__title">Womit fangen wir an?</h2>' +
+            '<p class="step__hint">Zwei Wege, dasselbe Ergebnis — ein Bier, das zu dem passt, was vor Ihnen steht.</p>' +
+            '<div class="tiles tiles--duo">' + tiles + '</div>' +
+            '</section>', 0);
+    }
+
+    function stepAnswers(mode) {
+        var list = ANSWERS[mode];
+        var title = mode === 'food' ? 'Was essen Sie?' : 'Was haben Sie heute vor?';
+        var hint = mode === 'food'
+            ? 'Wählen Sie die nächstliegende Kategorie — sie muss nicht exakt zum Gericht passen.'
+            : 'Wählen Sie den Moment, in dem Sie die Flasche öffnen.';
+
+        var tiles = list.map(function (item, i) {
+            return '<button class="tile" data-answer="' + i + '" style="--i:' + i + '">' +
+                photoTile(item.photo, item.label) +
+                '<span class="tile__label">' + item.label + '</span>' +
+                '<span class="tile__sub">' + item.sub + '</span>' +
+                '</button>';
+        }).join('');
+
+        swap('<section class="step is-active">' +
+            '<h2 class="step__title">' + title + '</h2>' +
+            '<p class="step__hint">' + hint + '</p>' +
+            '<div class="tiles">' + tiles + '</div>' +
+            '<div class="alts"><div class="alts__row">' +
+            '<button class="btn-ghost" data-action="restart">Zurück</button>' +
+            '</div></div>' +
+            '</section>', 1);
+    }
+
+    function stepResult(answer, slug) {
+        var key = slug || answer.beer;
+        var beer = BEERS[key];
+        var isMain = key === answer.beer;
+
+        var alts = [answer.beer].concat(answer.alts).filter(function (s) { return s !== key; });
+        var altHtml = alts.map(function (s) {
+            return '<button class="alt" data-alt="' + s + '">' + picture(BEERS[s]) + BEERS[s].name + '</button>';
+        }).join('');
+
+        swap('<section class="step is-active">' +
+            '<div class="result" style="--accent:' + beer.accent + '">' +
+            '<div class="result__photo">' + picture(beer) + '</div>' +
+            '<div>' +
+            '<p class="result__match">' + (isMain ? 'Unser Vorschlag' : 'Alternative') + ' · ' + answer.label + '</p>' +
+            '<h2 class="result__name">' + beer.name + '</h2>' +
+            '<p class="result__style">' + beer.style + '</p>' +
+            '<p class="result__why">' + (isMain ? answer.why : 'Gleicher Anlass, anderer Charakter — wenn der Hauptvorschlag nicht Ihr Geschmack ist, probieren Sie dieses Bier.') + '</p>' +
+            '<p class="result__pairing">' + answer.pairing + '</p>' +
+            '<div class="result__meta">' +
+            '<div>Alkohol<strong>' + beer.abv + '</strong></div>' +
+            '<div>Bittere<strong>' + beer.bitter + '</strong></div>' +
+            '</div>' +
+            '<div class="result__actions">' +
+            '<a class="btn-gold" href="/de/biere/' + key + '.html" data-action="open" data-slug="' + key + '">Dieses Bier ansehen</a>' +
+            '<button class="btn-ghost" data-action="back">← ' + (state.mode === 'food' ? 'Anderes Gericht' : 'Anderer Anlass') + '</button>' +
+            '<button class="btn-ghost" data-action="restart">Neu starten</button>' +
+            '</div>' +
+            '</div></div>' +
+            (altHtml ? '<div class="alts"><p class="alts__title">Passt vielleicht auch</p><div class="alts__row">' + altHtml + '</div></div>' : '') +
+            '</section>', 2);
+
+        track('view_item', {
+            currency: 'PLN', value: 0,
+            items: [{ item_id: key, item_name: beer.name, item_category: beer.style,
+                      item_brand: 'Browar Pogórza', item_list_name: 'beer_picker' }]
+        });
+    }
+
+    function bind() {
+        stage.querySelectorAll('[data-mode]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                state.mode = el.getAttribute('data-mode');
+                track('select_item', { item_list_name: 'beer_picker_mode', item_list_id: state.mode });
+                stepAnswers(state.mode);
+            });
+        });
+
+        stage.querySelectorAll('[data-answer]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                el.classList.add('is-picked');
+                state.answer = ANSWERS[state.mode][Number(el.getAttribute('data-answer'))];
+                track('select_item', {
+                    item_list_name: 'beer_picker_' + state.mode,
+                    item_list_id: state.answer.label
+                });
+                stepResult(state.answer);
+            });
+        });
+
+        stage.querySelectorAll('[data-alt]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                stepResult(state.answer, el.getAttribute('data-alt'));
+            });
+        });
+
+        stage.querySelectorAll('[data-action="back"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                if (state.mode) { stepAnswers(state.mode); return; }
+                stepMode();
+            });
+        });
+
+        stage.querySelectorAll('[data-action="restart"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                state = { mode: null, answer: null };
+                stepMode();
+            });
+        });
+
+        stage.querySelectorAll('[data-action="open"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                track('select_item', {
+                    item_list_name: 'beer_picker_result',
+                    items: [{ item_id: el.getAttribute('data-slug') }]
+                });
+            });
+        });
+    }
+
+    stepMode();
+})();
+</script>
+
+<script src="/js/script.js" defer></script>
+<script src="/js/consent.js" defer></script>
+</body>
+</html>

@@ -155,6 +155,13 @@
   ]
 }
     </script>
+
+    <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/piwa/hills-pils.html">
+    <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/beers/hills-pils.html">
+    <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/pyva/hills-pils.html">
+    <link rel="alternate" hreflang="es" href="https://browarpogorza.pl/es/cervezas/hills-pils.html">
+    <link rel="alternate" hreflang="de" href="https://browarpogorza.pl/de/biere/hills-pils.html">
+    <link rel="alternate" hreflang="x-default" href="https://browarpogorza.pl/piwa/hills-pils.html">
 </head>
 <body class="product-page">
 <a class="skip-link" href="#main">Przejdź do treści</a>
@@ -162,7 +169,7 @@
 <header class="nav is-scrolled" id="nav">
     <div class="container nav__inner">
         <a href="/" class="nav__brand">
-            <img class="nav__logo" src="/images/logo-black.png" alt="Browar Pogórza">
+            <img width="2166" height="2166" class="nav__logo" src="/images/logo-black.png" alt="Browar Pogórza">
         </a>
         <nav class="nav__menu" id="nav-menu">
             <a href="/#o-nas">O nas</a>
@@ -174,6 +181,19 @@
             <a href="/#galeria">Galeria</a>
             <a href="/#kontakt" class="nav__cta">Kontakt</a>
         </nav>
+        <details class="langswitch">
+            <summary class="langswitch__toggle" title="Język" aria-label="Język">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9z"/></svg>
+                <span class="langswitch__now">PL</span>
+            </summary>
+            <ul class="langswitch__list">
+                <li><a class="langswitch__item is-current" href="/piwa/hills-pils.html" hreflang="pl" lang="pl" aria-current="true"><span class="langswitch__code">PL</span>Polski</a></li>
+                <li><a class="langswitch__item" href="/en/beers/hills-pils.html" hreflang="en" lang="en"><span class="langswitch__code">EN</span>English</a></li>
+                <li><a class="langswitch__item" href="/uk/pyva/hills-pils.html" hreflang="uk" lang="uk"><span class="langswitch__code">UA</span>Українська</a></li>
+                <li><a class="langswitch__item" href="/es/cervezas/hills-pils.html" hreflang="es" lang="es"><span class="langswitch__code">ES</span>Español</a></li>
+                <li><a class="langswitch__item" href="/de/biere/hills-pils.html" hreflang="de" lang="de"><span class="langswitch__code">DE</span>Deutsch</a></li>
+            </ul>
+        </details>
         <button class="nav__toggle" id="nav-toggle" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>
@@ -188,7 +208,7 @@
 
         <div class="product__hero">
             <div class="product__photo">
-                <picture><source srcset="/images/beer-hills-pils.webp" type="image/webp"><img src="/images/beer-hills-pils.png" alt="Hills Pils — Pils" fetchpriority="high"></picture>
+                <img width="249" height="940" src="/images/beer-hills-pils.png" alt="Hills Pils — Pils" fetchpriority="high">
             </div>
             <div class="product__info">
                 <div class="product__style">Pils</div>
@@ -247,23 +267,23 @@
         <h2>Sprawdź inne nasze piwa</h2>
         <div class="related__grid">
         <a href="wheat-valley.html" class="related__item">
-            <picture><source srcset="/images/beer-wheat-valley.webp" type="image/webp"><img src="/images/beer-wheat-valley.png" alt="Wheat Valley" loading="lazy"></picture>
-            <h4>Wheat Valley</h4>
+            <img width="249" height="940" src="/images/beer-wheat-valley.png" alt="Wheat Valley" loading="lazy">
+            <h3>Wheat Valley</h3>
             <span>Pszeniczne</span>
         </a>
         <a href="herb-apa.html" class="related__item">
-            <picture><source srcset="/images/beer-herb-apa.webp" type="image/webp"><img src="/images/beer-herb-apa.png" alt="Herb APA" loading="lazy"></picture>
-            <h4>Herb APA</h4>
+            <img width="251" height="940" src="/images/beer-herb-apa.png" alt="Herb APA" loading="lazy">
+            <h3>Herb APA</h3>
             <span>Earl Grey APA</span>
         </a>
         <a href="san-lajt.html" class="related__item">
-            <picture><source srcset="/images/beer-san-lajt.webp" type="image/webp"><img src="/images/beer-san-lajt.png" alt="San Lajt" loading="lazy"></picture>
-            <h4>San Lajt</h4>
+            <img width="250" height="940" src="/images/beer-san-lajt.png" alt="San Lajt" loading="lazy">
+            <h3>San Lajt</h3>
             <span>Mango American Wheat</span>
         </a>
         <a href="green-hills.html" class="related__item">
-            <picture><source srcset="/images/beer-green-hills.webp" type="image/webp"><img src="/images/beer-green-hills.png" alt="Green Hills" loading="lazy"></picture>
-            <h4>Green Hills</h4>
+            <img width="250" height="940" src="/images/beer-green-hills.png" alt="Green Hills" loading="lazy">
+            <h3>Green Hills</h3>
             <span>Earl Grey IPA · bezalkoholowe</span>
         </a></div>
     </div>
@@ -274,7 +294,7 @@
     <div class="container footer__inner">
         <div class="footer__col">
             <div class="footer__brand">
-                <span class="footer__logo"><img src="/images/logo-black.png" alt="Browar Pogórza"></span>
+                <span class="footer__logo"><img width="2166" height="2166" src="/images/logo-black.png" alt="Browar Pogórza"></span>
                 <span class="footer__brand-text">Browar Pogórza</span>
             </div>
             <p class="footer__tag">Z Pogórza, nie z pośpiechu</p>
@@ -286,7 +306,7 @@
             </div>
         </div>
         <div class="footer__col">
-            <h4>Szybkie linki</h4>
+            <h3>Szybkie linki</h3>
             <ul>
                 <li><a href="/#o-nas">O nas</a></li>
                 <li><a href="/#tradycja">Tradycja</a></li>
@@ -297,7 +317,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h4>Kontakt</h4>
+            <h3>Kontakt</h3>
             <ul>
                 <li>Przedmieście Dubieckie 15A</li>
                 <li><a href="tel:+48734180172">+48 734 180 172</a></li>
@@ -305,7 +325,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h4>Dokumenty</h4>
+            <h3>Dokumenty</h3>
             <ul>
                 <li><a href="/polityka-prywatnosci.html">Polityka prywatności</a></li>
                 <li><a href="/regulamin.html">Regulamin</a></li>
@@ -332,8 +352,8 @@
     </div>
 </div>
 
-<script src="/js/script.js"></script>
-<script src="/js/consent.js"></script>
+<script src="/js/script.js" defer></script>
+<script src="/js/consent.js" defer></script>
 <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));

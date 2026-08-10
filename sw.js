@@ -1,4 +1,5 @@
-const CACHE_NAME = 'bp-v5';
+const CACHE_NAME = 'bp-v6';
+const LANG_DIRS = ['/en/', '/uk/', '/es/', '/de/'];
 const CORE = [
     '/images/logo-black.png',
     '/manifest.webmanifest',
@@ -36,7 +37,11 @@ self.addEventListener('fetch', event => {
                     caches.open(CACHE_NAME).then(c => c.put(req, copy));
                 }
                 return networkResp;
-            }).catch(() => caches.match(req).then(r => r || caches.match('/')))
+            }).catch(() => {
+                // Offline fallback stays in the visitor's language.
+                const home = LANG_DIRS.find(dir => url.pathname.startsWith(dir)) || '/';
+                return caches.match(req).then(r => r || caches.match(home));
+            })
         );
         return;
     }

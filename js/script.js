@@ -24,6 +24,18 @@
         });
     });
 
+    // <details> has no native outside-click dismiss, so the language menu needs one.
+    const closeLangMenus = () => {
+        document.querySelectorAll('details.langswitch[open]').forEach(menu => menu.removeAttribute('open'));
+    };
+    document.addEventListener('click', e => {
+        if (e.target.closest('details.langswitch')) return;
+        closeLangMenus();
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeLangMenus();
+    });
+
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');

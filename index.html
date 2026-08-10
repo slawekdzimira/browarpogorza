@@ -114,6 +114,16 @@
       ]
     }
     </script>
+
+
+
+
+    <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/">
+    <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/">
+    <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/">
+    <link rel="alternate" hreflang="es" href="https://browarpogorza.pl/es/">
+    <link rel="alternate" hreflang="de" href="https://browarpogorza.pl/de/">
+    <link rel="alternate" hreflang="x-default" href="https://browarpogorza.pl/">
 </head>
 <body>
 <a class="skip-link" href="#main">Przejdź do treści</a>
@@ -134,6 +144,19 @@
             <a href="#galeria">Galeria</a>
             <a href="#kontakt" class="nav__cta">Kontakt</a>
         </nav>
+        <details class="langswitch">
+            <summary class="langswitch__toggle" title="Język" aria-label="Język">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9z"/></svg>
+                <span class="langswitch__now">PL</span>
+            </summary>
+            <ul class="langswitch__list">
+                <li><a class="langswitch__item is-current" href="/" hreflang="pl" lang="pl" aria-current="true"><span class="langswitch__code">PL</span>Polski</a></li>
+                <li><a class="langswitch__item" href="/en/" hreflang="en" lang="en"><span class="langswitch__code">EN</span>English</a></li>
+                <li><a class="langswitch__item" href="/uk/" hreflang="uk" lang="uk"><span class="langswitch__code">UA</span>Українська</a></li>
+                <li><a class="langswitch__item" href="/es/" hreflang="es" lang="es"><span class="langswitch__code">ES</span>Español</a></li>
+                <li><a class="langswitch__item" href="/de/" hreflang="de" lang="de"><span class="langswitch__code">DE</span>Deutsch</a></li>
+            </ul>
+        </details>
         <button class="nav__toggle" id="nav-toggle" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>
@@ -533,7 +556,7 @@
             </div>
         </div>
         <div class="footer__col">
-            <h4>Szybkie linki</h4>
+            <h3>Szybkie linki</h3>
             <ul>
                 <li><a href="#o-nas">O nas</a></li>
                 <li><a href="#tradycja">Tradycja</a></li>
@@ -544,7 +567,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h4>Kontakt</h4>
+            <h3>Kontakt</h3>
             <ul>
                 <li>Przedmieście Dubieckie 15A</li>
                 <li><a href="tel:+48734180172">+48 734 180 172</a></li>
@@ -552,7 +575,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h4>Dokumenty</h4>
+            <h3>Dokumenty</h3>
             <ul>
                 <li><a href="/polityka-prywatnosci.html">Polityka prywatności</a></li>
                 <li><a href="/regulamin.html">Regulamin</a></li>
@@ -584,8 +607,8 @@
     </div>
 </div>
 
-<script src="js/script.js"></script>
-<script src="js/consent.js"></script>
+<script src="js/script.js" defer></script>
+<script src="js/consent.js" defer></script>
 <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));

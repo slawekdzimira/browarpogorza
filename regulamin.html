@@ -33,7 +33,7 @@
 
 <header class="nav is-scrolled" id="nav">
     <div class="container nav__inner">
-        <a href="/" class="nav__brand"><img class="nav__logo" src="/images/logo-black.png" alt="Browar Pogórza"></a>
+        <a href="/" class="nav__brand"><img width="2166" height="2166" class="nav__logo" src="/images/logo-black.png" alt="Browar Pogórza"></a>
         <nav class="nav__menu" id="nav-menu">
             <a href="/#o-nas">O nas</a>
             <a href="/#tradycja">Tradycja</a>
@@ -44,6 +44,19 @@
             <a href="/#galeria">Galeria</a>
             <a href="/#kontakt" class="nav__cta">Kontakt</a>
         </nav>
+        <details class="langswitch">
+            <summary class="langswitch__toggle" title="Język" aria-label="Język">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9z"/></svg>
+                <span class="langswitch__now">PL</span>
+            </summary>
+            <ul class="langswitch__list">
+                <li><a class="langswitch__item is-current" href="/" hreflang="pl" lang="pl" aria-current="true"><span class="langswitch__code">PL</span>Polski</a></li>
+                <li><a class="langswitch__item" href="/en/" hreflang="en" lang="en"><span class="langswitch__code">EN</span>English</a></li>
+                <li><a class="langswitch__item" href="/uk/" hreflang="uk" lang="uk"><span class="langswitch__code">UA</span>Українська</a></li>
+                <li><a class="langswitch__item" href="/es/" hreflang="es" lang="es"><span class="langswitch__code">ES</span>Español</a></li>
+                <li><a class="langswitch__item" href="/de/" hreflang="de" lang="de"><span class="langswitch__code">DE</span>Deutsch</a></li>
+            </ul>
+        </details>
         <button class="nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
 </header>
@@ -107,13 +120,13 @@
     <div class="container footer__inner">
         <div class="footer__col">
             <div class="footer__brand">
-                <span class="footer__logo"><img src="/images/logo-black.png" alt="Browar Pogórza"></span>
+                <span class="footer__logo"><img width="2166" height="2166" src="/images/logo-black.png" alt="Browar Pogórza"></span>
                 <span class="footer__brand-text">Browar Pogórza</span>
             </div>
             <p class="footer__tag">Z Pogórza, nie z pośpiechu</p>
         </div>
         <div class="footer__col">
-            <h4>Szybkie linki</h4>
+            <h3>Szybkie linki</h3>
             <ul>
                 <li><a href="/#o-nas">O nas</a></li>
                 <li><a href="/#piwa">Nasze piwa</a></li>
@@ -125,7 +138,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h4>Kontakt</h4>
+            <h3>Kontakt</h3>
             <ul>
                 <li>Przedmieście Dubieckie 15A</li>
                 <li><a href="tel:+48734180172">+48 734 180 172</a></li>
@@ -133,7 +146,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h4>Odpowiedzialność</h4>
+            <h3>Odpowiedzialność</h3>
             <p class="footer__small">Promujemy odpowiedzialne spożywanie alkoholu. Sprzedaż wyłącznie dla osób pełnoletnich.</p>
         </div>
     </div>
@@ -144,7 +157,7 @@
     </div>
 </footer>
 
-<script src="/js/script.js"></script>
-<script src="/js/consent.js"></script>
+<script src="/js/script.js" defer></script>
+<script src="/js/consent.js" defer></script>
 </body>
 </html>
