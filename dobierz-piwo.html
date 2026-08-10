@@ -534,7 +534,8 @@
             '</div>' +
             '<div class="result__actions">' +
             '<a class="btn-gold" href="/piwa/' + key + '.html" data-action="open" data-slug="' + key + '">Zobacz to piwo</a>' +
-            '<button class="btn-ghost" data-action="restart">Dobierz jeszcze raz</button>' +
+            '<button class="btn-ghost" data-action="back">← ' + (state.mode === 'food' ? 'Inne danie' : 'Inna okazja') + '</button>' +
+            '<button class="btn-ghost" data-action="restart">Zacznij od nowa</button>' +
             '</div>' +
             '</div></div>' +
             (altHtml ? '<div class="alts"><p class="alts__title">Może też pasować</p><div class="alts__row">' + altHtml + '</div></div>' : '') +
@@ -571,6 +572,13 @@
         stage.querySelectorAll('[data-alt]').forEach(function (el) {
             el.addEventListener('click', function () {
                 stepResult(state.answer, el.getAttribute('data-alt'));
+            });
+        });
+
+        stage.querySelectorAll('[data-action="back"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                if (state.mode) { stepAnswers(state.mode); return; }
+                stepMode();
             });
         });
 
