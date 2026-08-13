@@ -59,6 +59,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://browarpogorza.pl/piwo-z-logo-firmy.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>Piwo z logo firmy — puszki private label Browaru Pogórza</image:title>
+      <image:caption>Dedykowana seria puszek z etykietą klienta biznesowego</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-private-label.jpg</image:loc>
+      <image:title>Private label — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://browarpogorza.pl/piwa/hills-pils.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-hills-pils.png</image:loc>
