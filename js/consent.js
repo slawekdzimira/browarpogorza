@@ -144,7 +144,7 @@
         modal.setAttribute('aria-labelledby', 'age-gate-title');
         modal.innerHTML = `
             <div class="age-gate__inner">
-                <img src="/images/logo-black.png" alt="Browar Pogórza" class="age-gate__logo" width="120" height="120">
+                <picture><source type="image/webp" srcset="/images/logo-black-96.webp 96w, /images/logo-black-192.webp 192w, /images/logo-black-320.webp 320w" sizes="120px"><img src="/images/logo-black-192.png" alt="Browar Pogórza" class="age-gate__logo" width="120" height="120"></picture>
                 <h2 id="age-gate-title" class="age-gate__title">${escape(t.ageTitle)}</h2>
                 <p class="age-gate__text">${escape(t.ageText)}</p>
                 <p class="age-gate__question">${escape(t.ageQuestion)}</p>

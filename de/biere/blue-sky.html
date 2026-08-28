@@ -32,8 +32,9 @@
             ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
                 window.addEventListener(evt, loadGtag, { once: true, passive: true });
             });
-            if ('requestIdleCallback' in window) window.requestIdleCallback(loadGtag, { timeout: 4000 });
-            else window.addEventListener('load', function () { window.setTimeout(loadGtag, 2500); });
+            // First interaction only, by the owner's decision: the idle timer used to
+            // pull 181 KB of analytics into the critical window on mobile. A visitor
+            // who never interacts is not measured — that trade was made deliberately.
         })();
     </script>
     <script>
@@ -89,8 +90,9 @@
     <meta name="twitter:description" content="Ein trübes NEIPA, saftig und weich">
     <meta name="twitter:image" content="https://browarpogorza.pl/images/og/og-blue-sky.jpg">
 
-    <link rel="icon" type="image/png" href="/images/logo-black.png">
-    <link rel="apple-touch-icon" href="/images/logo-black.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48.png">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon-180.png">
     <link rel="manifest" href="/manifest.webmanifest">
 
     <!-- LCP preload: beer photo -->
@@ -176,7 +178,7 @@
 <header class="nav is-scrolled" id="nav">
     <div class="container nav__inner">
         <a href="/de/" class="nav__brand">
-            <img width="2166" height="2166" class="nav__logo" src="/images/logo-black.png" alt="Browar Pogórza">
+            <picture><source type="image/webp" srcset="/images/logo-black-96.webp 96w, /images/logo-black-192.webp 192w, /images/logo-black-320.webp 320w" sizes="(max-width: 1100px) 84px, 130px"><img class="nav__logo" src="/images/logo-black-192.png" srcset="/images/logo-black-96.png 96w, /images/logo-black-192.png 192w, /images/logo-black-320.png 320w" sizes="(max-width: 1100px) 84px, 130px" alt="Browar Pogórza" width="130" height="130"></picture>
         </a>
         <nav class="nav__menu" id="nav-menu">
             <a href="/de/#o-nas">Über uns</a>
@@ -310,7 +312,7 @@
     <div class="container footer__inner">
         <div class="footer__col">
             <div class="footer__brand">
-                <span class="footer__logo"><img width="2166" height="2166" src="/images/logo-black.png" alt="Browar Pogórza"></span>
+                <span class="footer__logo"><picture><source type="image/webp" srcset="/images/logo-black-96.webp 96w, /images/logo-black-192.webp 192w, /images/logo-black-320.webp 320w" sizes="48px"><img src="/images/logo-black-192.png" srcset="/images/logo-black-96.png 96w, /images/logo-black-192.png 192w, /images/logo-black-320.png 320w" sizes="48px" alt="Browar Pogórza" width="96" height="96"></picture></span>
                 <span class="footer__brand-text">Browar Pogórza</span>
             </div>
             <p class="footer__tag">Aus dem Pogórze, nicht aus der Eile</p>

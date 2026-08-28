@@ -32,8 +32,9 @@
             ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
                 window.addEventListener(evt, loadGtag, { once: true, passive: true });
             });
-            if ('requestIdleCallback' in window) window.requestIdleCallback(loadGtag, { timeout: 4000 });
-            else window.addEventListener('load', function () { window.setTimeout(loadGtag, 2500); });
+            // First interaction only, by the owner's decision: the idle timer used to
+            // pull 181 KB of analytics into the critical window on mobile. A visitor
+            // who never interacts is not measured — that trade was made deliberately.
         })();
     </script>
     <script>
@@ -53,7 +54,7 @@
     <meta property="og:description" content="Twoja wiadomość dotarła do Browaru Pogórza. Odpowiadamy w ciągu 24 godzin — zwykle szybciej.">
     <meta property="og:url" content="https://browarpogorza.pl/en/thank-you.html">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="icon" href="/images/logo-black.png" type="image/png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dziękujemy — Browar Pogórza">
     <meta name="twitter:description" content="Your message has been sent to Browar Pogórza.">
@@ -72,7 +73,7 @@
 <main id="main" tabindex="-1">
 <section class="section section--forest" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;">
     <div class="container" style="max-width: 720px;">
-        <a href="/en/" aria-label="Browar Pog&oacute;rza"><img src="/images/logo-black.png" alt="Browar Pog&oacute;rza" width="140" height="140" style="width: 140px; height: 140px; background: var(--cream); border-radius: 50%; padding: 12px; margin: 0 auto 32px; box-shadow: 0 12px 30px rgba(15, 58, 34, 0.4);"></a>
+        <a href="/en/" aria-label="Browar Pog&oacute;rza"><picture><source type="image/webp" srcset="/images/logo-black-96.webp 96w, /images/logo-black-192.webp 192w, /images/logo-black-320.webp 320w" sizes="140px"><img src="/images/logo-black-192.png" srcset="/images/logo-black-96.png 96w, /images/logo-black-192.png 192w, /images/logo-black-320.png 320w" sizes="140px" alt="Browar Pogórza" width="140" height="140" style="width: 140px; height: 140px; background: var(--cream); border-radius: 50%; padding: 12px; margin: 0 auto 32px; box-shadow: 0 12px 30px rgba(15, 58, 34, 0.4);"></picture></a>
         <div class="kicker kicker--light">Message delivered</div>
         <h1 class="h2 h2--light" style="margin-bottom: 24px;">Thank you!</h1>
         <p class="lead lead--light" style="margin-bottom: 40px;">Your message reached us safely. We will get back to you within 24 hours &mdash; usually sooner.</p>
