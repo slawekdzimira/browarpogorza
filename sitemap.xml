@@ -22,6 +22,23 @@
   <url><loc>https://browarpogorza.pl/regulamin.html</loc><lastmod>2026-08-27</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://browarpogorza.pl/cookies.html</loc><lastmod>2026-08-27</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
+  <url>
+    <loc>https://browarpogorza.pl/piwo-na-wesele.html</loc>
+  <lastmod>2026-08-28</lastmod>
+   <lastmod>2026-08-28</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/piwa-bezalkoholowe.html</loc>
+  <lastmod>2026-08-28</lastmod>
+   <lastmod>2026-08-28</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- i18n:start -->
   <url>
     <loc>https://browarpogorza.pl/en/</loc>
