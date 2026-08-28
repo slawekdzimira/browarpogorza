@@ -114,10 +114,6 @@
     }
     </script>
 
-
-
-
-
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/">
     <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/">
@@ -249,6 +245,10 @@
 <!-- ====== DOLINA SANU (parallax banner) ====== -->
 <section class="banner" aria-label="Dolina Sanu — Pogórze Dynowsko-Przemyskie">
     <div class="banner__bg"><picture><source srcset="images/dolina-sanu.webp" type="image/webp"><img width="2200" height="1228" src="images/dolina-sanu.jpg" alt="Dolina Sanu o świcie" loading="lazy"></picture></div>
+    <!-- The player is injected only when this section scrolls into view, and only on
+         a wide screen with motion allowed — the photo above stays as the poster, so
+         the page costs nothing extra until then. -->
+    <div class="video-bg" data-yt-bg="ShrY2rkMfkY" aria-hidden="true"></div>
     <div class="banner__overlay"></div>
     <div class="container banner__content">
         <div class="kicker kicker--light">Nasza inspiracja</div>

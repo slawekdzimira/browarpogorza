@@ -37,6 +37,96 @@
     const scrollBehavior = () => (reducedMotion.matches ? 'auto' : 'smooth');
 
     setupLightbox();
+    setupBackgroundVideo();
+    setupVideoFacades();
+
+    // YouTube costs roughly a megabyte of third-party JavaScript, so nothing is
+    // requested until the section is on screen — and never on a phone, a slow
+    // connection, or when the visitor asked for less motion. The still photo
+    // underneath is the poster, so the section looks finished either way.
+    function setupBackgroundVideo() {
+        const holder = document.querySelector('[data-yt-bg]');
+        if (!holder || !('IntersectionObserver' in window)) return;
+
+        if (reducedMotion.matches) return;
+        if (window.matchMedia('(max-width: 900px)').matches) return;
+        if (window.matchMedia('(hover: none)').matches) return;
+        const connection = navigator.connection || {};
+        if (connection.saveData) return;
+        if (/^([23]g|slow-2g)$/.test(connection.effectiveType || '')) return;
+
+        const id = holder.getAttribute('data-yt-bg');
+        let frame = null;
+
+        // Muted, looped, no chrome: it is decoration, not a player. nocookie host
+        // keeps YouTube from writing tracking cookies for people who never watch.
+        const load = () => {
+            frame = document.createElement('iframe');
+            frame.title = 'Browar Pogórza';
+            frame.tabIndex = -1;
+            frame.setAttribute('aria-hidden', 'true');
+            frame.setAttribute('allow', 'autoplay; encrypted-media');
+            frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+            // start=12 skips the channel intro so the first thing on screen is footage.
+            frame.src = 'https://www.youtube-nocookie.com/embed/' + id
+                + '?autoplay=1&mute=1&loop=1&playlist=' + id + '&start=12'
+                + '&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&enablejsapi=1';
+            frame.addEventListener('load', () => {
+                holder.classList.add('is-playing');
+                // Moving footage is brighter and busier than the still poster, so the
+                // section asks for a heavier scrim while it plays.
+                const section = holder.closest('.banner');
+                if (section) section.classList.add('has-video');
+            });
+            holder.appendChild(frame);
+        };
+
+        // Playing off-screen burns CPU and battery for nothing.
+        const command = (func) => {
+            if (!frame || !frame.contentWindow) return;
+            frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+        };
+
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!frame) load();
+                    else command('playVideo');
+                } else if (frame) {
+                    command('pauseVideo');
+                }
+            });
+        }, { rootMargin: '200px 0px' });
+        io.observe(holder);
+    }
+
+    // Review cards stay a poster plus a real YouTube link until clicked; the embed
+    // is built on the click, so the page carries no third-party weight by default.
+    function setupVideoFacades() {
+        document.querySelectorAll('[data-yt-facade]').forEach(facade => {
+            facade.addEventListener('click', event => {
+                const id = facade.getAttribute('data-yt-facade');
+                const start = facade.getAttribute('data-yt-start');
+                const media = facade.querySelector('.video-facade__media');
+                if (!id || !media) return;                 // fall through to the href
+                event.preventDefault();
+
+                const frame = document.createElement('iframe');
+                frame.title = facade.getAttribute('data-yt-title') || 'YouTube';
+                frame.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
+                frame.setAttribute('allowfullscreen', '');
+                frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+                frame.src = 'https://www.youtube-nocookie.com/embed/' + id
+                    + '?autoplay=1&rel=0&modestbranding=1&playsinline=1'
+                    + (start ? '&start=' + start : '');
+                media.innerHTML = '';
+                media.appendChild(frame);
+                facade.classList.add('is-playing');
+                facade.removeAttribute('target');
+                track('video_play', { video_id: id, source: facade.getAttribute('data-yt-source') || 'facade' });
+            });
+        });
+    }
 
     // Only the gallery pages carry the overlay markup; without this guard the
     // rest of the script (reveal, back-to-top, analytics) never runs elsewhere.
