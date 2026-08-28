@@ -22,9 +22,17 @@
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
     <link rel="canonical" href="https://browarpogorza.pl/blog/">
+    <meta property="og:site_name" content="Browar Pogórza">
+    <meta property="og:locale" content="pl_PL">
     <meta property="og:title" content="Blog · Browar Pogórza">
+    <meta property="og:description" content="Artykuły o piwie rzemieślniczym, stylach piwa i Browarze Pogórza z Doliny Sanu.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://browarpogorza.pl/blog/">
     <meta property="og:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog · Browar Pogórza">
+    <meta name="twitter:description" content="Artykuły o piwie rzemieślniczym, stylach piwa i Browarze Pogórza z Doliny Sanu.">
+    <meta name="twitter:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
     <link rel="icon" type="image/png" href="/images/logo-black.png">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="stylesheet" href="/fonts/fonts.css">
@@ -47,13 +55,13 @@
             <a href="/#kontakt" class="nav__cta">Kontakt</a>
         </nav>
         <nav class="langswitch" aria-label="Język">
-            <a class="langswitch__lang is-current" href="/" hreflang="pl" lang="pl" title="Polski" aria-label="Polski" aria-current="true">PL</a>
+            <a class="langswitch__lang is-current" href="/" hreflang="pl" lang="pl" title="Polski" aria-label="Polski" aria-current="page">PL</a>
             <a class="langswitch__lang" href="/en/" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
             <a class="langswitch__lang" href="/uk/" hreflang="uk" lang="uk" title="Українська" aria-label="Українська">UA</a>
             <a class="langswitch__lang" href="/es/" hreflang="es" lang="es" title="Español" aria-label="Español">ES</a>
             <a class="langswitch__lang" href="/de/" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
         </nav>
-        <button class="nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
     </div>
 </header>
 
@@ -72,7 +80,7 @@
                     <p class="blog-card__meta">2026-06-09 · 6 min</p>
                     <h2>Co to jest Porter Bałtycki — polska specjalność piwowarska</h2>
                     <p>Porter bałtycki — historia, charakterystyka, ABV 7-10%, aromaty i polskie interpretacje. Poznaj jeden z najmocniejszych stylów piwnych.</p>
-                    <span class="blog-card__read">Czytaj więcej →</span>
+                    <span class="blog-card__read">Czytaj więcej <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
                 </a>
             </article>
             <article class="blog-card">
@@ -80,7 +88,7 @@
                     <p class="blog-card__meta">2026-06-09 · 6 min</p>
                     <h2>Jak smakuje Foreign Extra Stout — przewodnik po stylu</h2>
                     <p>Foreign Extra Stout — mocny, palony stout o ABV 6,5-8%. Poznaj historię, charakterystykę i nowoczesne interpretacje z dodatkami kawy i kakao.</p>
-                    <span class="blog-card__read">Czytaj więcej →</span>
+                    <span class="blog-card__read">Czytaj więcej <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
                 </a>
             </article>
             <article class="blog-card">
@@ -88,7 +96,7 @@
                     <p class="blog-card__meta">2026-06-09 · 7 min</p>
                     <h2>Piwo rzemieślnicze na Podkarpaciu — przewodnik 2026</h2>
                     <p>Piwo rzemieślnicze na Podkarpaciu — przewodnik 2026. Browary kraftowe Doliny Sanu, najlepsze style i miejsca, gdzie spróbować podkarpackich piw.</p>
-                    <span class="blog-card__read">Czytaj więcej →</span>
+                    <span class="blog-card__read">Czytaj więcej <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
                 </a>
             </article></div>
     </div>
@@ -111,7 +119,7 @@
             </div>
         </div>
         <div class="footer__col">
-            <h3>Szybkie linki</h3>
+            <h2>Szybkie linki</h2>
             <ul>
                 <li><a href="/#o-nas">O nas</a></li>
                 <li><a href="/#piwa">Nasze piwa</a></li>
@@ -121,7 +129,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Kontakt</h3>
+            <h2>Kontakt</h2>
             <ul>
                 <li>Przedmieście Dubieckie 15A</li>
                 <li><a href="tel:+48734180172">+48 734 180 172</a></li>
@@ -129,11 +137,11 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Dokumenty</h3>
+            <h2>Dokumenty</h2>
             <ul>
-                <li><a href="/polityka-prywatnosci.html">Polityka prywatności</a></li>
-                <li><a href="/regulamin.html">Regulamin</a></li>
-                <li><a href="/cookies.html">Polityka cookies</a></li>
+                <li><a href="/polityka-prywatnosci.html" hreflang="pl" lang="pl">Polityka prywatności</a></li>
+                <li><a href="/regulamin.html" hreflang="pl" lang="pl">Regulamin</a></li>
+                <li><a href="/cookies.html" hreflang="pl" lang="pl">Polityka cookies</a></li>
             </ul>
             <p class="footer__small" style="margin-top: 14px;">Promujemy odpowiedzialne spożywanie alkoholu. Sprzedaż wyłącznie dla osób pełnoletnich.</p>
         </div>
@@ -149,7 +157,7 @@
 
 <div class="mobile-cta" role="region" aria-label="Szybki kontakt">
     <div class="mobile-cta__inner">
-        <a href="tel:+48734180172" class="btn btn--ghost">📞 Zadzwoń</a>
+        <a href="tel:+48734180172" class="btn btn--ghost"><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.2 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>Zadzwoń</a>
         <a href="/#kontakt" class="btn btn--sun">Skontaktuj się</a>
     </div>
 </div>

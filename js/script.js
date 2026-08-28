@@ -5,49 +5,139 @@
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
 
-    const isProductPage = document.body.classList.contains('product-page');
+    // Pages that open on a light background need the solid header from the start —
+    // the transparent state paints cream links on a cream page.
+    const isProductPage = document.body.classList.contains('product-page')
+        || document.body.classList.contains('legal-page');
     const onScroll = () => {
         nav.classList.toggle('is-scrolled', isProductPage || window.scrollY > 60);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('is-open');
-        navMenu.classList.toggle('is-open');
-    });
+    const setMenu = (open) => {
+        navToggle.classList.toggle('is-open', open);
+        navMenu.classList.toggle('is-open', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+    };
+
+    navToggle.addEventListener('click', () => setMenu(!navMenu.classList.contains('is-open')));
 
     navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('is-open');
-            navMenu.classList.remove('is-open');
-        });
+        link.addEventListener('click', () => setMenu(false));
     });
 
+    document.addEventListener('keydown', e => {
+        if (e.key !== 'Escape' || !navMenu.classList.contains('is-open')) return;
+        setMenu(false);
+        navToggle.focus();
+    });
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const scrollBehavior = () => (reducedMotion.matches ? 'auto' : 'smooth');
+
+    setupLightbox();
+
+    // Only the gallery pages carry the overlay markup; without this guard the
+    // rest of the script (reveal, back-to-top, analytics) never runs elsewhere.
+    function setupLightbox() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
+    if (!lightbox || !lightboxImg || !lightboxClose) return;
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxCounter = document.getElementById('lightbox-counter');
 
-    const openLightbox = src => {
-        lightboxImg.src = src;
+    // The whole gallery is one browsable set: arrows, keyboard and swipe move
+    // through it without closing and reopening the overlay.
+    const triggers = Array.from(document.querySelectorAll('.lightbox-trigger'));
+    const slides = triggers.map(a => ({
+        src: a.getAttribute('href'),
+        alt: (a.querySelector('img') || {}).alt || '',
+    }));
+    const multiple = slides.length > 1;
+    let current = 0;
+
+    const showSlide = index => {
+        current = (index + slides.length) % slides.length;
+        const slide = slides[current];
+        lightboxImg.src = slide.src;
+        lightboxImg.alt = slide.alt;
+        if (lightboxCounter) lightboxCounter.textContent = multiple ? `${current + 1} / ${slides.length}` : '';
+    };
+
+    // Everything except the overlay is made inert while it is open, so Tab
+    // cannot walk into the page behind it, and focus returns to the thumbnail.
+    const backdrop = () => Array.from(document.body.children).filter(node => node !== lightbox);
+    let returnFocusTo = null;
+
+    const openLightbox = index => {
+        returnFocusTo = triggers[index] || null;
+        showSlide(index);
         lightbox.classList.add('is-open');
         document.body.style.overflow = 'hidden';
+        backdrop().forEach(node => { node.setAttribute('inert', ''); node.setAttribute('aria-hidden', 'true'); });
+        (multiple ? lightboxNext : lightboxClose).focus();
     };
     const closeLightbox = () => {
         lightbox.classList.remove('is-open');
         lightboxImg.src = '';
         document.body.style.overflow = '';
+        backdrop().forEach(node => { node.removeAttribute('inert'); node.removeAttribute('aria-hidden'); });
+        if (returnFocusTo) returnFocusTo.focus();
+        returnFocusTo = null;
     };
+    const isOpen = () => lightbox.classList.contains('is-open');
 
-    document.querySelectorAll('.lightbox-trigger').forEach(a => {
+    triggers.forEach((a, index) => {
         a.addEventListener('click', e => {
             e.preventDefault();
-            openLightbox(a.getAttribute('href'));
+            openLightbox(index);
         });
     });
+
+    [lightboxPrev, lightboxNext].forEach((btn, i) => {
+        if (!btn) return;
+        btn.hidden = !multiple;
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            showSlide(current + (i === 0 ? -1 : 1));
+        });
+    });
+
     lightboxClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    document.addEventListener('keydown', e => {
+        if (!isOpen()) return;
+        if (e.key === 'Escape') closeLightbox();
+        else if (e.key === 'ArrowLeft' && multiple) showSlide(current - 1);
+        else if (e.key === 'ArrowRight' && multiple) showSlide(current + 1);
+        else if (e.key === 'Tab') {
+            // Inert handles the page behind; this keeps the cycle inside the dialog.
+            const stops = [lightboxClose, multiple ? lightboxPrev : null, multiple ? lightboxNext : null].filter(Boolean);
+            const index = stops.indexOf(document.activeElement);
+            e.preventDefault();
+            stops[(index + (e.shiftKey ? -1 : 1) + stops.length) % stops.length].focus();
+        }
+    });
+
+    // Horizontal swipe on touch devices; a mostly vertical drag is ignored.
+    let touchStartX = null;
+    let touchStartY = null;
+    lightbox.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+        if (touchStartX === null || !multiple) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) showSlide(current + (dx < 0 ? 1 : -1));
+        touchStartX = null;
+        touchStartY = null;
+    }, { passive: true });
+    }
 
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -104,11 +194,43 @@
     const form = document.querySelector('.contact__form');
     if (form) form.addEventListener('submit', () => track('form_start', { form_name: 'kontakt' }));
 
+    // Native validation bubbles are invisible to screen readers and vanish on blur;
+    // the same failure is mirrored into a live region next to the submit button.
+    const VALIDATION_MESSAGES = {
+        pl: 'Uzupełnij zaznaczone pola, aby wysłać formularz.',
+        en: 'Please complete the highlighted fields before sending.',
+        uk: 'Заповніть виділені поля, щоб надіслати форму.',
+        es: 'Completa los campos marcados antes de enviar.',
+        de: 'Bitte füllen Sie die markierten Felder aus.',
+    };
+    const pageLang = (document.documentElement.lang || 'pl').slice(0, 2).toLowerCase();
+    document.querySelectorAll('form').forEach(f => {
+        const status = f.querySelector('[data-form-status]');
+        if (!status) return;
+        const fields = [...f.querySelectorAll('input[required], textarea[required]')];
+        f.addEventListener('submit', e => {
+            const invalid = fields.filter(field => !field.checkValidity());
+            fields.forEach(field => field.removeAttribute('aria-invalid'));
+            if (!invalid.length) {
+                status.textContent = '';
+                return;
+            }
+            e.preventDefault();
+            invalid.forEach(field => field.setAttribute('aria-invalid', 'true'));
+            status.textContent = VALIDATION_MESSAGES[pageLang] || VALIDATION_MESSAGES.pl;
+            invalid[0].focus();
+        });
+        f.addEventListener('input', e => {
+            if (status.textContent) status.textContent = '';
+            if (e.target.checkValidity && e.target.checkValidity()) e.target.removeAttribute('aria-invalid');
+        });
+    });
+
     const backToTop = document.getElementById('back-to-top');
     if (backToTop) {
         const toggleBackToTop = () => backToTop.classList.toggle('is-visible', window.scrollY > 600);
         window.addEventListener('scroll', toggleBackToTop, { passive: true });
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: scrollBehavior() }));
         toggleBackToTop();
     }
 
@@ -118,11 +240,21 @@
         const msgField = document.getElementById('f-msg');
         if (msgField && !msgField.value) {
             const beerName = urlParams.get('name') || beerParam.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-            msgField.value = `Dzień dobry,\n\nJestem zainteresowany piwem ${beerName}. Proszę o ofertę.\n\nPozdrawiam`;
+            // The enquiry template is injected at runtime, so the i18n build never
+            // sees it — it has to carry its own translations.
+            const templates = {
+                pl: name => `Dzień dobry,\n\nJestem zainteresowany piwem ${name}. Proszę o ofertę.\n\nPozdrawiam`,
+                en: name => `Hello,\n\nI am interested in your ${name} beer. Could you send me an offer?\n\nBest regards`,
+                uk: name => `Доброго дня,\n\nМене цікавить пиво ${name}. Надішліть, будь ласка, пропозицію.\n\nЗ повагою`,
+                es: name => `Hola,\n\nEstoy interesado en la cerveza ${name}. ¿Podrían enviarme una oferta?\n\nUn saludo`,
+                de: name => `Guten Tag,\n\nich interessiere mich für das Bier ${name}. Bitte senden Sie mir ein Angebot.\n\nMit freundlichen Grüßen`,
+            };
+            const lang = (document.documentElement.lang || 'pl').slice(0, 2).toLowerCase();
+            msgField.value = (templates[lang] || templates.pl)(beerName);
             const kontakt = document.getElementById('kontakt');
             if (kontakt) {
                 setTimeout(() => {
-                    kontakt.scrollIntoView({ behavior: 'smooth' });
+                    kontakt.scrollIntoView({ behavior: scrollBehavior() });
                     msgField.focus();
                     msgField.setSelectionRange(msgField.value.length, msgField.value.length);
                 }, 300);

@@ -5,65 +5,54 @@
     <loc>https://browarpogorza.pl/</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
-      <image:title>Pola rzepaku Pogórza Dynowsko-Przemyskiego</image:title>
-      <image:caption>Krajobraz doliny Sanu o świcie</image:caption>
+      <image:title>Pola rzepaku nad doliną Sanu na Pogórzu Dynowsko-Przemyskim</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
-      <image:title>Zestaw piw rzemieślniczych Browaru Pogórza</image:title>
-      <image:caption>Pełna oferta browaru</image:caption>
+      <image:title>Zestaw piw Browaru Pogórza</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
-      <image:title>Dolina Sanu — Browar Pogórza</image:title>
-      <image:caption>Miejsce inspirujące nasze warzenia</image:caption>
+      <image:title>Dolina Sanu o świcie</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
-      <image:title>Proces warzenia piwa rzemieślniczego</image:title>
-      <image:caption>Rzemieślnicza produkcja</image:caption>
+      <image:title>Proces warzenia piwa</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
-      <image:title>Limitowana seria puszek private label</image:title>
-      <image:caption>Edycja na zamówienie biznesowe</image:caption>
+      <image:title>Limitowana seria puszek Browaru Pogórza dla klienta biznesowego</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/sport-bieg-niepodleglosci-1320.jpg</image:loc>
-      <image:title>Browar Pogórza na imprezach sportowych</image:title>
-      <image:caption>Wsparcie biegaczy</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://browarpogorza.pl/images/gallery-1.jpg</image:loc>
-      <image:title>Browar Pogórza - wydarzenie</image:title>
+      <image:title>Biegacze po 10. PKO Biegu Niepodległości z piwami Browaru Pogórza</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/gallery-2.jpg</image:loc>
-      <image:title>Browar Pogórza - event</image:title>
+      <image:title>Wydarzenie Browaru Pogórza</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/gallery-3.jpg</image:loc>
-      <image:title>Browar Pogórza - sport</image:title>
+      <image:title>Wydarzenie sportowe</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://browarpogorza.pl/images/gallery-4.jpg</image:loc>
-      <image:title>Browar Pogórza - galeria</image:title>
+      <image:loc>https://browarpogorza.pl/images/gallery-new-1.jpg</image:loc>
+      <image:title>Wydarzenie Browaru Pogórza</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/gallery-5.jpg</image:loc>
-      <image:title>Browar Pogórza - piwa</image:title>
+      <image:title>Piwa Browaru Pogórza</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/gallery-6.jpg</image:loc>
-      <image:title>Browar Pogórza - wsparcie sportu</image:title>
+      <image:title>Wsparcie sportu</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://browarpogorza.pl/piwo-z-logo-firmy.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
-      <image:title>Piwo z logo firmy — puszki private label Browaru Pogórza</image:title>
-      <image:caption>Dedykowana seria puszek z etykietą klienta biznesowego</image:caption>
+      <image:title>Limitowana seria puszek Browaru Pogórza dla klienta biznesowego</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-private-label.jpg</image:loc>
@@ -74,8 +63,7 @@
     <loc>https://browarpogorza.pl/piwa/hills-pils.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-hills-pils.png</image:loc>
-      <image:title>Hills Pils — Pils czeski</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Hills Pils</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-hills-pils.jpg</image:loc>
@@ -86,8 +74,7 @@
     <loc>https://browarpogorza.pl/piwa/wheat-valley.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-wheat-valley.png</image:loc>
-      <image:title>Wheat Valley — Pszeniczne hefeweizen</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Wheat Valley</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-wheat-valley.jpg</image:loc>
@@ -98,8 +85,7 @@
     <loc>https://browarpogorza.pl/piwa/herb-apa.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-herb-apa.png</image:loc>
-      <image:title>Herb APA — Earl Grey APA</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Herb APA</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-herb-apa.jpg</image:loc>
@@ -110,8 +96,7 @@
     <loc>https://browarpogorza.pl/piwa/san-lajt.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-san-lajt.png</image:loc>
-      <image:title>San Lajt — Mango American Wheat</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>San Lajt</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-san-lajt.jpg</image:loc>
@@ -122,8 +107,7 @@
     <loc>https://browarpogorza.pl/piwa/green-hills.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-green-hills.png</image:loc>
-      <image:title>Green Hills — Earl Grey IPA bezalkoholowe</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Green Hills</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-green-hills.jpg</image:loc>
@@ -134,8 +118,7 @@
     <loc>https://browarpogorza.pl/piwa/podium.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-podium.png</image:loc>
-      <image:title>Podium — IPA bezalkoholowa 0,5% dla aktywnych</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Podium — bezalkoholowa IPA dla aktywnych</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-podium.jpg</image:loc>
@@ -146,8 +129,7 @@
     <loc>https://browarpogorza.pl/piwa/blue-sky.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/puszka-blue-sky.png</image:loc>
-      <image:title>Blue Sky — New England IPA</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Blue Sky</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-blue-sky.jpg</image:loc>
@@ -158,8 +140,7 @@
     <loc>https://browarpogorza.pl/piwa/beerba.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-beerba.png</image:loc>
-      <image:title>BEERBA — Yerbamate &amp; Beer bezalkoholowe</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>BeerBa</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-beerba.jpg</image:loc>
@@ -170,8 +151,7 @@
     <loc>https://browarpogorza.pl/piwa/coffee-fes.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-coffee-fes.jpg</image:loc>
-      <image:title>Coffee Fes — Foreign Extra Stout (Srebro Kraft Roku 2023)</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Coffee Fes</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-coffee-fes.jpg</image:loc>
@@ -182,8 +162,7 @@
     <loc>https://browarpogorza.pl/piwa/dark-sky.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-dark-sky.png</image:loc>
-      <image:title>Dark Sky — Porter Bałtycki</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Dark Sky</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-dark-sky.jpg</image:loc>
@@ -194,8 +173,723 @@
     <loc>https://browarpogorza.pl/piwa/dark-sky-coconut-coffee.html</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/beer-dark-sky-coconut-coffee.png</image:loc>
-      <image:title>Dark Sky Coconut &amp; Coffee — Imperial Baltic Porter</image:title>
-      <image:caption>Browar Pogórza — rzemieślnicze piwo z Doliny Sanu</image:caption>
+      <image:title>Dark Sky Coconut &amp; Coffee</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-dark-sky-coconut-coffee.jpg</image:loc>
+      <image:title>Dark Sky Coconut &amp; Coffee — Imperial Baltic Porter — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
+      <image:title>Rapeseed fields above the San valley in the Dynów-Przemyśl foothills</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
+      <image:title>A set of Browar Pogórza beers</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
+      <image:title>The San valley at dawn</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
+      <image:title>The brewing process</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>A limited can series by Browar Pogórza for a business client</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/sport-bieg-niepodleglosci-1320.jpg</image:loc>
+      <image:title>Runners after the 10th PKO Independence Run with Browar Pogórza beers</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-2.jpg</image:loc>
+      <image:title>A Browar Pogórza event</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-3.jpg</image:loc>
+      <image:title>A sports event</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-new-1.jpg</image:loc>
+      <image:title>A Browar Pogórza event</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-5.jpg</image:loc>
+      <image:title>Browar Pogórza beers</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-6.jpg</image:loc>
+      <image:title>Supporting sport</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/private-label-beer.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>A limited can series by Browar Pogórza for a business client</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-private-label.jpg</image:loc>
+      <image:title>Private label — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/hills-pils.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-hills-pils.png</image:loc>
+      <image:title>Hills Pils</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-hills-pils.jpg</image:loc>
+      <image:title>Hills Pils — Pils czeski — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/wheat-valley.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-wheat-valley.png</image:loc>
+      <image:title>Wheat Valley</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-wheat-valley.jpg</image:loc>
+      <image:title>Wheat Valley — Pszeniczne hefeweizen — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/herb-apa.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-herb-apa.png</image:loc>
+      <image:title>Herb APA</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-herb-apa.jpg</image:loc>
+      <image:title>Herb APA — Earl Grey APA — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/san-lajt.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-san-lajt.png</image:loc>
+      <image:title>San Lajt</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-san-lajt.jpg</image:loc>
+      <image:title>San Lajt — Mango American Wheat — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/green-hills.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-green-hills.png</image:loc>
+      <image:title>Green Hills</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-green-hills.jpg</image:loc>
+      <image:title>Green Hills — Earl Grey IPA bezalkoholowe — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/podium.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-podium.png</image:loc>
+      <image:title>Podium — alcohol-free IPA for active people</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-podium.jpg</image:loc>
+      <image:title>Podium — IPA bezalkoholowa 0,5% dla aktywnych — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/blue-sky.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszka-blue-sky.png</image:loc>
+      <image:title>Blue Sky</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-blue-sky.jpg</image:loc>
+      <image:title>Blue Sky — New England IPA — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/beerba.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-beerba.png</image:loc>
+      <image:title>BeerBa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-beerba.jpg</image:loc>
+      <image:title>BEERBA — Yerbamate &amp; Beer bezalkoholowe — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/coffee-fes.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-coffee-fes.jpg</image:loc>
+      <image:title>Coffee Fes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-coffee-fes.jpg</image:loc>
+      <image:title>Coffee Fes — Foreign Extra Stout (Srebro Kraft Roku 2023) — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/dark-sky.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-dark-sky.png</image:loc>
+      <image:title>Dark Sky</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-dark-sky.jpg</image:loc>
+      <image:title>Dark Sky — Porter Bałtycki — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/en/beers/dark-sky-coconut-coffee.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-dark-sky-coconut-coffee.png</image:loc>
+      <image:title>Dark Sky Coconut &amp; Coffee</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-dark-sky-coconut-coffee.jpg</image:loc>
+      <image:title>Dark Sky Coconut &amp; Coffee — Imperial Baltic Porter — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
+      <image:title>Поля ріпаку над долиною Сяну в Диновсько-Перемишльському Погір&apos;ї</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
+      <image:title>Набір пива Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
+      <image:title>Долина Сяну на світанку</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
+      <image:title>Процес варіння пива</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>Лімітована серія бляшанок Browar Pogórza для бізнес-клієнта</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/sport-bieg-niepodleglosci-1320.jpg</image:loc>
+      <image:title>Бігуни після 10-го PKO Bieg Niepodległości з пивом Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-2.jpg</image:loc>
+      <image:title>Подія Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-3.jpg</image:loc>
+      <image:title>Спортивна подія</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-new-1.jpg</image:loc>
+      <image:title>Подія Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-5.jpg</image:loc>
+      <image:title>Пиво Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-6.jpg</image:loc>
+      <image:title>Підтримка спорту</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyvo-z-lohotypom.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>Лімітована серія бляшанок Browar Pogórza для бізнес-клієнта</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-private-label.jpg</image:loc>
+      <image:title>Private label — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/hills-pils.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-hills-pils.png</image:loc>
+      <image:title>Hills Pils</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-hills-pils.jpg</image:loc>
+      <image:title>Hills Pils — Pils czeski — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/wheat-valley.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-wheat-valley.png</image:loc>
+      <image:title>Wheat Valley</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-wheat-valley.jpg</image:loc>
+      <image:title>Wheat Valley — Pszeniczne hefeweizen — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/herb-apa.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-herb-apa.png</image:loc>
+      <image:title>Herb APA</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-herb-apa.jpg</image:loc>
+      <image:title>Herb APA — Earl Grey APA — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/san-lajt.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-san-lajt.png</image:loc>
+      <image:title>San Lajt</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-san-lajt.jpg</image:loc>
+      <image:title>San Lajt — Mango American Wheat — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/green-hills.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-green-hills.png</image:loc>
+      <image:title>Green Hills</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-green-hills.jpg</image:loc>
+      <image:title>Green Hills — Earl Grey IPA bezalkoholowe — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/podium.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-podium.png</image:loc>
+      <image:title>Podium — безалкогольна IPA для активних</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-podium.jpg</image:loc>
+      <image:title>Podium — IPA bezalkoholowa 0,5% dla aktywnych — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/blue-sky.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszka-blue-sky.png</image:loc>
+      <image:title>Blue Sky</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-blue-sky.jpg</image:loc>
+      <image:title>Blue Sky — New England IPA — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/beerba.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-beerba.png</image:loc>
+      <image:title>BeerBa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-beerba.jpg</image:loc>
+      <image:title>BEERBA — Yerbamate &amp; Beer bezalkoholowe — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/coffee-fes.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-coffee-fes.jpg</image:loc>
+      <image:title>Coffee Fes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-coffee-fes.jpg</image:loc>
+      <image:title>Coffee Fes — Foreign Extra Stout (Srebro Kraft Roku 2023) — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/dark-sky.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-dark-sky.png</image:loc>
+      <image:title>Dark Sky</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-dark-sky.jpg</image:loc>
+      <image:title>Dark Sky — Porter Bałtycki — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/uk/pyva/dark-sky-coconut-coffee.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-dark-sky-coconut-coffee.png</image:loc>
+      <image:title>Dark Sky Coconut &amp; Coffee</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-dark-sky-coconut-coffee.jpg</image:loc>
+      <image:title>Dark Sky Coconut &amp; Coffee — Imperial Baltic Porter — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
+      <image:title>Campos de colza sobre el valle del San, en las estribaciones de Dynów y Przemyśl</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
+      <image:title>Un conjunto de cervezas de Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
+      <image:title>El valle del San al amanecer</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
+      <image:title>El proceso de elaboración</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>Serie limitada de latas de Browar Pogórza para un cliente corporativo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/sport-bieg-niepodleglosci-1320.jpg</image:loc>
+      <image:title>Corredores tras la 10.ª PKO Carrera de la Independencia con cervezas de Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-2.jpg</image:loc>
+      <image:title>Un evento de Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-3.jpg</image:loc>
+      <image:title>Un evento deportivo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-new-1.jpg</image:loc>
+      <image:title>Un evento de Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-5.jpg</image:loc>
+      <image:title>Cervezas de Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-6.jpg</image:loc>
+      <image:title>Apoyo al deporte</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cerveza-marca-propia.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>Serie limitada de latas de Browar Pogórza para un cliente corporativo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-private-label.jpg</image:loc>
+      <image:title>Private label — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/hills-pils.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-hills-pils.png</image:loc>
+      <image:title>Hills Pils</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-hills-pils.jpg</image:loc>
+      <image:title>Hills Pils — Pils czeski — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/wheat-valley.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-wheat-valley.png</image:loc>
+      <image:title>Wheat Valley</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-wheat-valley.jpg</image:loc>
+      <image:title>Wheat Valley — Pszeniczne hefeweizen — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/herb-apa.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-herb-apa.png</image:loc>
+      <image:title>Herb APA</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-herb-apa.jpg</image:loc>
+      <image:title>Herb APA — Earl Grey APA — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/san-lajt.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-san-lajt.png</image:loc>
+      <image:title>San Lajt</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-san-lajt.jpg</image:loc>
+      <image:title>San Lajt — Mango American Wheat — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/green-hills.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-green-hills.png</image:loc>
+      <image:title>Green Hills</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-green-hills.jpg</image:loc>
+      <image:title>Green Hills — Earl Grey IPA bezalkoholowe — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/podium.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-podium.png</image:loc>
+      <image:title>Podium — IPA sin alcohol para gente activa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-podium.jpg</image:loc>
+      <image:title>Podium — IPA bezalkoholowa 0,5% dla aktywnych — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/blue-sky.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszka-blue-sky.png</image:loc>
+      <image:title>Blue Sky</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-blue-sky.jpg</image:loc>
+      <image:title>Blue Sky — New England IPA — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/beerba.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-beerba.png</image:loc>
+      <image:title>BeerBa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-beerba.jpg</image:loc>
+      <image:title>BEERBA — Yerbamate &amp; Beer bezalkoholowe — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/coffee-fes.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-coffee-fes.jpg</image:loc>
+      <image:title>Coffee Fes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-coffee-fes.jpg</image:loc>
+      <image:title>Coffee Fes — Foreign Extra Stout (Srebro Kraft Roku 2023) — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/dark-sky.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-dark-sky.png</image:loc>
+      <image:title>Dark Sky</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-dark-sky.jpg</image:loc>
+      <image:title>Dark Sky — Porter Bałtycki — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/es/cervezas/dark-sky-coconut-coffee.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-dark-sky-coconut-coffee.png</image:loc>
+      <image:title>Dark Sky Coconut &amp; Coffee</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-dark-sky-coconut-coffee.jpg</image:loc>
+      <image:title>Dark Sky Coconut &amp; Coffee — Imperial Baltic Porter — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
+      <image:title>Rapsfelder über dem San-Tal im Vorgebirge von Dynów und Przemyśl</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
+      <image:title>Ein Set Biere von Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
+      <image:title>Das San-Tal im Morgengrauen</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
+      <image:title>Der Brauprozess</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>Limitierte Dosenserie von Browar Pogórza für einen Geschäftskunden</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/sport-bieg-niepodleglosci-1320.jpg</image:loc>
+      <image:title>Läufer nach dem 10. PKO Unabhängigkeitslauf mit Bieren von Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-2.jpg</image:loc>
+      <image:title>Eine Veranstaltung von Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-3.jpg</image:loc>
+      <image:title>Eine Sportveranstaltung</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-new-1.jpg</image:loc>
+      <image:title>Eine Veranstaltung von Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-5.jpg</image:loc>
+      <image:title>Biere von Browar Pogórza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/gallery-6.jpg</image:loc>
+      <image:title>Unterstützung des Sports</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/bier-mit-firmenlogo.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszki-rzjs.jpg</image:loc>
+      <image:title>Limitierte Dosenserie von Browar Pogórza für einen Geschäftskunden</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-private-label.jpg</image:loc>
+      <image:title>Private label — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/hills-pils.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-hills-pils.png</image:loc>
+      <image:title>Hills Pils</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-hills-pils.jpg</image:loc>
+      <image:title>Hills Pils — Pils czeski — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/wheat-valley.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-wheat-valley.png</image:loc>
+      <image:title>Wheat Valley</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-wheat-valley.jpg</image:loc>
+      <image:title>Wheat Valley — Pszeniczne hefeweizen — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/herb-apa.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-herb-apa.png</image:loc>
+      <image:title>Herb APA</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-herb-apa.jpg</image:loc>
+      <image:title>Herb APA — Earl Grey APA — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/san-lajt.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-san-lajt.png</image:loc>
+      <image:title>San Lajt</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-san-lajt.jpg</image:loc>
+      <image:title>San Lajt — Mango American Wheat — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/green-hills.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-green-hills.png</image:loc>
+      <image:title>Green Hills</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-green-hills.jpg</image:loc>
+      <image:title>Green Hills — Earl Grey IPA bezalkoholowe — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/podium.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-podium.png</image:loc>
+      <image:title>Podium — alkoholfreies IPA für Aktive</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-podium.jpg</image:loc>
+      <image:title>Podium — IPA bezalkoholowa 0,5% dla aktywnych — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/blue-sky.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/puszka-blue-sky.png</image:loc>
+      <image:title>Blue Sky</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-blue-sky.jpg</image:loc>
+      <image:title>Blue Sky — New England IPA — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/beerba.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-beerba.png</image:loc>
+      <image:title>BeerBa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-beerba.jpg</image:loc>
+      <image:title>BEERBA — Yerbamate &amp; Beer bezalkoholowe — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/coffee-fes.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-coffee-fes.jpg</image:loc>
+      <image:title>Coffee Fes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-coffee-fes.jpg</image:loc>
+      <image:title>Coffee Fes — Foreign Extra Stout (Srebro Kraft Roku 2023) — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/dark-sky.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-dark-sky.png</image:loc>
+      <image:title>Dark Sky</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/og/og-dark-sky.jpg</image:loc>
+      <image:title>Dark Sky — Porter Bałtycki — Browar Pogórza</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://browarpogorza.pl/de/biere/dark-sky-coconut-coffee.html</loc>
+    <image:image>
+      <image:loc>https://browarpogorza.pl/images/beer-dark-sky-coconut-coffee.png</image:loc>
+      <image:title>Dark Sky Coconut &amp; Coffee</image:title>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/og/og-dark-sky-coconut-coffee.jpg</image:loc>

@@ -6,16 +6,20 @@
     <title>404 — Не знайдено · Browar Pogórza</title>
     <meta name="robots" content="noindex">
     <link rel="icon" type="image/png" href="/images/logo-black.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
-
-
-
-
-
-
+    <meta name="description" content="Nie znaleziono tej strony. Повернутися на головну Browaru Pogórza albo zajrzyj do naszych piw rzemieślniczych z Doliny Sanu.">
+    <link rel="canonical" href="https://browarpogorza.pl/uk/404.html">
+    <meta property="og:site_name" content="Browar Pogórza">
+    <meta property="og:locale" content="uk_UA">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="404 — Не знайдено · Browar Pogórza">
+    <meta property="og:description" content="Nie znaleziono tej strony. Повернутися на головну Browaru Pogórza albo zajrzyj do naszych piw rzemieślniczych z Doliny Sanu.">
+    <meta property="og:url" content="https://browarpogorza.pl/uk/404.html">
+    <meta property="og:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="404 — Не знайдено · Browar Pogórza">
+    <meta name="twitter:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
 
 
 
@@ -27,17 +31,62 @@
     <link rel="alternate" hreflang="x-default" href="https://browarpogorza.pl/404.html">
 </head>
 <body>
+<a class="skip-link" href="#main">Перейти до вмісту</a>
+<main id="main" tabindex="-1">
 <section class="not-found">
     <div class="not-found__inner">
-        <img width="2166" height="2166" src="/images/logo-black.png" alt="Browar Pogórza" style="width: 100px; height: 100px; background: var(--cream); border-radius: 50%; padding: 10px; box-shadow: var(--shadow-md); margin: 0 auto 24px; display: block;">
+        <a href="/uk/" aria-label="Browar Pogórza">
+            <img src="/images/logo-black.png" alt="Browar Pogórza" width="100" height="100" style="width: 100px; height: 100px; background: var(--cream); border-radius: 50%; padding: 10px; box-shadow: var(--shadow-md); margin: 0 auto 24px; display: block;">
+        </a>
         <p class="not-found__num">404</p>
-        <h1 class="not-found__title">Хміль розсипався</h1>
-        <p class="not-found__text">Ця сторінка зникла, як останній ковток Hills Pils — або її ніколи не було, або щось пішло не так.</p>
+        <h1 class="not-found__title" data-nf="title">Хміль розсипався</h1>
+        <p class="not-found__text" data-nf="text">Ця сторінка зникла, як останній ковток Hills Pils — або її ніколи не було, або щось пішло не так.</p>
         <div class="not-found__actions">
-            <a href="/uk/" class="btn btn--sun">Повернутися на головну</a>
-            <a href="/uk/#piwa" class="btn btn--ghost">Наше пиво</a>
+            <a href="/uk/" class="btn btn--sun" data-nf="home">Повернутися на головну</a>
+            <a href="/uk/#piwa" class="btn btn--ghost" data-nf="beers">Наше пиво</a>
         </div>
+                <nav class="langswitch" aria-label="Мова">
+            <a class="langswitch__lang" href="/404.html" hreflang="pl" lang="pl" title="Polski" aria-label="Polski">PL</a>
+            <a class="langswitch__lang" href="/en/404.html" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
+            <a class="langswitch__lang is-current" href="/uk/404.html" hreflang="uk" lang="uk" title="Українська" aria-label="Українська" aria-current="page">UA</a>
+            <a class="langswitch__lang" href="/es/404.html" hreflang="es" lang="es" title="Español" aria-label="Español">ES</a>
+            <a class="langswitch__lang" href="/de/404.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
+        </nav>
+        <!-- langswitch -->
     </div>
 </section>
+</main>
+<script>
+    // GitHub Pages serves this one file for every 404, including those under
+    // /en/, /uk/, /es/ and /de/ — so the page localizes itself from the path.
+    (function () {
+        var COPY = {
+            en: { lang: 'en', title: 'The hops got spilled', text: 'This page is gone like the last sip of Hills Pils — it either moved or never existed.', home: 'Back to the home page', beers: 'See our beers', beersHref: '/en/#piwa' },
+            uk: { lang: 'uk', title: 'Хміль розсипався', text: 'Ця сторінка зникла, як останній ковток Hills Pils — вона або переїхала, або її ніколи не було.', home: 'На головну сторінку', beers: 'Наші сорти пива', beersHref: '/uk/#piwa' },
+            es: { lang: 'es', title: 'Se derramó el lúpulo', text: 'Esta página desapareció como el último sorbo de Hills Pils: se movió o nunca existió.', home: 'Volver a la página principal', beers: 'Ver nuestras cervezas', beersHref: '/es/#piwa' },
+            de: { lang: 'de', title: 'Der Hopfen ist verschüttet', text: 'Diese Seite ist weg wie der letzte Schluck Hills Pils — sie wurde verschoben oder gab es nie.', home: 'Zurück zur Startseite', beers: 'Unsere Biere ansehen', beersHref: '/de/#piwa' }
+        };
+        var code = (location.pathname.split('/')[1] || '').toLowerCase();
+        var copy = COPY[code];
+        if (!copy) return;
+        document.documentElement.lang = copy.lang;
+        var set = function (key, value) {
+            var el = document.querySelector('[data-nf="' + key + '"]');
+            if (el) el.textContent = value;
+        };
+        set('title', copy.title);
+        set('text', copy.text);
+        set('home', copy.home);
+        set('beers', copy.beers);
+        var home = document.querySelector('[data-nf="home"]');
+        var beers = document.querySelector('[data-nf="beers"]');
+        if (home) home.href = '/' + code + '/';
+        if (beers) beers.href = copy.beersHref;
+        document.querySelectorAll('.langswitch__lang').forEach(function (a) {
+            a.classList.toggle('is-current', a.getAttribute('hreflang') === copy.lang);
+            if (a.getAttribute('hreflang') === copy.lang) a.setAttribute('aria-current', 'page');
+        });
+    })();
+</script>
 </body>
 </html>

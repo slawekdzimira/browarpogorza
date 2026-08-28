@@ -24,7 +24,7 @@
     </script>
 
     <title>Elige tu cerveza — el selector de Browar Pogórza</title>
-    <meta name="description" content="Dinos qué comes o qué haces hoy y te propondremos una cerveza de Browar Pogórza. Maridajes y sugerencias para cada ocasión: barbacoa, calor junto al río, noche de hoguera o volver conduciendo.">
+    <meta name="description" content="Dinos qué comes o qué haces hoy y te recomendamos una cerveza de Browar Pogórza: maridajes y una opción para cada ocasión.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://browarpogorza.pl/es/elige-tu-cerveza.html">
 
@@ -233,6 +233,8 @@
         }
     </style>
 
+
+
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/dobierz-piwo.html">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/beer-finder.html">
     <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/pidbir-pyva.html">
@@ -241,6 +243,7 @@
     <link rel="alternate" hreflang="x-default" href="https://browarpogorza.pl/dobierz-piwo.html">
 </head>
 <body>
+<a class="skip-link" href="#main">Ir al contenido</a>
 
 <header class="nav is-scrolled" id="nav">
     <div class="container nav__inner">
@@ -260,14 +263,14 @@
             <a class="langswitch__lang" href="/dobierz-piwo.html" hreflang="pl" lang="pl" title="Polski" aria-label="Polski">PL</a>
             <a class="langswitch__lang" href="/en/beer-finder.html" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
             <a class="langswitch__lang" href="/uk/pidbir-pyva.html" hreflang="uk" lang="uk" title="Українська" aria-label="Українська">UA</a>
-            <a class="langswitch__lang is-current" href="/es/elige-tu-cerveza.html" hreflang="es" lang="es" title="Español" aria-label="Español" aria-current="true">ES</a>
+            <a class="langswitch__lang is-current" href="/es/elige-tu-cerveza.html" hreflang="es" lang="es" title="Español" aria-label="Español" aria-current="page">ES</a>
             <a class="langswitch__lang" href="/de/bier-finden.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
         </nav>
-        <button class="nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
     </div>
 </header>
 
-<main class="picker">
+<main class="picker" id="main" tabindex="-1">
     <div class="container">
         <div class="picker__head">
             <p class="picker__kicker">Selector de cervezas</p>
@@ -281,7 +284,14 @@
             <span class="picker__dot" data-dot="2"></span>
         </div>
 
-        <div class="picker__stage" id="stage" aria-live="polite"></div>
+        <!-- Step 1 is rendered statically as well, so crawlers and no-JS visitors
+             get real copy instead of an empty container; the script replaces it. -->
+        <div class="picker__stage" id="stage" aria-live="polite">
+            <section class="step is-active">
+                <h2 class="step__title">¿Por dónde empezamos?</h2>
+                <p class="step__hint">Dos caminos, el mismo resultado: una cerveza que encaja con lo que tienes delante.</p>
+            </section>
+        </div>
     </div>
 </main>
 
@@ -295,19 +305,19 @@
             <p class="footer__tag">Del Pogórze, nunca con prisa</p>
         </div>
         <div class="footer__col">
-            <h3>Enlaces rápidos</h3>
+            <h2>Enlaces rápidos</h2>
             <ul>
                 <li><a href="/es/#o-nas">Sobre nosotros</a></li>
                 <li><a href="/es/#piwa">Nuestras cervezas</a></li>
                 <li><a href="/es/elige-tu-cerveza.html">Elige tu cerveza</a></li>
                 <li><a href="/es/#kontakt">Contacto</a></li>
-                <li><a href="/polityka-prywatnosci.html">Política de privacidad (PL)</a></li>
-                <li><a href="/regulamin.html">Términos y condiciones (PL)</a></li>
-                <li><a href="/cookies.html">Política de cookies (PL)</a></li>
+                <li><a href="/polityka-prywatnosci.html" hreflang="pl" lang="pl">Política de privacidad (PL)</a></li>
+                <li><a href="/regulamin.html" hreflang="pl" lang="pl">Términos y condiciones (PL)</a></li>
+                <li><a href="/cookies.html" hreflang="pl" lang="pl">Política de cookies (PL)</a></li>
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Contacto</h3>
+            <h2>Contacto</h2>
             <ul>
                 <li>Przedmieście Dubieckie 15A</li>
                 <li><a href="tel:+48734180172">+48 734 180 172</a></li>
@@ -315,7 +325,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Responsabilidad</h3>
+            <h2>Responsabilidad</h2>
             <p class="footer__small">Promovemos el consumo responsable de alcohol. Venta solo a mayores de edad.</p>
         </div>
     </div>
@@ -455,10 +465,15 @@
             '</picture></span>';
     }
 
+    // U+2190 is outside every self-hosted font subset, so it would render from Arial.
+    var ARROW_LEFT = '<svg class="icon-arrow icon-arrow--left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="11 6 5 12 11 18"></polyline></svg>';
+
     function picture(beer, className) {
         return '<picture>' +
             '<source srcset="/images/' + beer.img + '.webp" type="image/webp">' +
+            // Intrinsic size keeps the tile from collapsing before the bottle loads.
             '<img src="/images/' + beer.img + '.' + (beer.ext || 'png') + '" alt="' + beer.name + '"' +
+            ' width="600" height="900"' +
             (className ? ' class="' + className + '"' : '') + ' loading="lazy">' +
             '</picture>';
     }
@@ -477,9 +492,17 @@
         stage.innerHTML = html;
         setProgress(step);
         bind();
+        // innerHTML wipes the focused element; move focus to the new step so a
+        // keyboard user does not restart from the top of the document.
+        var heading = stage.querySelector('.step__title, .result__name');
+        if (heading) {
+            heading.setAttribute('tabindex', '-1');
+            heading.focus({ preventScroll: true });
+        }
         if (step > 0) {
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             var top = stage.getBoundingClientRect().top + window.pageYOffset - 140;
-            window.scrollTo({ top: top, behavior: 'smooth' });
+            window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
         }
     }
 
@@ -549,7 +572,7 @@
             '</div>' +
             '<div class="result__actions">' +
             '<a class="btn-gold" href="/es/cervezas/' + key + '.html" data-action="open" data-slug="' + key + '">Ver esta cerveza</a>' +
-            '<button class="btn-ghost" data-action="back">← ' + (state.mode === 'food' ? 'Otro plato' : 'Otra ocasión') + '</button>' +
+            '<button class="btn-ghost" data-action="back">' + ARROW_LEFT + (state.mode === 'food' ? 'Otro plato' : 'Otra ocasión') + '</button>' +
             '<button class="btn-ghost" data-action="restart">Empezar de nuevo</button>' +
             '</div>' +
             '</div></div>' +

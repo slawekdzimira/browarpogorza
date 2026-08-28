@@ -23,8 +23,8 @@
         });
     </script>
 
-    <title>Piwo z logo firmy — private label z browaru rzemieślniczego | Browar Pogórza</title>
-    <meta name="description" content="Piwo z logo Twojej firmy w modelu private label. Puszki i butelki z browaru rzemieślniczego na Podkarpaciu, wersje bezalkoholowe, projekt etykiety, wysyłka w całej UE.">
+    <title>Piwo z logo firmy — private label | Browar Pogórza</title>
+    <meta name="description" content="Piwo z logo Twojej firmy: puszki i butelki z browaru rzemieślniczego, wersje bezalkoholowe, projekt etykiety, wysyłka w całej UE.">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
@@ -80,7 +80,7 @@
           "@id": "https://browarpogorza.pl/piwo-z-logo-firmy.html#service",
           "serviceType": "Private label beer / contract brewing",
           "name": "Piwo z logo firmy",
-          "description": "Piwo z logo Twojej firmy w modelu private label. Puszki i butelki z browaru rzemieślniczego na Podkarpaciu, wersje bezalkoholowe, projekt etykiety, wysyłka w całej UE.",
+          "description": "Piwo z logo Twojej firmy: puszki i butelki z browaru rzemieślniczego, wersje bezalkoholowe, projekt etykiety, wysyłka w całej UE.",
           "provider": { "@id": "https://browarpogorza.pl/#brewery" },
           "areaServed": ["PL", "DE", "AT", "CZ", "SK", "LT", "LV", "EE", "FI", "SE", "DK", "NL", "BE", "FR", "ES", "IT", "IE", "PT"],
           "url": "https://browarpogorza.pl/piwo-z-logo-firmy.html",
@@ -126,6 +126,8 @@
     }
     </script>
 
+
+
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/piwo-z-logo-firmy.html">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/private-label-beer.html">
     <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/pyvo-z-lohotypom.html">
@@ -153,13 +155,13 @@
             <a href="#kontakt" class="nav__cta">Kontakt</a>
         </nav>
         <nav class="langswitch" aria-label="Język">
-            <a class="langswitch__lang is-current" href="/piwo-z-logo-firmy.html" hreflang="pl" lang="pl" title="Polski" aria-label="Polski" aria-current="true">PL</a>
+            <a class="langswitch__lang is-current" href="/piwo-z-logo-firmy.html" hreflang="pl" lang="pl" title="Polski" aria-label="Polski" aria-current="page">PL</a>
             <a class="langswitch__lang" href="/en/private-label-beer.html" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
             <a class="langswitch__lang" href="/uk/pyvo-z-lohotypom.html" hreflang="uk" lang="uk" title="Українська" aria-label="Українська">UA</a>
             <a class="langswitch__lang" href="/es/cerveza-marca-propia.html" hreflang="es" lang="es" title="Español" aria-label="Español">ES</a>
             <a class="langswitch__lang" href="/de/bier-mit-firmenlogo.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
         </nav>
-        <button class="nav__toggle" id="nav-toggle" aria-label="Menu">
+        <button class="nav__toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
             <span></span><span></span><span></span>
         </button>
     </div>
@@ -201,7 +203,7 @@
         </div>
         <div class="split__visual">
             <figure class="biznes-photo">
-                <img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="Limitowana seria puszek Browaru Pogórza dla klienta biznesowego" loading="lazy">
+                <picture><source srcset="/images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="Limitowana seria puszek Browaru Pogórza dla klienta biznesowego" loading="lazy"></picture>
                 <figcaption>
                     <span class="biznes-photo__tag">Limitowana seria</span>
                     <span class="biznes-photo__caption">Dedykowane wydania dla naszych partnerów</span>
@@ -253,7 +255,7 @@
         </div>
         <div class="split__visual">
             <div class="split__visual--photo">
-                <img width="1600" height="1065" src="/images/zestaw.jpg" alt="Zestaw piw Browaru Pogórza" loading="lazy">
+                <picture><source srcset="/images/zestaw.webp" type="image/webp"><img width="1600" height="1065" src="/images/zestaw.jpg" alt="Zestaw piw Browaru Pogórza" loading="lazy"></picture>
             </div>
         </div>
     </div>
@@ -329,7 +331,7 @@
                     </div>
                 </div>
             </div>
-            <form class="contact__form" action="https://formsubmit.co/slawek@browarpogorza.pl" method="POST">
+            <form class="contact__form" novalidate action="https://formsubmit.co/slawek@browarpogorza.pl" method="POST">
                 <input type="hidden" name="_subject" value="Private label inquiry — browarpogorza.pl">
                 <input type="hidden" name="_next" value="https://browarpogorza.pl/dziekujemy.html">
                 <input type="hidden" name="_template" value="table">
@@ -339,20 +341,21 @@
                 <input type="text" name="_honey" tabindex="-1" autocomplete="new-password" aria-hidden="true" style="display:none !important" data-autofill-skip="true">
                 <div class="field">
                     <label for="f-name">Imię i nazwisko</label>
-                    <input id="f-name" type="text" name="Imię i nazwisko" required>
+                    <input id="f-name" type="text" name="Imię i nazwisko" required aria-required="true" autocomplete="name">
                 </div>
                 <div class="field">
                     <label for="f-email">E-mail</label>
-                    <input id="f-email" type="email" name="email" required>
+                    <input id="f-email" type="email" name="email" required aria-required="true" autocomplete="email">
                 </div>
                 <div class="field">
                     <label for="f-phone">Telefon</label>
-                    <input id="f-phone" type="tel" name="Telefon">
+                    <input id="f-phone" type="tel" name="Telefon" autocomplete="tel">
                 </div>
                 <div class="field">
                     <label for="f-msg">Wiadomość</label>
-                    <textarea id="f-msg" name="Wiadomość" rows="5" required></textarea>
+                    <textarea id="f-msg" name="Wiadomość" rows="5" required aria-required="true"></textarea>
                 </div>
+                <p class="form-status" role="alert" data-form-status></p>
                 <button type="submit" class="btn btn--sun btn--block">Wyślij wiadomość</button>
             </form>
         </div>
@@ -407,9 +410,9 @@
         <div class="footer__col">
             <h3 class="footer__col-h">Dokumenty</h3>
             <ul>
-                <li><a href="/polityka-prywatnosci.html">Polityka prywatności</a></li>
-                <li><a href="/regulamin.html">Regulamin</a></li>
-                <li><a href="/cookies.html">Polityka cookies</a></li>
+                <li><a href="/polityka-prywatnosci.html" hreflang="pl" lang="pl">Polityka prywatności</a></li>
+                <li><a href="/regulamin.html" hreflang="pl" lang="pl">Regulamin</a></li>
+                <li><a href="/cookies.html" hreflang="pl" lang="pl">Polityka cookies</a></li>
             </ul>
             <p class="footer__small" style="margin-top: 14px;">Promujemy odpowiedzialne spożywanie alkoholu. Sprzedaż wyłącznie dla osób pełnoletnich.</p>
         </div>
@@ -427,7 +430,7 @@
 
 <div class="mobile-cta" role="region" aria-label="Szybki kontakt">
     <div class="mobile-cta__inner">
-        <a href="tel:+48734180172" class="btn btn--ghost">📞 Zadzwoń</a>
+        <a href="tel:+48734180172" class="btn btn--ghost"><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.2 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>Zadzwoń</a>
         <a href="#kontakt" class="btn btn--sun">Skontaktuj się</a>
     </div>
 </div>

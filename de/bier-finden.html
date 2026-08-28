@@ -24,7 +24,7 @@
     </script>
 
     <title>Bier finden — der Bierfinder von Browar Pogórza</title>
-    <meta name="description" content="Sagen Sie uns, was Sie essen oder heute vorhaben — wir finden das passende Bier von Browar Pogórza. Food-Pairing und Vorschläge für jeden Anlass: Grillen, Hitze am Fluss, Abend am Lagerfeuer, Heimfahrt mit dem Auto.">
+    <meta name="description" content="Sagen Sie uns, was Sie essen oder vorhaben, und wir empfehlen ein Bier von Browar Pogórza — Food-Pairing für jeden Anlass.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://browarpogorza.pl/de/bier-finden.html">
 
@@ -233,6 +233,8 @@
         }
     </style>
 
+
+
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/dobierz-piwo.html">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/beer-finder.html">
     <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/pidbir-pyva.html">
@@ -241,6 +243,7 @@
     <link rel="alternate" hreflang="x-default" href="https://browarpogorza.pl/dobierz-piwo.html">
 </head>
 <body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
 
 <header class="nav is-scrolled" id="nav">
     <div class="container nav__inner">
@@ -261,13 +264,13 @@
             <a class="langswitch__lang" href="/en/beer-finder.html" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
             <a class="langswitch__lang" href="/uk/pidbir-pyva.html" hreflang="uk" lang="uk" title="Українська" aria-label="Українська">UA</a>
             <a class="langswitch__lang" href="/es/elige-tu-cerveza.html" hreflang="es" lang="es" title="Español" aria-label="Español">ES</a>
-            <a class="langswitch__lang is-current" href="/de/bier-finden.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch" aria-current="true">DE</a>
+            <a class="langswitch__lang is-current" href="/de/bier-finden.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch" aria-current="page">DE</a>
         </nav>
-        <button class="nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Menü" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
     </div>
 </header>
 
-<main class="picker">
+<main class="picker" id="main" tabindex="-1">
     <div class="container">
         <div class="picker__head">
             <p class="picker__kicker">Bierfinder</p>
@@ -281,7 +284,14 @@
             <span class="picker__dot" data-dot="2"></span>
         </div>
 
-        <div class="picker__stage" id="stage" aria-live="polite"></div>
+        <!-- Step 1 is rendered statically as well, so crawlers and no-JS visitors
+             get real copy instead of an empty container; the script replaces it. -->
+        <div class="picker__stage" id="stage" aria-live="polite">
+            <section class="step is-active">
+                <h2 class="step__title">Womit fangen wir an?</h2>
+                <p class="step__hint">Zwei Wege, dasselbe Ergebnis — ein Bier, das zu dem passt, was vor Ihnen steht.</p>
+            </section>
+        </div>
     </div>
 </main>
 
@@ -295,19 +305,19 @@
             <p class="footer__tag">Aus dem Pogórze, nicht aus der Eile</p>
         </div>
         <div class="footer__col">
-            <h3>Schnelllinks</h3>
+            <h2>Schnelllinks</h2>
             <ul>
                 <li><a href="/de/#o-nas">Über uns</a></li>
                 <li><a href="/de/#piwa">Unsere Biere</a></li>
                 <li><a href="/de/bier-finden.html">Bier finden</a></li>
                 <li><a href="/de/#kontakt">Kontakt</a></li>
-                <li><a href="/polityka-prywatnosci.html">Datenschutz (PL)</a></li>
-                <li><a href="/regulamin.html">AGB (PL)</a></li>
-                <li><a href="/cookies.html">Cookie-Richtlinie (PL)</a></li>
+                <li><a href="/polityka-prywatnosci.html" hreflang="pl" lang="pl">Datenschutz (PL)</a></li>
+                <li><a href="/regulamin.html" hreflang="pl" lang="pl">AGB (PL)</a></li>
+                <li><a href="/cookies.html" hreflang="pl" lang="pl">Cookie-Richtlinie (PL)</a></li>
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Kontakt</h3>
+            <h2>Kontakt</h2>
             <ul>
                 <li>Przedmieście Dubieckie 15A</li>
                 <li><a href="tel:+48734180172">+48 734 180 172</a></li>
@@ -315,7 +325,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Verantwortung</h3>
+            <h2>Verantwortung</h2>
             <p class="footer__small">Wir stehen für verantwortungsvollen Alkoholkonsum. Abgabe nur an Volljährige.</p>
         </div>
     </div>
@@ -455,10 +465,15 @@
             '</picture></span>';
     }
 
+    // U+2190 is outside every self-hosted font subset, so it would render from Arial.
+    var ARROW_LEFT = '<svg class="icon-arrow icon-arrow--left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="11 6 5 12 11 18"></polyline></svg>';
+
     function picture(beer, className) {
         return '<picture>' +
             '<source srcset="/images/' + beer.img + '.webp" type="image/webp">' +
+            // Intrinsic size keeps the tile from collapsing before the bottle loads.
             '<img src="/images/' + beer.img + '.' + (beer.ext || 'png') + '" alt="' + beer.name + '"' +
+            ' width="600" height="900"' +
             (className ? ' class="' + className + '"' : '') + ' loading="lazy">' +
             '</picture>';
     }
@@ -477,9 +492,17 @@
         stage.innerHTML = html;
         setProgress(step);
         bind();
+        // innerHTML wipes the focused element; move focus to the new step so a
+        // keyboard user does not restart from the top of the document.
+        var heading = stage.querySelector('.step__title, .result__name');
+        if (heading) {
+            heading.setAttribute('tabindex', '-1');
+            heading.focus({ preventScroll: true });
+        }
         if (step > 0) {
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             var top = stage.getBoundingClientRect().top + window.pageYOffset - 140;
-            window.scrollTo({ top: top, behavior: 'smooth' });
+            window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
         }
     }
 
@@ -549,7 +572,7 @@
             '</div>' +
             '<div class="result__actions">' +
             '<a class="btn-gold" href="/de/biere/' + key + '.html" data-action="open" data-slug="' + key + '">Dieses Bier ansehen</a>' +
-            '<button class="btn-ghost" data-action="back">← ' + (state.mode === 'food' ? 'Anderes Gericht' : 'Anderer Anlass') + '</button>' +
+            '<button class="btn-ghost" data-action="back">' + ARROW_LEFT + (state.mode === 'food' ? 'Anderes Gericht' : 'Anderer Anlass') + '</button>' +
             '<button class="btn-ghost" data-action="restart">Neu starten</button>' +
             '</div>' +
             '</div></div>' +

@@ -32,7 +32,6 @@
     <meta name="geo.position" content="49.823;22.398">
     <meta name="ICBM" content="49.823, 22.398">
     <meta name="theme-color" content="#2d6232">
-    <meta name="google-site-verification" content="REPLACE_WITH_GSC_TOKEN">
     <link rel="canonical" href="https://browarpogorza.pl/uk/">
 
     <!-- Open Graph + Twitter -->
@@ -76,7 +75,7 @@
           "@id": "https://browarpogorza.pl/#brewery",
           "name": "Browar Pogórza",
           "alternateName": "Browar Pogorza",
-          "description": "Rzemieślniczy browar kontraktowy z Pogórza Dynowsko-Przemyskiego, warzący piwa rzemieślnicze z polskich składników.",
+          "description": "Крафтова контрактна броварня з Динівсько-Перемишльського Погір’я, яка варить пиво з польських інгредієнтів.",
           "url": "https://browarpogorza.pl",
           "logo": "https://browarpogorza.pl/images/logo-black.png",
           "image": "https://browarpogorza.pl/images/hero-bottle.jpg",
@@ -115,6 +114,8 @@
     }
     </script>
 
+
+
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/">
     <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/">
@@ -144,15 +145,17 @@
         <nav class="langswitch" aria-label="Мова">
             <a class="langswitch__lang" href="/" hreflang="pl" lang="pl" title="Polski" aria-label="Polski">PL</a>
             <a class="langswitch__lang" href="/en/" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
-            <a class="langswitch__lang is-current" href="/uk/" hreflang="uk" lang="uk" title="Українська" aria-label="Українська" aria-current="true">UA</a>
+            <a class="langswitch__lang is-current" href="/uk/" hreflang="uk" lang="uk" title="Українська" aria-label="Українська" aria-current="page">UA</a>
             <a class="langswitch__lang" href="/es/" hreflang="es" lang="es" title="Español" aria-label="Español">ES</a>
             <a class="langswitch__lang" href="/de/" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
         </nav>
-        <button class="nav__toggle" id="nav-toggle" aria-label="Menu">
+        <button class="nav__toggle" id="nav-toggle" aria-label="Меню" aria-expanded="false" aria-controls="nav-menu">
             <span></span><span></span><span></span>
         </button>
     </div>
 </header>
+
+<main id="main" tabindex="-1">
 
 <!-- ====== HERO ====== -->
 <section class="hero" id="hero" tabindex="-1">
@@ -202,7 +205,7 @@
         </div>
         <div class="split__visual">
             <div class="split__visual--photo">
-                <img width="1600" height="1065" src="/images/zestaw.jpg" alt="Набір пива Browar Pogórza" loading="lazy">
+                <picture><source srcset="/images/zestaw.webp" type="image/webp"><img width="1600" height="1065" src="/images/zestaw.jpg" alt="Набір пива Browar Pogórza" loading="lazy"></picture>
             </div>
         </div>
     </div>
@@ -216,17 +219,23 @@
         <p class="lead lead--light">Наше пиво народжується з пристрасті та досвіду польського броварського ремесла. Ми варимо його перевіреними натуральними методами, використовуючи солод, хміль і дріжджі від польських постачальників — без зайвих штучних додатків.</p>
         <div class="chapters">
             <div class="chapter">
-                <span class="chapter__num">🌾</span>
+                <span class="chapter__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V8"/><path d="M12 8c0-2.2 1.3-4 3-4 0 2.2-1.3 4-3 4z"/><path d="M12 8c0-2.2-1.3-4-3-4 0 2.2 1.3 4 3 4z"/><path d="M12 13c0-2.2 1.3-4 3-4 0 2.2-1.3 4-3 4z"/><path d="M12 13c0-2.2-1.3-4-3-4 0 2.2 1.3 4 3 4z"/><path d="M12 18c0-2.2 1.3-4 3-4 0 2.2-1.3 4-3 4z"/><path d="M12 18c0-2.2-1.3-4-3-4 0 2.2 1.3 4 3 4z"/></svg>
+                </span>
                 <h3>Солод</h3>
                 <p>Солод — основа смаку, тіла й кольору кожної варки. Ми беремо найкращі врожаї від перевірених польських постачальників.</p>
             </div>
             <div class="chapter">
-                <span class="chapter__num">🌿</span>
+                <span class="chapter__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c2.6 2.2 4.1 4.8 4.1 7.9 0 4-1.9 7.5-4.1 10.4-2.2-2.9-4.1-6.4-4.1-10.4C7.9 7.8 9.4 5.2 12 3z"/><path d="M8.4 9.2h7.2"/><path d="M9 13.2h6"/><path d="M10 17.1h4"/></svg>
+                </span>
                 <h3>Крафтовий хміль</h3>
                 <p>Шишки хмелю добираємо під кожен стиль — від делікатного Saaz у <a href="/uk/pyva/hills-pils.html">Hills Pils</a>, через Mosaic і Citra у <a href="/uk/pyva/herb-apa.html">Herb APA</a>, до класичного East Kent Golding у <a href="/uk/pyva/coffee-fes.html">Coffee Fes</a>. Кожна партія — від перевірених польських та європейських постачальників.</p>
             </div>
             <div class="chapter">
-                <span class="chapter__num">🫧</span>
+                <span class="chapter__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 21h15"/><path d="M7 21v-9.5a5 5 0 0110 0V21"/><circle cx="10.3" cy="14.2" r="1.25"/><circle cx="13.9" cy="17" r=".95"/></svg>
+                </span>
                 <h3>Дріжджі та традиція</h3>
                 <p>Багатовікові методи варіння та ретельно дібрані дріжджі від польських постачальників. Без скорочень і трюків — чисте пиво, у якому відчутна рука майстра.</p>
             </div>
@@ -236,7 +245,7 @@
 
 <!-- ====== DOLINA SANU (parallax banner) ====== -->
 <section class="banner" aria-label="Долина Сяну — Диновсько-Перемишльське Погір'я">
-    <div class="banner__bg"><img width="2200" height="1228" src="/images/dolina-sanu.jpg" alt="Долина Сяну на світанку" loading="lazy"></div>
+    <div class="banner__bg"><picture><source srcset="/images/dolina-sanu.webp" type="image/webp"><img width="2200" height="1228" src="/images/dolina-sanu.jpg" alt="Долина Сяну на світанку" loading="lazy"></picture></div>
     <div class="banner__overlay"></div>
     <div class="container banner__content">
         <div class="kicker kicker--light">Наше натхнення</div>
@@ -250,7 +259,7 @@
     <div class="container split split--reverse">
         <div class="split__visual">
             <figure class="biznes-photo">
-                <img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="Лімітована серія бляшанок Browar Pogórza для бізнес-клієнта">
+                <picture><source srcset="/images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="Лімітована серія бляшанок Browar Pogórza для бізнес-клієнта"></picture>
                 <figcaption>
                     <span class="biznes-photo__tag">Лімітована серія</span>
                     <span class="biznes-photo__caption">Спеціальні видання для наших партнерів</span>
@@ -301,7 +310,7 @@
         </div>
         <div class="split__visual">
             <div class="split__visual--photo">
-                <img width="1400" height="931" src="/images/sport-bieg-niepodleglosci-1320.jpg" alt="Бігуни після 10-го PKO Bieg Niepodległości з пивом Browar Pogórza" loading="lazy">
+                <picture><source srcset="/images/sport-bieg-niepodleglosci-1320.webp" type="image/webp"><img width="1400" height="931" src="/images/sport-bieg-niepodleglosci-1320.jpg" alt="Бігуни після 10-го PKO Bieg Niepodległości з пивом Browar Pogórza" loading="lazy"></picture>
             </div>
         </div>
     </div>
@@ -320,11 +329,11 @@
                 <span class="picker-cta__title">Не знаєте, що обрати?</span>
                 <span class="picker-cta__sub">Скажіть, що ви їсте або чим займаєтеся сьогодні — підберемо пиво за два кліки.</span>
             </span>
-            <span class="picker-cta__btn">Підбери пиво <span class="picker-cta__arrow">→</span></span>
+            <span class="picker-cta__btn">Підбери пиво <span class="picker-cta__arrow"><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span></span>
         </a>
 
         <div class="beer-grid">
-            <article class="beer-card" data-beer-slug="hills-pils" data-beer-name="Hills Pils" data-beer-style="Пільзнер" data-beer-abv="5,0%"><a href="/uk/pyva/hills-pils.html"><div class="beer-card__photo"><img width="249" height="940" src="/images/beer-hills-pils.png" alt="Hills Pils" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="hills-pils" data-beer-name="Hills Pils" data-beer-style="Пільзнер" data-beer-abv="5,0%"><a href="/uk/pyva/hills-pils.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-hills-pils.webp" type="image/webp"><img width="249" height="940" src="/images/beer-hills-pils.png" alt="Hills Pils" loading="lazy"></picture></div>
                 <h3>Hills Pils</h3>
                 <p class="beer-card__style">Пільзнер</p>
                 <div class="beer-card__meta">
@@ -332,7 +341,7 @@
                     <div>Гіркота<strong>3/5</strong></div>
                     <div>Екстракт<strong>12,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="wheat-valley" data-beer-name="Wheat Valley" data-beer-style="Пшеничне" data-beer-abv="6,0%"><a href="/uk/pyva/wheat-valley.html"><div class="beer-card__photo"><img width="249" height="940" src="/images/beer-wheat-valley.png" alt="Wheat Valley" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="wheat-valley" data-beer-name="Wheat Valley" data-beer-style="Пшеничне" data-beer-abv="6,0%"><a href="/uk/pyva/wheat-valley.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-wheat-valley.webp" type="image/webp"><img width="249" height="940" src="/images/beer-wheat-valley.png" alt="Wheat Valley" loading="lazy"></picture></div>
                 <h3>Wheat Valley</h3>
                 <p class="beer-card__style">Пшеничне</p>
                 <div class="beer-card__meta">
@@ -340,7 +349,7 @@
                     <div>Гіркота<strong>1/5</strong></div>
                     <div>Екстракт<strong>12,5</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="herb-apa" data-beer-name="Herb APA" data-beer-style="Earl Grey APA" data-beer-abv="5,5%"><a href="/uk/pyva/herb-apa.html"><div class="beer-card__photo"><img width="251" height="940" src="/images/beer-herb-apa.png" alt="Herb APA" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="herb-apa" data-beer-name="Herb APA" data-beer-style="Earl Grey APA" data-beer-abv="5,5%"><a href="/uk/pyva/herb-apa.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-herb-apa.webp" type="image/webp"><img width="251" height="940" src="/images/beer-herb-apa.png" alt="Herb APA" loading="lazy"></picture></div>
                 <h3>Herb APA</h3>
                 <p class="beer-card__style">Earl Grey APA</p>
                 <div class="beer-card__meta">
@@ -348,7 +357,7 @@
                     <div>Гіркота<strong>2,5/5</strong></div>
                     <div>Екстракт<strong>12,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="san-lajt" data-beer-name="San Lajt" data-beer-style="Mango American Wheat" data-beer-abv="5,0%"><a href="/uk/pyva/san-lajt.html"><div class="beer-card__photo"><img width="250" height="940" src="/images/beer-san-lajt.png" alt="San Lajt" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="san-lajt" data-beer-name="San Lajt" data-beer-style="Mango American Wheat" data-beer-abv="5,0%"><a href="/uk/pyva/san-lajt.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-san-lajt.webp" type="image/webp"><img width="250" height="940" src="/images/beer-san-lajt.png" alt="San Lajt" loading="lazy"></picture></div>
                 <h3>San Lajt</h3>
                 <p class="beer-card__style">Mango American Wheat</p>
                 <div class="beer-card__meta">
@@ -356,7 +365,7 @@
                     <div>Гіркота<strong>1/5</strong></div>
                     <div>Екстракт<strong>12,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="green-hills" data-beer-name="Green Hills" data-beer-style="Earl Grey IPA" data-beer-abv="0,5%"><a href="/uk/pyva/green-hills.html"><div class="beer-card__photo"><img width="250" height="940" src="/images/beer-green-hills.png" alt="Green Hills" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="green-hills" data-beer-name="Green Hills" data-beer-style="Earl Grey IPA" data-beer-abv="0,5%"><a href="/uk/pyva/green-hills.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-green-hills.webp" type="image/webp"><img width="250" height="940" src="/images/beer-green-hills.png" alt="Green Hills" loading="lazy"></picture></div>
                 <h3>Green Hills</h3>
                 <p class="beer-card__style">Earl Grey IPA</p>
                 <div class="beer-card__meta">
@@ -364,7 +373,7 @@
                     <div>Гіркота<strong>1/5</strong></div>
                     <div>Екстракт<strong>12,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="podium" data-beer-name="Podium" data-beer-style="Безалкогольна IPA" data-beer-abv="0,5%"><a href="/uk/pyva/podium.html"><div class="beer-card__photo"><img width="244" height="881" src="/images/beer-podium.png" alt="Podium — безалкогольна IPA для активних" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="podium" data-beer-name="Podium" data-beer-style="Безалкогольна IPA" data-beer-abv="0,5%"><a href="/uk/pyva/podium.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-podium.webp" type="image/webp"><img width="244" height="881" src="/images/beer-podium.png" alt="Podium — безалкогольна IPA для активних" loading="lazy"></picture></div>
                 <h3>Podium</h3>
                 <p class="beer-card__style">Безалкогольна IPA</p>
                 <div class="beer-card__meta">
@@ -372,7 +381,7 @@
                     <div>Гіркота<strong>1/5</strong></div>
                     <div>Екстракт<strong>10,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="blue-sky" data-beer-name="Blue Sky" data-beer-style="New England IPA" data-beer-abv="6,2%"><a href="/uk/pyva/blue-sky.html"><div class="beer-card__photo"><img width="356" height="940" src="/images/puszka-blue-sky.png" alt="Blue Sky" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="blue-sky" data-beer-name="Blue Sky" data-beer-style="New England IPA" data-beer-abv="6,2%"><a href="/uk/pyva/blue-sky.html"><div class="beer-card__photo"><picture><source srcset="/images/puszka-blue-sky.webp" type="image/webp"><img width="356" height="940" src="/images/puszka-blue-sky.png" alt="Blue Sky" loading="lazy"></picture></div>
                 <h3>Blue Sky</h3>
                 <p class="beer-card__style">New England IPA · бляшанка</p>
                 <div class="beer-card__meta">
@@ -380,7 +389,7 @@
                     <div>Гіркота<strong>2/5</strong></div>
                     <div>Екстракт<strong>15,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="beerba" data-beer-name="BEERBA" data-beer-style="Yerbamate &amp; Beer" data-beer-abv="0,0%"><a href="/uk/pyva/beerba.html"><div class="beer-card__photo"><img width="562" height="746" src="/images/beer-beerba.png" alt="BeerBa" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="beerba" data-beer-name="BEERBA" data-beer-style="Yerbamate &amp; Beer" data-beer-abv="0,0%"><a href="/uk/pyva/beerba.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-beerba.webp" type="image/webp"><img width="562" height="746" src="/images/beer-beerba.png" alt="BeerBa" loading="lazy"></picture></div>
                 <h3>BEERBA</h3>
                 <p class="beer-card__style">Yerba Mate &amp; Beer · 0,0%</p>
                 <div class="beer-card__meta">
@@ -388,7 +397,7 @@
                     <div>Гіркота<strong>2/5</strong></div>
                     <div>Екстракт<strong>11,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="coffee-fes" data-beer-name="Coffee Fes" data-beer-style="Foreign Extra Stout" data-beer-abv="7,5%"><a href="/uk/pyva/coffee-fes.html"><div class="beer-card__photo"><img width="1100" height="1653" src="/images/beer-coffee-fes.jpg" alt="Coffee Fes" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="coffee-fes" data-beer-name="Coffee Fes" data-beer-style="Foreign Extra Stout" data-beer-abv="7,5%"><a href="/uk/pyva/coffee-fes.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-coffee-fes.webp" type="image/webp"><img width="1100" height="1653" src="/images/beer-coffee-fes.jpg" alt="Coffee Fes" loading="lazy"></picture></div>
                 <h3>Coffee Fes</h3>
                 <p class="beer-card__style">Foreign Extra Stout</p>
                 <div class="beer-card__meta">
@@ -396,7 +405,7 @@
                     <div>Гіркота<strong>4/5</strong></div>
                     <div>Екстракт<strong>17,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="dark-sky" data-beer-name="Dark Sky" data-beer-style="Балтійський портер" data-beer-abv="9,5%"><a href="/uk/pyva/dark-sky.html"><div class="beer-card__photo"><img width="257" height="940" src="/images/beer-dark-sky.png" alt="Dark Sky" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="dark-sky" data-beer-name="Dark Sky" data-beer-style="Балтійський портер" data-beer-abv="9,5%"><a href="/uk/pyva/dark-sky.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-dark-sky.webp" type="image/webp"><img width="257" height="940" src="/images/beer-dark-sky.png" alt="Dark Sky" loading="lazy"></picture></div>
                 <h3>Dark Sky</h3>
                 <p class="beer-card__style">Балтійський портер</p>
                 <div class="beer-card__meta">
@@ -404,7 +413,7 @@
                     <div>Гіркота<strong>4/5</strong></div>
                     <div>Екстракт<strong>25,0</strong></div>
                 </div></a></article>
-            <article class="beer-card" data-beer-slug="dark-sky-coconut-coffee" data-beer-name="Dark Sky Coconut &amp; Coffee" data-beer-style="Балтійський портер" data-beer-abv="9,5%"><a href="/uk/pyva/dark-sky-coconut-coffee.html"><div class="beer-card__photo"><img width="800" height="800" src="/images/beer-dark-sky-coconut-coffee.png" alt="Dark Sky Coconut & Coffee" loading="lazy"></div>
+            <article class="beer-card" data-beer-slug="dark-sky-coconut-coffee" data-beer-name="Dark Sky Coconut &amp; Coffee" data-beer-style="Балтійський портер" data-beer-abv="9,5%"><a href="/uk/pyva/dark-sky-coconut-coffee.html"><div class="beer-card__photo"><picture><source srcset="/images/beer-dark-sky-coconut-coffee.webp" type="image/webp"><img width="800" height="800" src="/images/beer-dark-sky-coconut-coffee.png" alt="Dark Sky Coconut & Coffee" loading="lazy"></picture></div>
                 <h3>Dark Sky Coconut & Coffee</h3>
                 <p class="beer-card__style">Балтійський портер · Кокос & Кава</p>
                 <div class="beer-card__meta">
@@ -424,12 +433,12 @@
         <h2 class="h2">Броварня в об'єктиві</h2>
         <p class="lead">Кадри з подій, де ми підтримували бігунів, спортсменів і поціновувачів крафту.</p>
         <div class="gallery">
-            <div class="gallery__item gallery__item--a"><a href="/images/gallery-2.jpg" class="lightbox-trigger"><img width="1200" height="900" src="/images/gallery-2.jpg" alt="Подія Browar Pogórza" loading="lazy"></a></div>
-            <div class="gallery__item gallery__item--b"><a href="/images/gallery-3.jpg" class="lightbox-trigger"><img width="1200" height="800" src="/images/gallery-3.jpg" alt="Спортивна подія" loading="lazy"></a></div>
-            <div class="gallery__item gallery__item--c"><a href="/images/gallery-new-1.jpg" class="lightbox-trigger"><img width="1200" height="900" src="/images/gallery-new-1.jpg" alt="Подія Browar Pogórza" loading="lazy"></a></div>
-            <div class="gallery__item gallery__item--d"><a href="/images/gallery-5.jpg" class="lightbox-trigger"><img width="1200" height="800" src="/images/gallery-5.jpg" alt="Пиво Browar Pogórza" loading="lazy"></a></div>
-            <div class="gallery__item gallery__item--e"><a href="/images/gallery-6.jpg" class="lightbox-trigger"><img width="1200" height="612" src="/images/gallery-6.jpg" alt="Підтримка спорту" loading="lazy"></a></div>
-            <div class="gallery__item gallery__item--f"><a href="/images/brewing.jpg" class="lightbox-trigger"><img width="1600" height="893" src="/images/brewing.jpg" alt="Процес варіння пива" loading="lazy"></a></div>
+            <div class="gallery__item gallery__item--a"><a href="/images/gallery-2.jpg" class="lightbox-trigger"><picture><source srcset="/images/gallery-2.webp" type="image/webp"><img width="1200" height="900" src="/images/gallery-2.jpg" alt="Подія Browar Pogórza" loading="lazy"></picture></a></div>
+            <div class="gallery__item gallery__item--b"><a href="/images/gallery-3.jpg" class="lightbox-trigger"><picture><source srcset="/images/gallery-3.webp" type="image/webp"><img width="1200" height="800" src="/images/gallery-3.jpg" alt="Спортивна подія" loading="lazy"></picture></a></div>
+            <div class="gallery__item gallery__item--c"><a href="/images/gallery-new-1.jpg" class="lightbox-trigger"><picture><source srcset="/images/gallery-new-1.webp" type="image/webp"><img width="1200" height="900" src="/images/gallery-new-1.jpg" alt="Подія Browar Pogórza" loading="lazy"></picture></a></div>
+            <div class="gallery__item gallery__item--d"><a href="/images/gallery-5.jpg" class="lightbox-trigger"><picture><source srcset="/images/gallery-5.webp" type="image/webp"><img width="1200" height="800" src="/images/gallery-5.jpg" alt="Пиво Browar Pogórza" loading="lazy"></picture></a></div>
+            <div class="gallery__item gallery__item--e"><a href="/images/gallery-6.jpg" class="lightbox-trigger"><picture><source srcset="/images/gallery-6.webp" type="image/webp"><img width="1200" height="612" src="/images/gallery-6.jpg" alt="Підтримка спорту" loading="lazy"></picture></a></div>
+            <div class="gallery__item gallery__item--f"><a href="/images/brewing.jpg" class="lightbox-trigger"><picture><source srcset="/images/brewing.webp" type="image/webp"><img width="1600" height="893" src="/images/brewing.jpg" alt="Процес варіння пива" loading="lazy"></picture></a></div>
         </div>
     </div>
 </section>
@@ -470,8 +479,8 @@
                     </div>
                 </div>
             </div>
-            <form class="contact__form" action="https://formsubmit.co/slawek@browarpogorza.pl" method="POST">
-                <input type="hidden" name="_subject" value="Nowa wiadomość ze strony Browaru Pogórza">
+            <form class="contact__form" novalidate action="https://formsubmit.co/slawek@browarpogorza.pl" method="POST">
+                <input type="hidden" name="_subject" value="Нове повідомлення з browarpogorza.pl">
                 <input type="hidden" name="_next" value="https://browarpogorza.pl/uk/dyakuyemo.html">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
@@ -480,20 +489,21 @@
                 <input type="text" name="_honey" tabindex="-1" autocomplete="new-password" aria-hidden="true" style="display:none !important" data-autofill-skip="true">
                 <div class="field">
                     <label for="f-name">Ім'я та прізвище</label>
-                    <input id="f-name" type="text" name="Ім'я та прізвище" required>
+                    <input id="f-name" type="text" name="Ім'я та прізвище" required aria-required="true">
                 </div>
                 <div class="field">
                     <label for="f-email">E-mail</label>
-                    <input id="f-email" type="email" name="email" required>
+                    <input id="f-email" type="email" name="email" required aria-required="true" autocomplete="email">
                 </div>
                 <div class="field">
                     <label for="f-phone">Телефон</label>
-                    <input id="f-phone" type="tel" name="Телефон">
+                    <input id="f-phone" type="tel" name="Телефон" autocomplete="tel">
                 </div>
                 <div class="field">
                     <label for="f-msg">Повідомлення</label>
-                    <textarea id="f-msg" name="Повідомлення" rows="5" required></textarea>
+                    <textarea id="f-msg" name="Повідомлення" rows="5" required aria-required="true"></textarea>
                 </div>
+                <p class="form-status" role="alert" data-form-status></p>
                 <button type="submit" class="btn btn--sun btn--block">Надіслати повідомлення</button>
             </form>
         </div>
@@ -511,19 +521,23 @@
     <div class="container">
         <h2 class="newsletter__title">Будьте в курсі</h2>
         <p class="newsletter__text">Повідомимо про нові варки, події Browar Pogórza та сезонні лімітовані серії.</p>
-        <form class="newsletter__form" action="https://formsubmit.co/slawek@browarpogorza.pl" method="POST">
-            <input type="hidden" name="_subject" value="Newsletter — nowy zapis">
+        <form class="newsletter__form" novalidate action="https://formsubmit.co/slawek@browarpogorza.pl" method="POST">
+            <input type="hidden" name="_subject" value="Розсилка — нова підписка">
             <input type="hidden" name="_next" value="https://browarpogorza.pl/uk/dyakuyemo.html">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_autoresponse" value="Дякуємо за підписку на розсилку Browar Pogórza! Повідомимо про нові варки.">
             <input type="text" name="_honey" tabindex="-1" autocomplete="new-password" aria-hidden="true" style="display:none !important" data-autofill-skip="true">
-            <input type="email" name="email" placeholder="Ваш e-mail" required aria-label="Адреса e-mail">
+            <label class="visually-hidden" for="f-newsletter">Адреса e-mail</label>
+            <input id="f-newsletter" type="email" name="email" placeholder="Ваш e-mail" required aria-required="true" autocomplete="email">
             <button type="submit" class="btn btn--sun">Підписатися</button>
+            <p class="form-status" role="alert" data-form-status></p>
         </form>
         <p class="newsletter__small">Без спаму. Відписатися можна будь-коли. <a href="/polityka-prywatnosci.html">Політика конфіденційності (PL)</a>.</p>
     </div>
 </section>
+
+</main>
 
 <!-- ====== FOOTER ====== -->
 <footer class="footer">
@@ -550,7 +564,7 @@
             </div>
         </div>
         <div class="footer__col">
-            <h3>Швидкі посилання</h3>
+            <h2>Швидкі посилання</h2>
             <ul>
                 <li><a href="#o-nas">Про нас</a></li>
                 <li><a href="#tradycja">Традиція</a></li>
@@ -562,7 +576,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Контакти</h3>
+            <h2>Контакти</h2>
             <ul>
                 <li>Przedmieście Dubieckie 15A</li>
                 <li><a href="tel:+48734180172">+48 734 180 172</a></li>
@@ -570,11 +584,11 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Документи</h3>
+            <h2>Документи</h2>
             <ul>
-                <li><a href="/polityka-prywatnosci.html">Політика конфіденційності (PL)</a></li>
-                <li><a href="/regulamin.html">Правила (PL)</a></li>
-                <li><a href="/cookies.html">Політика cookies (PL)</a></li>
+                <li><a href="/polityka-prywatnosci.html" hreflang="pl" lang="pl">Політика конфіденційності (PL)</a></li>
+                <li><a href="/regulamin.html" hreflang="pl" lang="pl">Правила (PL)</a></li>
+                <li><a href="/cookies.html" hreflang="pl" lang="pl">Політика cookies (PL)</a></li>
             </ul>
             <p class="footer__small" style="margin-top: 14px;">Ми пропагуємо відповідальне вживання алкоголю. Продаж лише повнолітнім.</p>
         </div>
@@ -588,7 +602,14 @@
 
 <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Збільшене фото">
     <button class="lightbox__close" id="lightbox-close" aria-label="Закрити">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Попереднє фото">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
     <img class="lightbox__img" id="lightbox-img" src="" alt="">
+    <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Наступне фото">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox__counter" id="lightbox-counter" aria-live="polite"></div>
 </div>
 
 <button type="button" id="back-to-top" class="back-to-top" aria-label="Нагору">
@@ -597,7 +618,7 @@
 
 <div class="mobile-cta" role="region" aria-label="Швидкий контакт">
     <div class="mobile-cta__inner">
-        <a href="tel:+48734180172" class="btn btn--ghost">📞 Подзвонити</a>
+        <a href="tel:+48734180172" class="btn btn--ghost"><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.2 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>Подзвонити</a>
         <a href="#kontakt" class="btn btn--sun">Написати нам</a>
     </div>
 </div>

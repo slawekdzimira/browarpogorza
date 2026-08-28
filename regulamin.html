@@ -20,16 +20,25 @@
     </script>
 
     <title>Regulamin · Browar Pogórza</title>
-    <meta name="description" content="Regulamin korzystania ze strony internetowej Browaru Pogórza.">
+    <meta name="description" content="Regulamin korzystania ze strony browarpogorza.pl: zasady korzystania z serwisu, formularza kontaktowego i newslettera Browaru Pogórza.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://browarpogorza.pl/regulamin.html">
     <link rel="icon" type="image/png" href="/images/logo-black.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
+    <meta property="og:site_name" content="Browar Pogórza">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Regulamin · Browar Pogórza">
+    <meta property="og:description" content="Regulamin korzystania ze strony browarpogorza.pl: zasady korzystania z serwisu, formularza kontaktowego i newslettera Browaru Pogórza.">
+    <meta property="og:url" content="https://browarpogorza.pl/regulamin.html">
+    <meta property="og:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Regulamin · Browar Pogórza">
+    <meta name="twitter:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
 </head>
 <body class="legal-page">
+<a class="skip-link" href="#main">Przejdź do treści</a>
 
 <header class="nav is-scrolled" id="nav">
     <div class="container nav__inner">
@@ -45,17 +54,17 @@
             <a href="/#kontakt" class="nav__cta">Kontakt</a>
         </nav>
         <nav class="langswitch" aria-label="Język">
-            <a class="langswitch__lang is-current" href="/" hreflang="pl" lang="pl" title="Polski" aria-label="Polski" aria-current="true">PL</a>
+            <a class="langswitch__lang is-current" href="/" hreflang="pl" lang="pl" title="Polski" aria-label="Polski" aria-current="page">PL</a>
             <a class="langswitch__lang" href="/en/" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
             <a class="langswitch__lang" href="/uk/" hreflang="uk" lang="uk" title="Українська" aria-label="Українська">UA</a>
             <a class="langswitch__lang" href="/es/" hreflang="es" lang="es" title="Español" aria-label="Español">ES</a>
             <a class="langswitch__lang" href="/de/" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
         </nav>
-        <button class="nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
     </div>
 </header>
 
-<main class="legal">
+<main class="legal" id="main" tabindex="-1">
     <div class="container">
         <h1>Regulamin strony</h1>
         <p class="legal__meta">Ostatnia aktualizacja: 9 czerwca 2026 r.</p>
@@ -120,19 +129,19 @@
             <p class="footer__tag">Z Pogórza, nie z pośpiechu</p>
         </div>
         <div class="footer__col">
-            <h3>Szybkie linki</h3>
+            <h2>Szybkie linki</h2>
             <ul>
                 <li><a href="/#o-nas">O nas</a></li>
                 <li><a href="/#piwa">Nasze piwa</a></li>
                 <li><a href="/dobierz-piwo.html">Dobierz piwo</a></li>
                 <li><a href="/#kontakt">Kontakt</a></li>
-                <li><a href="/polityka-prywatnosci.html">Polityka prywatności</a></li>
-                <li><a href="/regulamin.html">Regulamin</a></li>
-                <li><a href="/cookies.html">Polityka cookies</a></li>
+                <li><a href="/polityka-prywatnosci.html" hreflang="pl" lang="pl">Polityka prywatności</a></li>
+                <li><a href="/regulamin.html" hreflang="pl" lang="pl">Regulamin</a></li>
+                <li><a href="/cookies.html" hreflang="pl" lang="pl">Polityka cookies</a></li>
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Kontakt</h3>
+            <h2>Kontakt</h2>
             <ul>
                 <li>Przedmieście Dubieckie 15A</li>
                 <li><a href="tel:+48734180172">+48 734 180 172</a></li>
@@ -140,7 +149,7 @@
             </ul>
         </div>
         <div class="footer__col">
-            <h3>Odpowiedzialność</h3>
+            <h2>Odpowiedzialność</h2>
             <p class="footer__small">Promujemy odpowiedzialne spożywanie alkoholu. Sprzedaż wyłącznie dla osób pełnoletnich.</p>
         </div>
     </div>
