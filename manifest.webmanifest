@@ -1,7 +1,7 @@
 {
   "name": "Browar Pogórza",
   "short_name": "Browar Pogórza",
-  "description": "Rzemieślniczy browar z Pogórza Dynowsko-Przemyskiego — Z Pogórza, nie z pośpiechu",
+  "description": "Rzemieślniczy browar z Pogórza Dynowsko-Przemyskiego - Z Pogórza, nie z pośpiechu",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

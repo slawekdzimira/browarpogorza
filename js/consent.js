@@ -46,7 +46,7 @@
             ageWarning: 'Ми пропагуємо відповідальне вживання алкоголю. Алкоголь шкодить здоров’ю.',
             cookieRegion: 'Згода на файли cookie',
             cookieTitle: 'Ми використовуємо файли cookie',
-            cookieTextBefore: 'Щоб забезпечити найкращий досвід, ми використовуємо файли cookie для аналітики (Google Analytics). Ваші дані анонімні. Деталі — у ',
+            cookieTextBefore: 'Щоб забезпечити найкращий досвід, ми використовуємо файли cookie для аналітики (Google Analytics). Ваші дані анонімні. Деталі - у ',
             cookieLink: 'політиці cookie (PL)',
             cookieTextAfter: '.',
             cookieReject: 'Лише необхідні',
@@ -241,7 +241,7 @@
         document.body.style.overflow = '';
 
         // Skip age gate + cookie banner for automated audits (Lighthouse, headless Chrome).
-        // PageSpeed Insights uses HeadlessChromium — measuring the age-gate modal as LCP
+        // PageSpeed Insights uses HeadlessChromium - measuring the age-gate modal as LCP
         // gives misleading scores. Real users still see the modal.
         const ua = navigator.userAgent || '';
         if (/Lighthouse|Headless|PageSpeed|GoogleBot|bingbot|YandexBot|crawler|spider|bot/i.test(ua)) {

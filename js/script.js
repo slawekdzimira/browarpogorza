@@ -5,7 +5,7 @@
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
 
-    // Pages that open on a light background need the solid header from the start —
+    // Pages that open on a light background need the solid header from the start -
     // the transparent state paints cream links on a cream page.
     const isProductPage = document.body.classList.contains('product-page')
         || document.body.classList.contains('legal-page');
@@ -41,7 +41,7 @@
     setupVideoFacades();
 
     // YouTube costs roughly a megabyte of third-party JavaScript, so nothing is
-    // requested until the section is on screen — and never on a phone, a slow
+    // requested until the section is on screen - and never on a phone, a slow
     // connection, or when the visitor asked for less motion. The still photo
     // underneath is the poster, so the section looks finished either way.
     function setupBackgroundVideo() {
@@ -347,7 +347,7 @@
         if (msgField && !msgField.value) {
             const beerName = urlParams.get('name') || beerParam.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
             // The enquiry template is injected at runtime, so the i18n build never
-            // sees it — it has to carry its own translations.
+            // sees it - it has to carry its own translations.
             const templates = {
                 pl: name => `Dzień dobry,\n\nJestem zainteresowany piwem ${name}. Proszę o ofertę.\n\nPozdrawiam`,
                 en: name => `Hello,\n\nI am interested in your ${name} beer. Could you send me an offer?\n\nBest regards`,
