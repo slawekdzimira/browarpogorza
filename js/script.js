@@ -87,16 +87,32 @@
             frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
         };
 
+        // The photo gets its five seconds first: the player is only requested if the
+        // visitor is still looking at this section after the dwell, so scrolling past
+        // costs nothing and the still image is what a passer-by sees.
+        const DWELL_MS = 5000;
+        let dwellTimer = null;
+
         const io = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    if (!frame) load();
-                    else command('playVideo');
-                } else if (frame) {
-                    command('pauseVideo');
+                    if (frame) {
+                        command('playVideo');
+                    } else if (!dwellTimer) {
+                        dwellTimer = window.setTimeout(() => {
+                            dwellTimer = null;
+                            if (!frame) load();
+                        }, DWELL_MS);
+                    }
+                } else {
+                    if (dwellTimer) {
+                        window.clearTimeout(dwellTimer);
+                        dwellTimer = null;
+                    }
+                    if (frame) command('pauseVideo');
                 }
             });
-        }, { rootMargin: '200px 0px' });
+        }, { threshold: 0.35 });
         io.observe(holder);
     }
 
