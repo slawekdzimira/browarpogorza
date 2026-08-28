@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -13,7 +14,27 @@
             wait_for_update: 500
         });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J"></script>
+    <script>
+        // gtag.js is not needed to paint the page. Loading it at idle - or on the
+        // first interaction, whichever comes first - keeps its parse and execution
+        // off the critical path; the dataLayer queue above is replayed on arrival.
+        (function () {
+            var loaded = false;
+            function loadGtag() {
+                if (loaded) return;
+                loaded = true;
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J';
+                document.head.appendChild(s);
+            }
+            ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
+                window.addEventListener(evt, loadGtag, { once: true, passive: true });
+            });
+            if ('requestIdleCallback' in window) window.requestIdleCallback(loadGtag, { timeout: 4000 });
+            else window.addEventListener('load', function () { window.setTimeout(loadGtag, 2500); });
+        })();
+    </script>
     <script>
         gtag('js', new Date());
         gtag('config', 'G-BE132JG40J');
@@ -24,7 +45,6 @@
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://browarpogorza.pl/regulamin.html">
     <link rel="icon" type="image/png" href="/images/logo-black.png">
-    <link rel="stylesheet" href="/fonts/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
     <meta property="og:site_name" content="Browar Pogórza">
     <meta property="og:locale" content="pl_PL">
@@ -36,6 +56,44 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Regulamin · Browar Pogórza">
     <meta name="twitter:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Strona główna",
+              "item": "https://browarpogorza.pl/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Regulamin",
+              "item": "https://browarpogorza.pl/regulamin.html"
+            }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://browarpogorza.pl/regulamin.html#webpage",
+          "name": "Regulamin",
+          "description": "Zasady korzystania ze strony browarpogorza.pl.",
+          "url": "https://browarpogorza.pl/regulamin.html",
+          "inLanguage": "pl-PL",
+          "isPartOf": {
+            "@id": "https://browarpogorza.pl/#website"
+          },
+          "publisher": {
+            "@id": "https://browarpogorza.pl/#brewery"
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body class="legal-page">
 <a class="skip-link" href="#main">Przejdź do treści</a>

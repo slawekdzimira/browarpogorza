@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Google Consent Mode v2 — default deny until cookie banner accepted -->
     <script>
@@ -14,7 +15,27 @@
             wait_for_update: 500
         });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J"></script>
+    <script>
+        // gtag.js is not needed to paint the page. Loading it at idle - or on the
+        // first interaction, whichever comes first - keeps its parse and execution
+        // off the critical path; the dataLayer queue above is replayed on arrival.
+        (function () {
+            var loaded = false;
+            function loadGtag() {
+                if (loaded) return;
+                loaded = true;
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J';
+                document.head.appendChild(s);
+            }
+            ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
+                window.addEventListener(evt, loadGtag, { once: true, passive: true });
+            });
+            if ('requestIdleCallback' in window) window.requestIdleCallback(loadGtag, { timeout: 4000 });
+            else window.addEventListener('load', function () { window.setTimeout(loadGtag, 2500); });
+        })();
+    </script>
     <script>
         gtag('js', new Date());
         gtag('config', 'G-BE132JG40J');
@@ -55,14 +76,12 @@
     <link rel="manifest" href="/manifest.webmanifest">
 
     <!-- Hero LCP optimization -->
-    <link rel="preload" as="image" href="/images/hero-pogorze-rzepak.webp" type="image/webp" fetchpriority="high" media="(min-width: 0px)">
-    <link rel="preload" as="image" href="/images/hero-pogorze-rzepak.jpg" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high"
+          imagesrcset="/images/hero-pogorze-rzepak-640.webp 640w, /images/hero-pogorze-rzepak-1024.webp 1024w, /images/hero-pogorze-rzepak-1440.webp 1440w, /images/hero-pogorze-rzepak.webp 2000w" imagesizes="100vw">
 
     <!-- Fonts (self-hosted) -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-latin-ext.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-latin-ext.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-500-latin-ext.woff2" crossorigin>
-    <link rel="stylesheet" href="/fonts/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- JSON-LD: Brewery + LocalBusiness + WebSite -->
@@ -114,6 +133,7 @@
     }
     </script>
 
+
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/">
     <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/">
@@ -158,7 +178,7 @@
 <!-- ====== HERO ====== -->
 <section class="hero" id="hero" tabindex="-1">
     <div class="hero__bg">
-        <picture><source srcset="/images/hero-pogorze-rzepak.webp" type="image/webp"><img src="/images/hero-pogorze-rzepak.jpg" alt="Rapeseed fields above the San valley in the Dynów-Przemyśl foothills" loading="eager" fetchpriority="high" width="2200" height="1100"></picture>
+        <picture><source type="image/webp" srcset="/images/hero-pogorze-rzepak-640.webp 640w, /images/hero-pogorze-rzepak-1024.webp 1024w, /images/hero-pogorze-rzepak-1440.webp 1440w, /images/hero-pogorze-rzepak.webp 2000w" sizes="100vw"><img src="/images/hero-pogorze-rzepak-1024.jpg" srcset="/images/hero-pogorze-rzepak-640.jpg 640w, /images/hero-pogorze-rzepak-1024.jpg 1024w, /images/hero-pogorze-rzepak-1440.jpg 1440w, /images/hero-pogorze-rzepak.jpg 2200w" sizes="100vw" alt="Rapeseed fields above the San valley in the Dynów-Przemyśl foothills" loading="eager" fetchpriority="high" width="2200" height="1100"></picture>
     </div>
     <div class="hero__overlay"></div>
     <div class="container hero__content">
@@ -243,7 +263,7 @@
 
 <!-- ====== DOLINA SANU (parallax banner) ====== -->
 <section class="banner" aria-label="San valley — Dynów-Przemyśl foothills">
-    <div class="banner__bg"><picture><source srcset="/images/dolina-sanu.webp" type="image/webp"><img width="2200" height="1228" src="/images/dolina-sanu.jpg" alt="The San valley at dawn" loading="lazy"></picture></div>
+    <div class="banner__bg"><picture><source type="image/webp" srcset="/images/dolina-sanu-640.webp 640w, /images/dolina-sanu-1024.webp 1024w, /images/dolina-sanu-1440.webp 1440w, /images/dolina-sanu.webp 2000w" sizes="100vw"><img width="1024" height="572" src="/images/dolina-sanu-1024.jpg" srcset="/images/dolina-sanu-640.jpg 640w, /images/dolina-sanu-1024.jpg 1024w, /images/dolina-sanu-1440.jpg 1440w, /images/dolina-sanu.jpg 2400w" sizes="100vw" alt="The San valley at dawn" loading="lazy"></picture></div>
     <!-- The player is injected only when this section scrolls into view, and only on
          a wide screen with motion allowed — the photo above stays as the poster, so
          the page costs nothing extra until then. -->

@@ -5,7 +5,8 @@
     <loc>https://browarpogorza.pl/</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
-      <image:title>Pola rzepaku nad doliną Sanu na Pogórzu Dynowsko-Przemyskim</image:title>
+      <image:title>Pola rzepaku Pogórza Dynowsko-Przemyskiego</image:title>
+      <image:caption>Krajobraz doliny Sanu o świcie</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
@@ -13,7 +14,8 @@
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
-      <image:title>Dolina Sanu o świcie</image:title>
+      <image:title>Dolina Sanu — Browar Pogórza</image:title>
+      <image:caption>Miejsce inspirujące nasze warzenia</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
@@ -184,7 +186,8 @@
     <loc>https://browarpogorza.pl/en/</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
-      <image:title>Rapeseed fields above the San valley in the Dynów-Przemyśl foothills</image:title>
+      <image:title>Pola rzepaku Pogórza Dynowsko-Przemyskiego</image:title>
+      <image:caption>Krajobraz doliny Sanu o świcie</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
@@ -192,7 +195,8 @@
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
-      <image:title>The San valley at dawn</image:title>
+      <image:title>Dolina Sanu — Browar Pogórza</image:title>
+      <image:caption>Miejsce inspirujące nasze warzenia</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
@@ -363,7 +367,8 @@
     <loc>https://browarpogorza.pl/uk/</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
-      <image:title>Поля ріпаку над долиною Сяну в Диновсько-Перемишльському Погір&apos;ї</image:title>
+      <image:title>Pola rzepaku Pogórza Dynowsko-Przemyskiego</image:title>
+      <image:caption>Krajobraz doliny Sanu o świcie</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
@@ -371,7 +376,8 @@
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
-      <image:title>Долина Сяну на світанку</image:title>
+      <image:title>Dolina Sanu — Browar Pogórza</image:title>
+      <image:caption>Miejsce inspirujące nasze warzenia</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
@@ -542,7 +548,8 @@
     <loc>https://browarpogorza.pl/es/</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
-      <image:title>Campos de colza sobre el valle del San, en las estribaciones de Dynów y Przemyśl</image:title>
+      <image:title>Pola rzepaku Pogórza Dynowsko-Przemyskiego</image:title>
+      <image:caption>Krajobraz doliny Sanu o świcie</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
@@ -550,7 +557,8 @@
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
-      <image:title>El valle del San al amanecer</image:title>
+      <image:title>Dolina Sanu — Browar Pogórza</image:title>
+      <image:caption>Miejsce inspirujące nasze warzenia</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>
@@ -721,7 +729,8 @@
     <loc>https://browarpogorza.pl/de/</loc>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/hero-pogorze-rzepak.jpg</image:loc>
-      <image:title>Rapsfelder über dem San-Tal im Vorgebirge von Dynów und Przemyśl</image:title>
+      <image:title>Pola rzepaku Pogórza Dynowsko-Przemyskiego</image:title>
+      <image:caption>Krajobraz doliny Sanu o świcie</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/zestaw.jpg</image:loc>
@@ -729,7 +738,8 @@
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/dolina-sanu.jpg</image:loc>
-      <image:title>Das San-Tal im Morgengrauen</image:title>
+      <image:title>Dolina Sanu — Browar Pogórza</image:title>
+      <image:caption>Miejsce inspirujące nasze warzenia</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://browarpogorza.pl/images/brewing.jpg</image:loc>

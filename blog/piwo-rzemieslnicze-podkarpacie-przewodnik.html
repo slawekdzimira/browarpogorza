@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -13,7 +14,27 @@
             wait_for_update: 500
         });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J"></script>
+    <script>
+        // gtag.js is not needed to paint the page. Loading it at idle - or on the
+        // first interaction, whichever comes first - keeps its parse and execution
+        // off the critical path; the dataLayer queue above is replayed on arrival.
+        (function () {
+            var loaded = false;
+            function loadGtag() {
+                if (loaded) return;
+                loaded = true;
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J';
+                document.head.appendChild(s);
+            }
+            ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
+                window.addEventListener(evt, loadGtag, { once: true, passive: true });
+            });
+            if ('requestIdleCallback' in window) window.requestIdleCallback(loadGtag, { timeout: 4000 });
+            else window.addEventListener('load', function () { window.setTimeout(loadGtag, 2500); });
+        })();
+    </script>
     <script>
         gtag('js', new Date());
         gtag('config', 'G-BE132JG40J', { 'content_group': 'blog' });
@@ -43,7 +64,6 @@
 
     <link rel="icon" type="image/png" href="/images/logo-black.png">
     <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="stylesheet" href="/fonts/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
 
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://browarpogorza.pl/blog/piwo-rzemieslnicze-podkarpacie-przewodnik.html#article","headline":"Piwo rzemieślnicze na Podkarpaciu — przewodnik 2026","description":"Piwo rzemieślnicze na Podkarpaciu — przewodnik 2026. Browary kraftowe Doliny Sanu, najlepsze style i miejsca, gdzie spróbować podkarpackich piw.","datePublished":"2026-06-09","dateModified":"2026-06-09","author":{"@type":"Organization","name":"Browar Pogórza","@id":"https://browarpogorza.pl/#brewery"},"publisher":{"@id":"https://browarpogorza.pl/#brewery"},"mainEntityOfPage":"https://browarpogorza.pl/blog/piwo-rzemieslnicze-podkarpacie-przewodnik.html","image":"https://browarpogorza.pl/images/og/og-default.jpg","inLanguage":"pl-PL","timeRequired":"PT7M"}</script>

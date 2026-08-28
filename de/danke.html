@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Google Consent Mode v2 -->
     <script>
@@ -14,7 +15,27 @@
             wait_for_update: 500
         });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J"></script>
+    <script>
+        // gtag.js is not needed to paint the page. Loading it at idle — or on the
+        // first interaction, whichever comes first — keeps its parse and execution
+        // off the critical path; the dataLayer queue below is replayed on arrival.
+        (function () {
+            var loaded = false;
+            function loadGtag() {
+                if (loaded) return;
+                loaded = true;
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J';
+                document.head.appendChild(s);
+            }
+            ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
+                window.addEventListener(evt, loadGtag, { once: true, passive: true });
+            });
+            if ('requestIdleCallback' in window) window.requestIdleCallback(loadGtag, { timeout: 4000 });
+            else window.addEventListener('load', function () { window.setTimeout(loadGtag, 2500); });
+        })();
+    </script>
     <script>
         gtag('js', new Date());
         gtag('config', 'G-BE132JG40J');
@@ -31,7 +52,6 @@
     <meta property="og:title" content="Dziękujemy — Browar Pogórza">
     <meta property="og:description" content="Twoja wiadomość dotarła do Browaru Pogórza. Odpowiadamy w ciągu 24 godzin — zwykle szybciej.">
     <meta property="og:url" content="https://browarpogorza.pl/de/danke.html">
-    <link rel="stylesheet" href="/fonts/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" href="/images/logo-black.png" type="image/png">
     <meta name="twitter:card" content="summary_large_image">
@@ -39,6 +59,7 @@
     <meta name="twitter:description" content="Ihre Nachricht wurde an Browar Pogórza gesendet.">
     <meta name="twitter:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
     <meta property="og:image" content="https://browarpogorza.pl/images/og/og-default.jpg">
+
 
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/dziekujemy.html">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/thank-you.html">

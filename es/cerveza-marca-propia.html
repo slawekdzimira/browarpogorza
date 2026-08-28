@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Google Consent Mode v2 — default deny -->
     <script>
@@ -14,7 +15,27 @@
             wait_for_update: 500
         });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J"></script>
+    <script>
+        // gtag.js is not needed to paint the page. Loading it at idle — or on the
+        // first interaction, whichever comes first — keeps its parse and execution
+        // off the critical path; the dataLayer queue below is replayed on arrival.
+        (function () {
+            var loaded = false;
+            function loadGtag() {
+                if (loaded) return;
+                loaded = true;
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J';
+                document.head.appendChild(s);
+            }
+            ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
+                window.addEventListener(evt, loadGtag, { once: true, passive: true });
+            });
+            if ('requestIdleCallback' in window) window.requestIdleCallback(loadGtag, { timeout: 4000 });
+            else window.addEventListener('load', function () { window.setTimeout(loadGtag, 2500); });
+        })();
+    </script>
     <script>
         gtag('js', new Date());
         gtag('config', 'G-BE132JG40J', {
@@ -55,13 +76,11 @@
     <link rel="apple-touch-icon" href="/images/logo-black.png">
     <link rel="manifest" href="/manifest.webmanifest">
 
-    <link rel="preload" as="image" href="/images/puszki-rzjs.webp" type="image/webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/puszki-rzjs.jpg" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high"
+          imagesrcset="/images/puszki-rzjs-640.webp 640w, /images/puszki-rzjs-1024.webp 1024w, /images/puszki-rzjs.webp 1600w" imagesizes="(max-width: 900px) 100vw, 50vw">
 
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-latin-ext.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-latin-ext.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-500-latin-ext.woff2" crossorigin>
-    <link rel="stylesheet" href="/fonts/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
 
     <script type="application/ld+json">
@@ -126,6 +145,7 @@
     }
     </script>
 
+
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/piwo-z-logo-firmy.html">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/private-label-beer.html">
     <link rel="alternate" hreflang="uk" href="https://browarpogorza.pl/uk/pyvo-z-lohotypom.html">
@@ -169,7 +189,7 @@
 
 <!-- ====== HERO ====== -->
 <section class="banner" aria-label="Cerveza con el logo de tu empresa">
-    <div class="banner__bg"><picture><source srcset="/images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="Latas de cerveza con etiqueta personalizada de un cliente corporativo" loading="eager" fetchpriority="high"></picture></div>
+    <div class="banner__bg"><picture><source type="image/webp" srcset="/images/puszki-rzjs-640.webp 640w, /images/puszki-rzjs-1024.webp 1024w, /images/puszki-rzjs.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw"><img width="1024" height="522" src="/images/puszki-rzjs-1024.jpg" srcset="/images/puszki-rzjs-640.jpg 640w, /images/puszki-rzjs-1024.jpg 1024w, /images/puszki-rzjs.jpg 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Latas de cerveza con etiqueta personalizada de un cliente corporativo" loading="eager" fetchpriority="high"></picture></div>
     <div class="banner__overlay"></div>
     <div class="container banner__content">
         <div class="kicker kicker--light">Private label</div>

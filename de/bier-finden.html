@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Google Consent Mode v2 — default deny -->
     <script>
@@ -14,7 +15,27 @@
             wait_for_update: 500
         });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J"></script>
+    <script>
+        // gtag.js is not needed to paint the page. Loading it at idle - or on the
+        // first interaction, whichever comes first - keeps its parse and execution
+        // off the critical path; the dataLayer queue above is replayed on arrival.
+        (function () {
+            var loaded = false;
+            function loadGtag() {
+                if (loaded) return;
+                loaded = true;
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BE132JG40J';
+                document.head.appendChild(s);
+            }
+            ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
+                window.addEventListener(evt, loadGtag, { once: true, passive: true });
+            });
+            if ('requestIdleCallback' in window) window.requestIdleCallback(loadGtag, { timeout: 4000 });
+            else window.addEventListener('load', function () { window.setTimeout(loadGtag, 2500); });
+        })();
+    </script>
     <script>
         gtag('js', new Date());
         gtag('config', 'G-BE132JG40J', {
@@ -43,7 +64,6 @@
     <link rel="icon" type="image/png" href="/images/logo-black.png">
     <link rel="apple-touch-icon" href="/images/logo-black.png">
     <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="stylesheet" href="/fonts/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
 
     <style>
@@ -232,6 +252,48 @@
             .picker *, .picker *::before { animation: none !important; transition: none !important; }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Startseite",
+              "item": "https://browarpogorza.pl/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Bier finden",
+              "item": "https://browarpogorza.pl/de/bier-finden.html"
+            }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://browarpogorza.pl/de/bier-finden.html#webpage",
+          "name": "Bier finden",
+          "description": "Sagen Sie uns, was Sie essen oder vorhaben, und wir empfehlen ein Bier von Browar Pogórza — Food-Pairing für jeden Anlass.",
+          "url": "https://browarpogorza.pl/de/bier-finden.html",
+          "inLanguage": "de-DE",
+          "isPartOf": {
+            "@id": "https://browarpogorza.pl/#website"
+          },
+          "about": {
+            "@id": "https://browarpogorza.pl/#brewery"
+          },
+          "publisher": {
+            "@id": "https://browarpogorza.pl/#brewery"
+          }
+        }
+      ]
+    }
+    </script>
+
 
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/dobierz-piwo.html">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/beer-finder.html">
