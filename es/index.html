@@ -41,8 +41,13 @@
         gtag('config', 'G-BE132JG40J');
     </script>
 
-    <title>Cervecería artesanal de Podkarpacie | Browar Pogórza</title>
-    <meta name="description" content="Cervecería artesanal de las estribaciones de Dynów y Przemyśl: cervezas naturales con ingredientes polacos. Hills Pils, Wheat Valley, Dark Sky, Coffee Fes.">
+    <!-- Title and description answer the two regional queries this page already
+         ranks for but never named: "browar w dolinie sanu" (pos 1.7, 2.6% CTR) and
+         "browar nad sanem" (pos 4.7, 0 clicks), plus the "piwo podkarpackie"
+         cluster. Both strings are dictionary KEYS in i18n/translations.index.json —
+         changing them here means renaming the key there too. -->
+    <title>Cervecería artesanal del valle del San | Browar Pogórza</title>
+    <meta name="description" content="Cervecería artesanal junto al río San, en las estribaciones de Dynów y Przemyśl. Cervezas naturales con ingredientes polacos: Hills Pils, Wheat Valley.">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
@@ -446,6 +451,14 @@
         <p class="microcopy microcopy--center">La gama completa está disponible bajo pedido: escríbenos y elegiremos la cerveza para tu evento o empresa.</p>
     </div>
 </section>
+
+<!-- ====== CZYTELNIA (Polish search demand only) ======
+     The "piwo podkarpackie" cluster (~1180 impressions, 1 click, positions 6-11)
+     is answered by the blog guide, which until now had a single inbound link — the
+     blog index. This block gives it, and the two Polish landing pages, a home-page
+     link in the language people actually search in. data-pl-only: generate_i18n.js
+     drops the whole section from the localized builds, because the pages it points
+     at are Polish. -->
 
 <!-- ====== GALERIA ====== -->
 <section class="section section--cream" id="galeria">

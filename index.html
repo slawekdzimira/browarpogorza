@@ -41,8 +41,13 @@
         gtag('config', 'G-BE132JG40J');
     </script>
 
-    <title>Browar rzemieślniczy z Podkarpacia | Browar Pogórza</title>
-    <meta name="description" content="Rzemieślniczy browar z Pogórza Dynowsko-Przemyskiego — naturalne piwa z polskich składników. Hills Pils, Wheat Valley, Dark Sky, Coffee Fes.">
+    <!-- Title and description answer the two regional queries this page already
+         ranks for but never named: "browar w dolinie sanu" (pos 1.7, 2.6% CTR) and
+         "browar nad sanem" (pos 4.7, 0 clicks), plus the "piwo podkarpackie"
+         cluster. Both strings are dictionary KEYS in i18n/translations.index.json —
+         changing them here means renaming the key there too. -->
+    <title>Browar w Dolinie Sanu — piwo podkarpackie | Browar Pogórza</title>
+    <meta name="description" content="Rzemieślniczy browar nad Sanem, na Pogórzu Dynowsko-Przemyskim. Podkarpackie piwa z polskich składników — Hills Pils, Wheat Valley, Dark Sky, Coffee Fes.">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
@@ -445,6 +450,26 @@
                 </div></a></article>
         </div>
         <p class="microcopy microcopy--center">Pełna oferta dostępna na zamówienie — skontaktuj się i dobierzemy piwo do Twojej imprezy lub firmy.</p>
+    </div>
+</section>
+
+<!-- ====== CZYTELNIA (Polish search demand only) ======
+     The "piwo podkarpackie" cluster (~1180 impressions, 1 click, positions 6-11)
+     is answered by the blog guide, which until now had a single inbound link — the
+     blog index. This block gives it, and the two Polish landing pages, a home-page
+     link in the language people actually search in. data-pl-only: generate_i18n.js
+     drops the whole section from the localized builds, because the pages it points
+     at are Polish. -->
+<section class="section section--paper" data-pl-only id="czytelnia">
+    <div class="container">
+        <div class="kicker">Czytelnia</div>
+        <h2 class="h2">Piwo podkarpackie — co warto wiedzieć</h2>
+        <p class="lead">Warzymy nad Sanem, na Pogórzu Dynowsko-Przemyskim, i całą produkcję prowadzimy na Podkarpaciu. Jeśli szukasz piwa z Podkarpacia, zacznij od tych stron.</p>
+        <div class="prose">
+            <p><a href="/blog/piwo-rzemieslnicze-podkarpacie-przewodnik.html">Piwo podkarpackie — przewodnik po browarach Podkarpacia</a>: które browary w województwie podkarpackim warto znać, jakie style z regionu wybrać i gdzie ich spróbować.</p>
+            <p>O stylach, które warzymy: <a href="/blog/co-to-jest-porter-baltycki.html">czym jest porter bałtycki</a> — jak <a href="/piwa/dark-sky.html">Dark Sky</a>, oraz <a href="/blog/jak-smakuje-foreign-extra-stout.html">jak smakuje foreign extra stout</a> — jak <a href="/piwa/coffee-fes.html">Coffee Fes</a>.</p>
+            <p>Na konkretne okazje: <a href="/piwa-bezalkoholowe.html">piwa bezalkoholowe</a> dla kierowców i gości, którzy nie piją, oraz <a href="/piwo-na-wesele.html">piwo na wesele i event</a> z etykietą pod okazję.</p>
+        </div>
     </div>
 </section>
 
