@@ -39,6 +39,75 @@
     setupLightbox();
     setupBackgroundVideo();
     setupVideoFacades();
+    setupPour();
+    setupCardTilt();
+
+    // The hero stein pours once, and only when somebody can actually see it: a
+    // first-time visitor confirms their age over a modal, and a pour that finished
+    // behind it would be a piece of animation nobody ever watches.
+    function setupPour() {
+        const pour = document.querySelector('.pour');
+        if (!pour) return;
+
+        const start = () => pour.classList.add('is-pouring');
+        let verified = false;
+        try { verified = !!localStorage.getItem('bp_age_verified'); } catch (e) { /* private mode */ }
+        if (verified) start();
+        else document.addEventListener('bp:age-verified', start, { once: true });
+
+        // Only the bubbles loop, so they stop once the hero scrolls out of view.
+        if (!('IntersectionObserver' in window)) {
+            pour.classList.add('is-visible');
+            return;
+        }
+        const io = new IntersectionObserver(entries => {
+            pour.classList.toggle('is-visible', entries[0].isIntersecting);
+        }, { threshold: 0.1 });
+        io.observe(pour);
+    }
+
+    // Cards tilt towards the pointer with a highlight that tracks it and the bottle
+    // lagging behind for parallax. Mouse only: on a touch screen there is no pointer
+    // to follow, and tapping a card that tilts under the finger just feels broken.
+    function setupCardTilt() {
+        const cards = document.querySelectorAll('.beer-card');
+        if (!cards.length || reducedMotion.matches) return;
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+        const MAX_DEG = 7;
+        const CUSTOM_PROPS = ['--tilt-x', '--tilt-y', '--pointer-x', '--pointer-y', '--gloss-x', '--gloss-y'];
+
+        cards.forEach(card => {
+            let frame = 0;
+
+            card.addEventListener('pointermove', event => {
+                // One update per painted frame; pointermove fires far more often.
+                if (frame) return;
+                frame = requestAnimationFrame(() => {
+                    frame = 0;
+                    const box = card.getBoundingClientRect();
+                    const x = (event.clientX - box.left) / box.width * 2 - 1;
+                    const y = (event.clientY - box.top) / box.height * 2 - 1;
+                    card.style.setProperty('--tilt-y', (x * MAX_DEG).toFixed(2) + 'deg');
+                    card.style.setProperty('--tilt-x', (-y * MAX_DEG).toFixed(2) + 'deg');
+                    card.style.setProperty('--pointer-x', x.toFixed(3));
+                    card.style.setProperty('--pointer-y', y.toFixed(3));
+                    card.style.setProperty('--gloss-x', ((x + 1) * 50).toFixed(1) + '%');
+                    card.style.setProperty('--gloss-y', ((y + 1) * 50).toFixed(1) + '%');
+                    card.classList.add('is-tilting');
+                });
+            });
+
+            card.addEventListener('pointerleave', () => {
+                if (frame) {
+                    cancelAnimationFrame(frame);
+                    frame = 0;
+                }
+                card.classList.remove('is-tilting');
+                CUSTOM_PROPS.forEach(prop => card.style.removeProperty(prop));
+            });
+        });
+    }
 
     // YouTube costs roughly a megabyte of third-party JavaScript, so nothing is
     // requested until the section is on screen - and never on a phone, a slow
