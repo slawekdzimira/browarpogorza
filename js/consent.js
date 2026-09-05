@@ -172,9 +172,6 @@
                 setBackgroundInert(inertNodes, false);
                 restoreScroll();
                 maybeShowCookieBanner();
-                // The hero animation waits for this: nothing behind the gate should
-                // start moving while the gate is still covering it.
-                document.dispatchEvent(new CustomEvent('bp:age-verified'));
             }, 300);
         };
         modal.querySelector('[data-age-yes]').addEventListener('click', () => {

@@ -39,31 +39,101 @@
     setupLightbox();
     setupBackgroundVideo();
     setupVideoFacades();
-    setupPour();
+    setupPourScene();
     setupCardTilt();
 
-    // The hero stein pours once, and only when somebody can actually see it: a
-    // first-time visitor confirms their age over a modal, and a pour that finished
-    // behind it would be a piece of animation nobody ever watches.
-    function setupPour() {
-        const pour = document.querySelector('.pour');
-        if (!pour) return;
+    // One bottle leaves the shelf, grows, tips over and pours into the stein. On a
+    // desktop the scroll wheel is the hand: the stage is sticky inside a tall
+    // wrapper and progress is how far the visitor has scrolled through it, so the
+    // pour scrubs backwards as well. A phone gets the same scene played on a
+    // timer once it is on screen, and reduced motion gets the finished still.
+    //
+    // The script owns the timeline and writes six custom properties; the shapes
+    // are pure CSS functions of them (see .pour-scene in style.css).
+    function setupPourScene() {
+        const scene = document.querySelector('[data-pour-scene]');
+        if (!scene) return;
+        const stage = scene.querySelector('.pour-scene__stage');
 
-        const start = () => pour.classList.add('is-pouring');
-        let verified = false;
-        try { verified = !!localStorage.getItem('bp_age_verified'); } catch (e) { /* private mode */ }
-        if (verified) start();
-        else document.addEventListener('bp:age-verified', start, { once: true });
+        const clamp01 = v => Math.min(1, Math.max(0, v));
+        const segment = (p, from, to) => clamp01((p - from) / (to - from));
+        const easeInOut = t => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+        const easeOut = t => 1 - Math.pow(1 - t, 3);
+        const POUR_TILT = 108;
 
-        // Only the bubbles loop, so they stop once the hero scrolls out of view.
-        if (!('IntersectionObserver' in window)) {
-            pour.classList.add('is-visible');
+        const slide = parseFloat(getComputedStyle(scene).getPropertyValue('--slide')) || -140;
+
+        // Timeline, in shares of the whole scroll: pick up (0-.30), tip over
+        // (.12-.42), pour (.36-.84), head builds (.46-.90), stand back up (.84-1).
+        const render = (p) => {
+            const lift = easeInOut(segment(p, 0, 0.30));
+            const tip = easeInOut(segment(p, 0.12, 0.42));
+            const back = easeInOut(segment(p, 0.84, 1));
+            const tilt = POUR_TILT * tip * (1 - back);
+            const fill = easeOut(segment(p, 0.36, 0.84));
+            const foam = easeOut(segment(p, 0.46, 0.90));
+            // Beer leaves the neck once the bottle passes about 70 degrees.
+            const stream = clamp01((tilt - 70) / 30);
+
+            scene.style.setProperty('--bottle-x', (slide * (1 - lift)).toFixed(1) + 'px');
+            scene.style.setProperty('--bottle-scale', (0.72 + 0.28 * lift).toFixed(3));
+            scene.style.setProperty('--bottle-tilt', tilt.toFixed(2) + 'deg');
+            scene.style.setProperty('--stream', stream.toFixed(3));
+            scene.style.setProperty('--fill', fill.toFixed(3));
+            scene.style.setProperty('--foam', foam.toFixed(3));
+            scene.classList.toggle('is-bubbling', fill > 0.12);
+        };
+
+        if (reducedMotion.matches) {
+            render(1);
             return;
         }
-        const io = new IntersectionObserver(entries => {
-            pour.classList.toggle('is-visible', entries[0].isIntersecting);
-        }, { threshold: 0.1 });
-        io.observe(pour);
+
+        // Phones: play once, 3.8 s, when a third of the stage is on screen.
+        if (window.matchMedia('(max-width: 1023px)').matches) {
+            render(0);
+            const DURATION_MS = 3800;
+            const play = () => {
+                const started = performance.now();
+                const tick = now => {
+                    const p = clamp01((now - started) / DURATION_MS);
+                    render(p);
+                    if (p < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            };
+            if (!('IntersectionObserver' in window)) {
+                play();
+                return;
+            }
+            const io = new IntersectionObserver(entries => {
+                if (!entries[0].isIntersecting) return;
+                io.disconnect();
+                play();
+            }, { threshold: 0.35 });
+            io.observe(stage);
+            return;
+        }
+
+        // Desktop: progress is the sticky stage's travel through its wrapper. The
+        // stage pins at --nav-h, so that is where the scrub starts.
+        const navHeight = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 0;
+        const update = () => {
+            const box = scene.getBoundingClientRect();
+            const travel = scene.offsetHeight - stage.offsetHeight;
+            if (travel <= 0) {
+                render(1);
+                return;
+            }
+            render(clamp01((navHeight() - box.top) / travel));
+        };
+        // Rendered straight from the scroll event, which browsers already deliver
+        // once per frame. Deferring it to requestAnimationFrame left the scene a
+        // frame behind the wheel, and in a headless browser the frame sometimes
+        // never came at all.
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
     }
 
     // Cards tilt towards the pointer with a highlight that tracks it and the bottle
