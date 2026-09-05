@@ -1,6 +1,6 @@
 // Bump on every release: the activate handler drops caches whose key differs, and
 // the image branch is cache-first, so stale assets survive otherwise.
-const CACHE_NAME = 'bp-v11';
+const CACHE_NAME = 'bp-v12';
 const LANG_DIRS = ['/en/', '/uk/', '/es/', '/de/'];
 // The offline fallback serves a locale root, so those roots have to be precached —
 // otherwise a cold offline visit has nothing to fall back to.
