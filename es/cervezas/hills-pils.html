@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script data-vt-types>(function(){var isBeer=function(p){return /^\/(?:[a-z]{2}\/)?[a-z-]+\/[a-z0-9-]+\.html$/.test(p)&&!/\/blog\//.test(p)};var dir=function(u){try{return new URL(u,location.href).pathname.replace(/[^/]*$/,"")}catch(e){return null}};var here=location.pathname;addEventListener("pageswap",function(e){var a=e.activation;if(e.viewTransition&&a&&a.entry&&isBeer(here)&&dir(a.entry.url)===dir(here))e.viewTransition.types.add("beer")});addEventListener("pagereveal",function(e){var a=self.navigation&&navigation.activation;if(e.viewTransition&&a&&a.from&&isBeer(here)&&dir(a.from.url)===dir(here))e.viewTransition.types.add("beer")})})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -204,7 +205,7 @@
     </div>
 </header>
 
-<main class="product" id="main" tabindex="-1">
+<main class="product" id="main" tabindex="-1" style="--beer-accent:#2f7a3e;--beer-tint:#dee5d0;--beer-deep:#246434">
     <div class="container">
         <nav class="product__breadcrumb" aria-label="Ruta de navegación">
             <a href="/es/">Inicio</a><span>›</span><a href="/es/#piwa">Nuestras cervezas</a><span>›</span>Hills Pils
@@ -239,6 +240,18 @@
                 </div>
             </div>
         </div>
+
+        <nav class="beer-nav" aria-label="Otras cervezas">
+            <a class="beer-nav__link beer-nav__link--prev" href="dark-sky-coconut-coffee.html" style="--beer-accent:#785744;--beer-tint:#e9dfd1;--beer-deep:#534d38">
+                <svg class="icon-arrow icon-arrow--left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 6 5 12 11 18"/></svg>
+                <span class="beer-nav__text"><small>Cerveza anterior</small><strong>Dark Sky Coconut &amp; Coffee</strong></span>
+            </a>
+            <span class="beer-nav__count">1 / 11</span>
+            <a class="beer-nav__link beer-nav__link--next" href="wheat-valley.html" style="--beer-accent:#2d6bb3;--beer-tint:#dde2e3;--beer-deep:#235a80">
+                <span class="beer-nav__text"><small>Siguiente cerveza</small><strong>Wheat Valley</strong></span>
+                <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+            </a>
+        </nav>
 
         
 
@@ -281,6 +294,7 @@
 
 
 <section class="related">
+    <div class="hills" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false"><path d="M0,78 C240,18 480,108 720,58 C960,8 1200,88 1440,38 L1440,121 L0,121 Z"/><path d="M0,94 C300,40 600,118 900,74 C1100,44 1300,100 1440,70 L1440,121 L0,121 Z"/><path d="M0,110 C200,82 450,120 700,102 C950,84 1200,116 1440,96 L1440,121 L0,121 Z"/></svg></div>
     <div class="container">
         <h2>Descubre nuestras otras cervezas</h2>
         <div class="related__grid">

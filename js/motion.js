@@ -63,19 +63,36 @@
         [...group.children].forEach((child, i) => child.style.setProperty('--i', i % 4));
     });
 
-    const onLoad = () => {
-        document.querySelectorAll('.hero__title, .hero__tagline, .hero__lead, .hero__mark, .hero__actions, .product__name, .product__style, .product__tagline, .product__desc, .product__stats, .product__cta, .product__photo, .thanks__title, .legal h1')
-            .forEach((el, i) => {
-                el.classList.add('intro');
-                el.style.setProperty('--intro', i);
-                // Reading a computed value forces the hidden state to be resolved
-                // before the visible one lands, so the transition has a start point
-                // even when both changes fall inside one frame.
-                void getComputedStyle(el).opacity;
-                requestAnimationFrame(() => el.classList.add('is-visible'));
-            });
+    const INTRO_TARGETS = '.hero__title, .hero__tagline, .hero__lead, .hero__mark, .hero__actions, .product__name, .product__style, .product__tagline, .product__desc, .product__stats, .product__cta, .product__photo, .beer-nav, .thanks__title, .legal h1';
+    // Hidden right away so the intro has somewhere to start from...
+    document.querySelectorAll(INTRO_TARGETS).forEach((el, i) => {
+        el.classList.add('intro');
+        el.style.setProperty('--intro', i);
+    });
+    const playIntro = () => {
+        document.querySelectorAll('.intro').forEach(el => {
+            // Reading a computed value forces the hidden state to be resolved
+            // before the visible one lands, so the transition has a start point
+            // even when both changes fall inside one frame.
+            void getComputedStyle(el).opacity;
+            requestAnimationFrame(() => el.classList.add('is-visible'));
+        });
     };
-    if (document.readyState === 'complete') onLoad(); else window.addEventListener('load', onLoad, { once: true });
+    // ...and it waits for the age gate on a first visit: an intro that plays
+    // behind the gate is one nobody sees. consent.js fires the event on close.
+    let gated = false;
+    try { gated = !localStorage.getItem('bp_age_verified'); } catch (e) { /* private mode: gate shows, event follows */ gated = true; }
+    if (gated) {
+        if (lenis) lenis.stop();
+        document.addEventListener('bp:age-verified', () => {
+            if (lenis) lenis.start();
+            playIntro();
+        }, { once: true });
+    } else if (document.readyState === 'complete') {
+        playIntro();
+    } else {
+        window.addEventListener('load', playIntro, { once: true });
+    }
 
     // --- parallax and hero drift, one pass per frame from the scroll position.
     // Speed is a plain multiplier of the element's distance from the viewport

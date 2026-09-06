@@ -9,6 +9,7 @@
     const STRINGS = {
         pl: {
             ageTitle: 'Witaj w Browarze Pogórza',
+            ageClaim: 'Z Pogórza, nie z pośpiechu',
             ageText: 'Strona zawiera treści przeznaczone dla osób pełnoletnich. Wejście jest możliwe tylko po potwierdzeniu wieku.',
             ageQuestion: 'Czy masz ukończone 18 lat?',
             ageYes: 'Tak, mam 18+ lat',
@@ -24,6 +25,7 @@
         },
         en: {
             ageTitle: 'Welcome to Browar Pogórza',
+            ageClaim: 'From the foothills, never in a hurry',
             ageText: 'This site contains content intended for adults. You may enter only after confirming your age.',
             ageQuestion: 'Are you 18 or older?',
             ageYes: 'Yes, I am 18+',
@@ -39,6 +41,7 @@
         },
         uk: {
             ageTitle: 'Ласкаво просимо до Browar Pogórza',
+            ageClaim: 'З Погір’я, а не з поспіху',
             ageText: 'Сайт містить вміст, призначений для повнолітніх. Вхід можливий лише після підтвердження віку.',
             ageQuestion: 'Вам виповнилося 18 років?',
             ageYes: 'Так, мені є 18',
@@ -54,6 +57,7 @@
         },
         es: {
             ageTitle: 'Bienvenido a Browar Pogórza',
+            ageClaim: 'Del Pogórze, sin prisas',
             ageText: 'Este sitio contiene contenido destinado a personas adultas. Solo puedes entrar tras confirmar tu edad.',
             ageQuestion: '¿Tienes 18 años o más?',
             ageYes: 'Sí, tengo 18+',
@@ -69,6 +73,7 @@
         },
         de: {
             ageTitle: 'Willkommen bei Browar Pogórza',
+            ageClaim: 'Aus dem Pogórze, nie in Eile',
             ageText: 'Diese Website enthält Inhalte für Erwachsene. Der Zugang ist erst nach Bestätigung des Alters möglich.',
             ageQuestion: 'Bist du 18 Jahre oder älter?',
             ageYes: 'Ja, ich bin 18+',
@@ -142,10 +147,14 @@
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-modal', 'true');
         modal.setAttribute('aria-labelledby', 'age-gate-title');
+        // The gate is the first scene every new visitor sees, so it carries the
+        // brand claim and the landscape, not just the legal question. The photo
+        // is the hero image, already preloaded on the home page.
         modal.innerHTML = `
             <div class="age-gate__inner">
                 <picture><source type="image/webp" srcset="/images/logo-black-96.webp 96w, /images/logo-black-192.webp 192w, /images/logo-black-320.webp 320w" sizes="120px"><img src="/images/logo-black-192.png" alt="Browar Pogórza" class="age-gate__logo" width="120" height="120"></picture>
                 <h2 id="age-gate-title" class="age-gate__title">${escape(t.ageTitle)}</h2>
+                <p class="age-gate__claim">${escape(t.ageClaim)}</p>
                 <p class="age-gate__text">${escape(t.ageText)}</p>
                 <p class="age-gate__question">${escape(t.ageQuestion)}</p>
                 <div class="age-gate__buttons">
@@ -153,6 +162,9 @@
                     <a href="https://www.google.com" class="btn btn--ghost age-gate__no">${escape(t.ageNo)}</a>
                 </div>
                 <p class="age-gate__warning">${escape(t.ageWarning)}</p>
+            </div>
+            <div class="age-gate__bg" aria-hidden="true">
+                <picture><source type="image/webp" srcset="/images/hero-pogorze-rzepak-1024.webp 1024w, /images/hero-pogorze-rzepak-1440.webp 1440w" sizes="60vw"><img src="/images/hero-pogorze-rzepak-1024.jpg" alt="" width="2200" height="1100" decoding="async"></picture>
             </div>
         `;
         document.body.appendChild(modal);
@@ -172,7 +184,10 @@
                 setBackgroundInert(inertNodes, false);
                 restoreScroll();
                 maybeShowCookieBanner();
-            }, 300);
+                // The motion layer holds the hero intro and inertia scroll until
+                // the gate is out of the way.
+                document.dispatchEvent(new CustomEvent('bp:age-verified'));
+            }, 550);
         };
         modal.querySelector('[data-age-yes]').addEventListener('click', () => {
             try { localStorage.setItem(STORAGE_AGE, String(Date.now())); } catch (e) {}
