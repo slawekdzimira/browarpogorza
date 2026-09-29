@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://browarpogorza.pl/</loc><lastmod>2026-09-06</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://browarpogorza.pl/dobierz-piwo.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://browarpogorza.pl/piwo-z-logo-firmy.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://browarpogorza.pl/piwo-z-logo-firmy.html</loc><lastmod>2026-09-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://browarpogorza.pl/blog/</loc><lastmod>2026-09-03</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://browarpogorza.pl/blog/co-to-jest-porter-baltycki.html</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/blog/jak-smakuje-foreign-extra-stout.html</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
@@ -19,17 +19,17 @@
   <url><loc>https://browarpogorza.pl/piwa/coffee-fes.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/piwa/dark-sky.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://browarpogorza.pl/piwa/dark-sky-coconut-coffee.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://browarpogorza.pl/polityka-prywatnosci.html</loc><lastmod>2026-08-28</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://browarpogorza.pl/polityka-prywatnosci.html</loc><lastmod>2026-09-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://browarpogorza.pl/regulamin.html</loc><lastmod>2026-08-28</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://browarpogorza.pl/cookies.html</loc><lastmod>2026-08-28</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
   <url>
-    <loc>https://browarpogorza.pl/piwo-na-wesele.html</loc><lastmod>2026-09-14</lastmod>
+    <loc>https://browarpogorza.pl/piwo-na-wesele.html</loc><lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://browarpogorza.pl/piwa-bezalkoholowe.html</loc><lastmod>2026-09-14</lastmod>
+    <loc>https://browarpogorza.pl/piwa-bezalkoholowe.html</loc><lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -49,7 +49,7 @@
   </url>
   <url>
     <loc>https://browarpogorza.pl/en/private-label-beer.html</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -133,7 +133,7 @@
   </url>
   <url>
     <loc>https://browarpogorza.pl/uk/pyvo-z-lohotypom.html</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -217,7 +217,7 @@
   </url>
   <url>
     <loc>https://browarpogorza.pl/es/cerveza-marca-propia.html</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -301,7 +301,7 @@
   </url>
   <url>
     <loc>https://browarpogorza.pl/de/bier-mit-firmenlogo.html</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

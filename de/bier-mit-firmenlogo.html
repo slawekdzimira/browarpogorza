@@ -185,6 +185,10 @@
       ]
     }
     </script>
+    <!-- Kapsel, the AI assistant: inert until assistant/deploy.py --wire-site fills data-endpoint.
+         Lives in <head> so generate_landing_pages.js does not copy it onto the wedding and
+         non-alcoholic pages, while generate_i18n.js carries it to the four locale twins. -->
+    <script src="/js/kapsel.js" defer data-endpoint=""></script>
 
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/piwo-z-logo-firmy.html">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/private-label-beer.html">

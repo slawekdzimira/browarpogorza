@@ -128,7 +128,7 @@
 <main class="legal" id="main" tabindex="-1">
     <div class="container">
         <h1>Polityka prywatności</h1>
-        <p class="legal__meta">Ostatnia aktualizacja: 9 czerwca 2026 r.</p>
+        <p class="legal__meta">Ostatnia aktualizacja: 29 września 2026 r.</p>
 
         <h2>1. Administrator danych</h2>
         <p>Administratorem Twoich danych osobowych w rozumieniu Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 (RODO) jest <strong>Browar Pogórza</strong>, Przedmieście Dubieckie 15A, województwo podkarpackie. Kontakt w sprawach ochrony danych: <a href="mailto:slawek@browarpogorza.pl">slawek@browarpogorza.pl</a>.</p>
@@ -137,6 +137,7 @@
         <p>Przetwarzamy Twoje dane w następujących celach:</p>
         <ul>
             <li><strong>Obsługa zapytań kontaktowych</strong> - dane podane w formularzu kontaktowym (imię, e-mail, telefon, treść wiadomości) na podstawie art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes - odpowiedź na zapytanie).</li>
+            <li><strong>Rozmowa z asystentem AI i zapytanie ofertowe</strong> - treść rozmowy z asystentem na stronach piwa z własną etykietą oraz dane, które podasz w zapytaniu (imię, firma, e-mail, telefon, szczegóły zamówienia), na podstawie art. 6 ust. 1 lit. b RODO (działania na Twoje żądanie przed zawarciem umowy) i art. 6 ust. 1 lit. f RODO (odpowiedź na pytania). Szczegóły w punkcie 10.</li>
             <li><strong>Analityka i optymalizacja strony</strong> - dane statystyczne zbierane przez Google Analytics 4, na podstawie art. 6 ust. 1 lit. a RODO (zgoda wyrażona przez kliknięcie "Akceptuję wszystkie" w banerze cookies).</li>
             <li><strong>Wypełnienie obowiązków prawnych</strong> - np. związanych z rachunkowością - na podstawie art. 6 ust. 1 lit. c RODO.</li>
         </ul>
@@ -145,7 +146,9 @@
         <p>Twoje dane mogą być przekazywane następującym podmiotom przetwarzającym:</p>
         <ul>
             <li><strong>FormSubmit.co</strong> - usługa obsługi formularza kontaktowego (przekazywanie zapytań na nasz adres e-mail).</li>
-            <li><strong>Netlify, Inc.</strong> - dostawca hostingu strony (USA, na podstawie standardowych klauzul umownych).</li>
+            <li><strong>GitHub, Inc.</strong> - dostawca hostingu strony (GitHub Pages; USA, na podstawie standardowych klauzul umownych).</li>
+            <li><strong>Anthropic PBC</strong> - dostawca modelu AI, który generuje odpowiedzi asystenta (USA, na podstawie standardowych klauzul umownych).</li>
+            <li><strong>Cloudflare, Inc.</strong> - infrastruktura, przez którą asystent AI łączy się z modelem (na podstawie standardowych klauzul umownych).</li>
             <li><strong>Google LLC</strong> - usługa Google Analytics 4 (USA, na podstawie standardowych klauzul umownych i mechanizmu DPF).</li>
             <li><strong>GoDaddy / Secureserver</strong> - dostawca poczty e-mail.</li>
         </ul>
@@ -153,6 +156,7 @@
         <h2>4. Okres przechowywania danych</h2>
         <ul>
             <li>Korespondencja z formularza kontaktowego - do 3 lat od ostatniego kontaktu, chyba że dalsze przechowywanie wynika z obowiązku prawnego.</li>
+            <li>Rozmowy z asystentem AI - nie zapisujemy ich na naszych serwerach. Trafiają do nas tylko wtedy, gdy wyślesz zapytanie, i wtedy przechowujemy je jak korespondencję z formularza.</li>
             <li>Dane analityczne Google Analytics - zgodnie z domyślnymi ustawieniami GA4 (do 14 miesięcy).</li>
             <li>Dokumentacja księgowa - przez okres wymagany przepisami prawa (zwykle 5 lat).</li>
         </ul>
@@ -178,10 +182,20 @@
         <p>Podanie danych w formularzu kontaktowym jest dobrowolne, ale niezbędne do udzielenia odpowiedzi na zapytanie.</p>
 
         <h2>8. Zautomatyzowane podejmowanie decyzji</h2>
-        <p>Nie podejmujemy decyzji w sposób zautomatyzowany, w tym profilowania, które wywierałoby skutki prawne lub w podobny sposób istotnie wpływałoby na osoby, których dane dotyczą.</p>
+        <p>Nie podejmujemy decyzji w sposób zautomatyzowany, w tym profilowania, które wywierałoby skutki prawne lub w podobny sposób istotnie wpływałoby na osoby, których dane dotyczą. Asystent AI nie podejmuje żadnych decyzji wobec Ciebie - odpowiada na pytania i pomaga przygotować zapytanie, a ofertę przygotowuje człowiek.</p>
 
         <h2>9. Zmiany polityki</h2>
         <p>Zastrzegamy sobie prawo do zmian niniejszej polityki. Każda zmiana zostanie opublikowana na tej stronie wraz z datą aktualizacji.</p>
+
+        <h2 id="asystent-ai">10. Asystent AI</h2>
+        <p>Na stronach piwa z własną etykietą działa asystent AI (po polsku Kapsel, w innych wersjach językowych Capper, Kronki, Chapita i Korok). To program, nie człowiek: odpowiedzi generuje model językowy firmy Anthropic na podstawie informacji o naszej ofercie. Może się pomylić - wiążąca jest oferta, którą przygotowujemy po otrzymaniu zapytania.</p>
+        <ul>
+            <li><strong>Co przetwarzamy</strong> - treść Twoich wiadomości do asystenta, a jeśli zdecydujesz się wysłać zapytanie - dane, które w nim podasz, oraz zapis rozmowy.</li>
+            <li><strong>Jak</strong> - każda wiadomość trafia przez serwer pośredniczący w Cloudflare do modelu Anthropic, który zwraca odpowiedź. Nie zapisujemy rozmów na naszych serwerach. Anthropic przetwarza je jako podmiot przetwarzający, przez ograniczony czas i zgodnie ze swoimi zasadami, i nie wykorzystuje ich do trenowania modeli.</li>
+            <li><strong>W Twojej przeglądarce</strong> - rozmowa jest pamiętana w pamięci sesji (sessionStorage) do zamknięcia karty, żeby nie znikała po przejściu między stronami. Asystent nie zapisuje plików cookies.</li>
+            <li><strong>Zapytanie</strong> - przed wysłaniem widzisz i możesz poprawić wszystkie dane. Wysłane zapytanie trafia do nas e-mailem przez FormSubmit.co, razem z zapisem rozmowy.</li>
+            <li><strong>Czego nie podawać</strong> - w rozmowie nie są potrzebne numery dokumentów, dane płatnicze ani inne dane wrażliwe.</li>
+        </ul>
     </div>
 </main>
 
