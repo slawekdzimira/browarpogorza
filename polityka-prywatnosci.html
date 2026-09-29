@@ -148,8 +148,8 @@
             <li><strong>FormSubmit.co</strong> - usługa obsługi formularza kontaktowego (przekazywanie zapytań na nasz adres e-mail).</li>
             <li><strong>GitHub, Inc.</strong> - dostawca hostingu strony (GitHub Pages; USA, na podstawie standardowych klauzul umownych).</li>
             <li><strong>Anthropic PBC</strong> - dostawca modelu AI, który generuje odpowiedzi asystenta (USA, na podstawie standardowych klauzul umownych).</li>
-            <li><strong>Cloudflare, Inc.</strong> - infrastruktura, przez którą asystent AI łączy się z modelem (na podstawie standardowych klauzul umownych).</li>
-            <li><strong>Google LLC</strong> - usługa Google Analytics 4 (USA, na podstawie standardowych klauzul umownych i mechanizmu DPF).</li>
+            <li><strong>Cloudflare, Inc.</strong> - serwer asystenta AI, który łączy go z modelem i przekazuje nam wysłane zapytania (na podstawie standardowych klauzul umownych).</li>
+            <li><strong>Google LLC</strong> - usługa Google Analytics 4 oraz poczta Gmail, przez którą przychodzą zapytania z asystenta AI (USA, na podstawie standardowych klauzul umownych i mechanizmu DPF).</li>
             <li><strong>GoDaddy / Secureserver</strong> - dostawca poczty e-mail.</li>
         </ul>
 
@@ -193,7 +193,7 @@
             <li><strong>Co przetwarzamy</strong> - treść Twoich wiadomości do asystenta, a jeśli zdecydujesz się wysłać zapytanie - dane, które w nim podasz, oraz zapis rozmowy.</li>
             <li><strong>Jak</strong> - każda wiadomość trafia przez serwer pośredniczący w Cloudflare do modelu Anthropic, który zwraca odpowiedź. Nie zapisujemy rozmów na naszych serwerach. Anthropic przetwarza je jako podmiot przetwarzający, przez ograniczony czas i zgodnie ze swoimi zasadami, i nie wykorzystuje ich do trenowania modeli.</li>
             <li><strong>W Twojej przeglądarce</strong> - rozmowa jest pamiętana w pamięci sesji (sessionStorage) do zamknięcia karty, żeby nie znikała po przejściu między stronami. Asystent nie zapisuje plików cookies.</li>
-            <li><strong>Zapytanie</strong> - przed wysłaniem widzisz i możesz poprawić wszystkie dane. Wysłane zapytanie trafia do nas e-mailem przez FormSubmit.co, razem z zapisem rozmowy.</li>
+            <li><strong>Zapytanie</strong> - przed wysłaniem widzisz i możesz poprawić wszystkie dane. Wysłane zapytanie nasz serwer w Cloudflare przekazuje nam e-mailem przez pocztę Gmail, razem z zapisem rozmowy.</li>
             <li><strong>Czego nie podawać</strong> - w rozmowie nie są potrzebne numery dokumentów, dane płatnicze ani inne dane wrażliwe.</li>
         </ul>
     </div>

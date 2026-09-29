@@ -3,8 +3,8 @@
 // closes a bottle: PL Kapsel, EN Capper, DE Kronki, ES Chapita, UK Корок.
 //
 // Answers stream from a Cloudflare Worker (assistant/worker.js), which holds the
-// API key. A finished enquiry goes out through the same FormSubmit address as the
-// contact form, after the visitor has checked every field.
+// API key. A finished enquiry goes back to the same Worker, which e-mails it to the
+// brewery (assistant/mail.js) after the visitor has checked every field.
 //
 // Loaded with defer from the landing's <head>. Stays invisible while data-endpoint
 // is empty, and while the age gate or the cookie banner is on screen.
@@ -16,8 +16,6 @@
     if (!ENDPOINT || window.__kapsel) return;
     window.__kapsel = true;
 
-    const FORM_ENDPOINT = 'https://formsubmit.co/ajax/slawek@browarpogorza.pl';
-    const FORM_CC = 'slawekdzimira@gmail.com';
     const PRIVACY_URL = '/polityka-prywatnosci.html#asystent-ai';
     const MAX_CHARS = 1200;          // the Worker enforces the same per message
     const MAX_MESSAGES = 28;         // the Worker accepts 30; keep room for the last turn
@@ -72,8 +70,6 @@
                 tooLong: 'Ta rozmowa jest już długa. Przygotuj zapytanie przyciskiem poniżej albo napisz na slawek@browarpogorza.pl.',
                 briefFailed: 'Nie udało się przygotować podsumowania. Uzupełnij pola albo napisz na slawek@browarpogorza.pl.',
             },
-            subject: 'Kapsel - zapytanie o piwo z własną etykietą',
-            autoresponse: 'Dziękujemy za zapytanie - dotarło do Browaru Pogórza. Odpowiemy na ten adres. Browar Pogórza, +48 734 180 172, slawek@browarpogorza.pl',
         },
         en: {
             name: 'Capper',
@@ -120,8 +116,6 @@
                 tooLong: 'This chat is getting long. Prepare your enquiry with the button below or write to slawek@browarpogorza.pl.',
                 briefFailed: 'I couldn\'t prepare the summary. Please fill in the fields or write to slawek@browarpogorza.pl.',
             },
-            subject: 'Capper - private label enquiry',
-            autoresponse: 'Thank you for your enquiry - it has reached Browar Pogórza. We will reply to this address. Browar Pogórza, +48 734 180 172, slawek@browarpogorza.pl',
         },
         de: {
             name: 'Kronki',
@@ -168,8 +162,6 @@
                 tooLong: 'Dieses Gespräch ist schon lang. Bereiten Sie Ihre Anfrage mit der Schaltfläche unten vor oder schreiben Sie an slawek@browarpogorza.pl.',
                 briefFailed: 'Die Zusammenfassung ließ sich nicht erstellen. Bitte füllen Sie die Felder aus oder schreiben Sie an slawek@browarpogorza.pl.',
             },
-            subject: 'Kronki - Anfrage Bier mit eigenem Etikett',
-            autoresponse: 'Vielen Dank für Ihre Anfrage - sie ist bei der Browar Pogórza angekommen. Wir antworten an diese Adresse. Browar Pogórza, +48 734 180 172, slawek@browarpogorza.pl',
         },
         es: {
             name: 'Chapita',
@@ -216,8 +208,6 @@
                 tooLong: 'Esta conversación ya es larga. Prepara tu solicitud con el botón de abajo o escribe a slawek@browarpogorza.pl.',
                 briefFailed: 'No he podido preparar el resumen. Rellena los campos o escribe a slawek@browarpogorza.pl.',
             },
-            subject: 'Chapita - solicitud de cerveza con etiqueta propia',
-            autoresponse: 'Gracias por tu solicitud: ha llegado a Browar Pogórza. Responderemos a esta dirección. Browar Pogórza, +48 734 180 172, slawek@browarpogorza.pl',
         },
         uk: {
             name: 'Корок',
@@ -264,16 +254,7 @@
                 tooLong: 'Розмова вже довга. Підготуйте запит кнопкою нижче або напишіть на slawek@browarpogorza.pl.',
                 briefFailed: 'Не вдалося підготувати підсумок. Заповніть поля або напишіть на slawek@browarpogorza.pl.',
             },
-            subject: 'Корок - запит на пиво з власною етикеткою',
-            autoresponse: 'Дякуємо за запит - його отримала броварня Browar Pogórza. Ми відповімо на цю адресу. Browar Pogórza, +48 734 180 172, slawek@browarpogorza.pl',
         },
-    };
-
-    // What the brewery sees in the e-mail: Polish labels whatever the page language.
-    const MAIL_LABELS = {
-        name: 'Imię i nazwisko', company: 'Firma', phone: 'Telefon', country: 'Kraj i miasto dostawy',
-        occasion: 'Okazja / cel', quantity: 'Ilość', format: 'Format', styles: 'Styl', deadline: 'Termin',
-        artwork: 'Etykieta', notes: 'Uwagi', summary: 'Podsumowanie (sprawdzone przez klienta)',
     };
 
     const FORM_FIELDS = [
@@ -743,27 +724,6 @@
         .map(f => `${S.labels[f.key]}: ${values[f.key]}`)
         .join('\n');
 
-    // Enquiries sent from staging or a local run reach the same inbox; the subject says so.
-    const TEST_HOST = !/(^|\.)browarpogorza\.pl$/.test(location.hostname);
-
-    const mailPayload = values => {
-        const brief = state.brief || {};
-        const payload = {
-            _subject: `${TEST_HOST ? '[TEST] ' : ''}${S.subject}: ${values.company || values.name || values.email} [${LANG.toUpperCase()}]`,
-            _template: 'table',
-            _captcha: 'false',
-            _cc: FORM_CC,
-            _autoresponse: S.autoresponse,
-            'Źródło': `${S.name} (asystent AI), ${location.host}${location.pathname}`,
-            email: values.email,
-        };
-        FORM_FIELDS.filter(f => f.key !== 'email' && values[f.key]).forEach(f => { payload[MAIL_LABELS[f.key]] = values[f.key]; });
-        if (brief.summary_pl) payload['Streszczenie dla browaru'] = brief.summary_pl;
-        if (brief.flags_pl) payload['Na co uważać'] = brief.flags_pl;
-        if (state.messages.length) payload['Zapis rozmowy'] = transcript();
-        return payload;
-    };
-
     const submitBrief = async event => {
         event.preventDefault();
         if (form.elements._honey.value) return;
@@ -780,13 +740,16 @@
         setStatus(S.sending, 'busy');
         setFormBusy(true);
         try {
-            const res = await fetch(FORM_ENDPOINT, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify(mailPayload(values)),
+            const res = await post('/enquiry', {
+                lang: LANG,
+                page: location.pathname,
+                fields: values,
+                messages: state.messages,
+                brief: { summary_pl: state.brief?.summary_pl || '', flags_pl: state.brief?.flags_pl || '' },
+                honey: form.elements._honey.value,
             });
             const body = await res.json().catch(() => ({}));
-            if (!res.ok || String(body.success) !== 'true') throw new Error('formsubmit');
+            if (!res.ok || body.ok !== true) throw new Error(body.error || 'send');
             state.sent = true;
             persist();
             track('generate_lead', { source: 'assistant' });
