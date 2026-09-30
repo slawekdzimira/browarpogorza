@@ -103,11 +103,13 @@
     const layers = [];
     const addLayer = (el, speed) => { el.classList.add('px'); layers.push({ el, speed, current: 0 }); };
     const addLayers = (selector, speed) => document.querySelectorAll(selector).forEach(el => addLayer(el, speed));
-    addLayers('.hero__mark', 0.10);
-    addLayers('.hero__title', 0.16);
-    addLayers('.hero__tagline', 0.22);
-    addLayers('.hero__lead', 0.28);
-    addLayers('.hero__actions', 0.34);
+    // Home hero only: the landings reuse .hero__actions under a .banner whose lead
+    // paragraph does not drift, so moving the buttons alone rode them up over the text.
+    addLayers('.hero .hero__mark', 0.10);
+    addLayers('.hero .hero__title', 0.16);
+    addLayers('.hero .hero__tagline', 0.22);
+    addLayers('.hero .hero__lead', 0.28);
+    addLayers('.hero .hero__actions', 0.34);
     addLayers('.split__visual--photo', -0.06);
     addLayers('.picker-cta__icon', -0.08);
     addLayers('.kicker', 0.05);

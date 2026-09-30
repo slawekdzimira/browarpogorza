@@ -13,6 +13,9 @@
 
     const script = document.currentScript;
     const ENDPOINT = ((script && script.dataset.endpoint) || '').trim().replace(/\/+$/, '');
+    // "general" on the home pages (brewery, beers, brewing; the rest goes to the contact
+    // form), "private-label" on the landings (business questions and the quote request).
+    const MODE = script && script.dataset.mode === 'general' ? 'general' : 'private-label';
     if (!ENDPOINT || window.__kapsel) return;
     window.__kapsel = true;
 
@@ -257,6 +260,35 @@
         },
     };
 
+    // The home page's greeting, starters and button; everything else is shared.
+    const GENERAL = {
+        pl: {
+            greeting: 'Cześć, jestem Kapsel - asystent AI Browaru Pogórza. Opowiem o naszych piwach, ich składzie i o tym, jak powstaje piwo rzemieślnicze. O co chcesz zapytać?',
+            chips: ['Jakie piwa warzycie?', 'Co polecisz na początek?', 'Jak powstaje piwo?', 'Macie coś bez alkoholu?'],
+            contact: 'Napisz do browaru',
+        },
+        en: {
+            greeting: 'Hi, I\'m Capper, the AI assistant of Browar Pogórza. Ask me about our beers, what goes into them and how craft beer is brewed.',
+            chips: ['What beers do you brew?', 'Where should I start?', 'How is beer made?', 'Anything non-alcoholic?'],
+            contact: 'Write to the brewery',
+        },
+        de: {
+            greeting: 'Guten Tag, ich bin Kronki, der KI-Assistent der Browar Pogórza. Fragen Sie mich nach unseren Bieren, ihren Zutaten und danach, wie Craft-Bier gebraut wird.',
+            chips: ['Welche Biere brauen Sie?', 'Womit soll ich anfangen?', 'Wie entsteht Bier?', 'Gibt es alkoholfreie?'],
+            contact: 'An die Brauerei schreiben',
+        },
+        es: {
+            greeting: '¡Hola! Soy Chapita, el asistente de IA de Browar Pogórza. Pregúntame por nuestras cervezas, sus ingredientes y cómo se elabora la cerveza artesanal.',
+            chips: ['¿Qué cervezas hacéis?', '¿Por cuál empiezo?', '¿Cómo se hace la cerveza?', '¿Tenéis sin alcohol?'],
+            contact: 'Escribir a la cervecería',
+        },
+        uk: {
+            greeting: 'Вітаю! Я Корок, ШІ-асистент Browar Pogórza. Розповім про наше пиво, його склад і про те, як вариться крафтове пиво. Що вас цікавить?',
+            chips: ['Яке пиво ви варите?', 'З чого почати?', 'Як виготовляють пиво?', 'Є безалкогольне?'],
+            contact: 'Написати броварні',
+        },
+    };
+
     const FORM_FIELDS = [
         { key: 'name', type: 'text', autocomplete: 'name' },
         { key: 'company', type: 'text', autocomplete: 'organization' },
@@ -276,6 +308,9 @@
     const pageLang = (document.documentElement.lang || 'pl').slice(0, 2).toLowerCase();
     const LANG = Object.prototype.hasOwnProperty.call(STRINGS, pageLang) ? pageLang : 'pl';
     const S = STRINGS[LANG];
+    const GENERAL_MODE = MODE === 'general';
+    const GREETING = GENERAL_MODE ? GENERAL[LANG].greeting : S.greeting;
+    const CHIPS = GENERAL_MODE ? GENERAL[LANG].chips : S.chips;
 
     const ICON = {
         close: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>',
@@ -283,18 +318,31 @@
         send: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"/></svg>',
     };
 
-    // A crown cap seen from above: 21 teeth, as on a real one.
+    // Kapsel himself: a crown cap in three-quarter view - a fluted gold skirt and a cream
+    // top with a face in the brewery's green. Seen straight from above, the earlier
+    // toothed disc read as a sun. Gradient ids are numbered: the cap is drawn twice.
+    let capCount = 0;
     const capSvg = cls => {
-        const points = Array.from({ length: 42 }, (_, i) => {
-            const angle = (i / 42) * Math.PI * 2 - Math.PI / 2;
-            const radius = i % 2 ? 20.4 : 23;
-            return `${(24 + radius * Math.cos(angle)).toFixed(2)},${(24 + radius * Math.sin(angle)).toFixed(2)}`;
-        }).join(' ');
+        const id = `kapsel-cap-${++capCount}`;
+        const flutes = Array.from({ length: 11 }, (_, i) => {
+            const t = ((i + 1) / 12) * Math.PI;
+            const x = (24 - 19 * Math.cos(t)).toFixed(2);
+            return `<line x1="${x}" y1="${(18 + 10 * Math.sin(t)).toFixed(2)}" x2="${x}" y2="${(27.5 + 10 * Math.sin(t)).toFixed(2)}"/>`;
+        }).join('');
         return `<svg class="${cls}" viewBox="0 0 48 48" aria-hidden="true" focusable="false">`
-            + `<polygon class="kapsel-cap__rim" points="${points}"/>`
-            + '<circle class="kapsel-cap__top" cx="24" cy="24" r="16.5"/>'
-            + '<circle class="kapsel-cap__ring" cx="24" cy="24" r="11.5"/>'
-            + '<path class="kapsel-cap__hop" d="M24 16.5c-3 2.2-4.2 5-4.2 7.6 0 3.3 1.9 6 4.2 7.4 2.3-1.4 4.2-4.1 4.2-7.4 0-2.6-1.2-5.4-4.2-7.6zM24 19.5v10"/>'
+            + `<defs><linearGradient id="${id}-skirt" x1="0" x2="1" y1="0" y2="0">`
+            + '<stop offset="0" stop-color="#A8600D"/><stop offset=".28" stop-color="#FFD050"/><stop offset=".55" stop-color="#FFC02E"/>'
+            + '<stop offset=".82" stop-color="#E89020"/><stop offset="1" stop-color="#8F520B"/></linearGradient>'
+            + `<radialGradient id="${id}-top" cx=".38" cy=".3" r=".8">`
+            + '<stop offset="0" stop-color="#FFFDF6"/><stop offset=".7" stop-color="#FFF3D6"/><stop offset="1" stop-color="#F2DDA8"/></radialGradient></defs>'
+            + `<path d="M5 18v9.5a19 10 0 0 0 38 0V18z" fill="url(#${id}-skirt)"/>`
+            + `<g stroke="#8F520B" stroke-width="1.1" stroke-opacity=".45">${flutes}</g>`
+            + '<path d="M5 27.5a19 10 0 0 0 38 0" fill="none" stroke="#7A4509" stroke-width="1" stroke-opacity=".5"/>'
+            + '<ellipse cx="24" cy="18" rx="19" ry="10" fill="#E89020"/>'
+            + `<ellipse cx="24" cy="18" rx="17.4" ry="8.8" fill="url(#${id}-top)"/>`
+            + '<ellipse cx="18.6" cy="16.6" rx="1.55" ry="2.05" fill="#0F3A22"/><ellipse cx="29.4" cy="16.6" rx="1.55" ry="2.05" fill="#0F3A22"/>'
+            + '<ellipse cx="15.4" cy="19.8" rx="1.9" ry="1.05" fill="#FF8E3C" opacity=".35"/><ellipse cx="32.6" cy="19.8" rx="1.9" ry="1.05" fill="#FF8E3C" opacity=".35"/>'
+            + '<path d="M20.2 20.2q3.8 3.1 7.6 0" fill="none" stroke="#0F3A22" stroke-width="1.5" stroke-linecap="round"/>'
             + '</svg>';
     };
 
@@ -302,7 +350,7 @@
         { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
     const track = (name, params = {}) => {
-        if (typeof window.gtag === 'function') window.gtag('event', name, { ...params, assistant_lang: LANG });
+        if (typeof window.gtag === 'function') window.gtag('event', name, { ...params, assistant_lang: LANG, assistant_mode: MODE });
     };
 
     // ---------------------------------------------------------------- formatting
@@ -363,7 +411,7 @@
 
     const restore = () => {
         try {
-            const saved = JSON.parse(sessionStorage.getItem(STORAGE_KEY + LANG) || 'null');
+            const saved = JSON.parse(sessionStorage.getItem(STORAGE_KEY + MODE + '_' + LANG) || 'null');
             if (saved && Array.isArray(saved.messages)) Object.assign(state, {
                 messages: saved.messages.filter(m => m && typeof m.content === 'string' && ['user', 'assistant'].includes(m.role)),
                 brief: saved.brief || null,
@@ -375,7 +423,7 @@
 
     const persist = () => {
         try {
-            sessionStorage.setItem(STORAGE_KEY + LANG, JSON.stringify({
+            sessionStorage.setItem(STORAGE_KEY + MODE + '_' + LANG, JSON.stringify({
                 messages: state.messages, brief: state.brief, briefAt: state.briefAt, sent: state.sent,
             }));
         } catch (e) { /* private mode: the chat simply does not survive a reload */ }
@@ -420,7 +468,9 @@
                     <button type="submit" class="kapsel-send" aria-label="${escapeHtml(S.send)}">${ICON.send}</button>
                 </form>
                 <div class="kapsel-foot">
-                    <button type="button" class="kapsel-brief-btn" data-act="brief">${escapeHtml(S.briefBtn)}</button>
+                    ${GENERAL_MODE
+        ? `<a class="kapsel-brief-btn" href="#kontakt" data-act="contact">${escapeHtml(GENERAL[LANG].contact)}</a>`
+        : `<button type="button" class="kapsel-brief-btn" data-act="brief">${escapeHtml(S.briefBtn)}</button>`}
                     <p class="kapsel-note">${escapeHtml(S.disclaimer)} <a href="${PRIVACY_URL}" hreflang="pl">${escapeHtml(S.privacy)}</a></p>
                 </div>
             </div>
@@ -489,17 +539,18 @@
     const renderChips = () => {
         chips.hidden = userTurns() > 0;
         if (chips.hidden || chips.childElementCount) return;
-        chips.innerHTML = S.chips.map(c => `<button type="button" class="kapsel-chip">${escapeHtml(c)}</button>`).join('');
+        chips.innerHTML = CHIPS.map(c => `<button type="button" class="kapsel-chip">${escapeHtml(c)}</button>`).join('');
     };
 
     const renderFoot = () => {
+        if (GENERAL_MODE) return;
         briefBtn.disabled = state.sent;
         briefBtn.textContent = state.sent ? S.briefSent : S.briefBtn;
     };
 
     const renderLog = () => {
         log.innerHTML = '';
-        bubble('assistant', S.greeting);
+        bubble('assistant', GREETING);
         state.messages.forEach(m => bubble(m.role, m.content));
         renderChips();
         renderFoot();
@@ -514,7 +565,7 @@
         state.busy = busy;
         sendBtn.disabled = busy;
         resetBtn.disabled = busy;
-        briefBtn.disabled = busy || state.sent;
+        if (!GENERAL_MODE) briefBtn.disabled = busy || state.sent;
         log.setAttribute('aria-busy', String(busy));
     };
 
@@ -593,7 +644,7 @@
         };
 
         try {
-            const res = await post('/chat', { lang: LANG, messages: state.messages });
+            const res = await post('/chat', { lang: LANG, mode: MODE, messages: state.messages });
             if (!res.ok || !res.body) {
                 failure = await errorFrom(res);
             } else {
@@ -827,6 +878,7 @@
             if (action === 'close') closePanel();
             else if (action === 'reset') reset();
             else if (action === 'brief') openBrief();
+            else if (action === 'contact') closePanel(); // the link itself scrolls to the form
             else if (action === 'back') { showChat(); input.focus(); }
             else if (action === 'copy') copySummary();
             return;
@@ -876,12 +928,9 @@
 .kapsel-launcher:hover { background: var(--k-deep); transform: translateY(-2px); }
 .kapsel-launcher:focus-visible { outline: 3px solid var(--k-sun); outline-offset: 3px; }
 .kapsel.is-open .kapsel-launcher { background: var(--k-deep); }
-.kapsel-cap { width: 40px; height: 40px; flex-shrink: 0; transition: transform .6s ease; }
-.kapsel-launcher:hover .kapsel-cap { transform: rotate(60deg); }
-.kapsel-cap__rim { fill: var(--k-sun-deep); }
-.kapsel-cap__top { fill: var(--k-sun); }
-.kapsel-cap__ring { fill: none; stroke: var(--k-forest); stroke-width: 1.6; opacity: .45; }
-.kapsel-cap__hop { fill: none; stroke: var(--k-forest); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.kapsel-cap { width: 40px; height: 40px; flex-shrink: 0; transition: transform .35s ease; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.28)); }
+.kapsel-launcher:hover .kapsel-cap { transform: rotate(-10deg) translateY(-1px); }
+a.kapsel-brief-btn { display: block; text-align: center; text-decoration: none; }
 .kapsel-panel { position: fixed; right: 24px; bottom: 96px; z-index: 850; width: min(400px, calc(100vw - 32px));
   height: min(640px, calc(100vh - var(--nav-h, 96px) - 108px)); display: flex; flex-direction: column; overflow: hidden;
   background: var(--k-cream); border-radius: 18px; box-shadow: 0 30px 70px rgba(15, 58, 34, 0.30); border: 1px solid var(--k-line); }
@@ -950,7 +999,7 @@ body.has-kapsel .back-to-top { bottom: 92px; }
 @media (max-width: 720px) {
   .kapsel-launcher { right: 16px; bottom: 92px; width: 56px; padding: 0; justify-content: center; }
   .kapsel-launcher__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .kapsel-cap { width: 42px; height: 42px; }
+  .kapsel-cap { width: 44px; height: 44px; }
   .kapsel-panel { inset: 0; width: 100%; height: 100%; border-radius: 0; border: 0; z-index: 1500;
     padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
   .kapsel.is-open .kapsel-launcher { display: none; }
