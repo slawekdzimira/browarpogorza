@@ -101,7 +101,7 @@
             + (p.tagline ? `<p class="shop-card__tagline">${esc(p.tagline)}.</p>` : '')
             + `<p class="shop-card__pack">${packLine(p)}</p>`
             + `<div class="shop-card__price"><strong>${zl(p.priceGr)}</strong><span>za sztukę, z VAT${inCart ? ` · w zamówieniu: ${inCart} szt.` : ''}</span></div>`
-            + `<div class="shop-card__buy">${qtyControl(p.id, 1, p.name)}<button type="button" class="btn btn--sun" data-add="${esc(p.id)}">Dodaj do zamówienia</button></div>`
+            + `<div class="shop-card__buy">${qtyControl(p.id, 1, p.name)}<button type="button" class="btn btn--sun" data-add="${esc(p.id)}" aria-label="Dodaj do zamówienia: ${esc(p.name)}">Dodaj</button></div>`
             + '</div></article>';
     };
 
@@ -438,7 +438,7 @@
         done(data, email) {
             const p = data.payment;
             const copy = v => `<button type="button" class="co-copy" data-copy="${esc(v)}">kopiuj</button>`;
-            this.root.innerHTML = `<div class="co-done" role="status"><h2 style="font-family:var(--font-display);font-weight:500;font-size:2rem;color:var(--green-forest);margin:0 0 8px">Dziękujemy. ${data.kind === 'event' ? 'Umowa' : 'Zamówienie'} ${esc(data.number)} przyjęte.</h2>`
+            this.root.innerHTML = `<div class="co-done" role="status"><h2 style="font-family:var(--font-display);font-weight:500;font-size:2rem;color:var(--green-forest);margin:0 0 8px">Dziękujemy. ${data.kind === 'event' ? `Umowa ${esc(data.number)} zawarta` : `Zamówienie ${esc(data.number)} przyjęte`}.</h2>`
                 + `<p>${data.mailed ? `Wysłaliśmy ${data.kind === 'event' ? 'treść umowy' : 'potwierdzenie'} na adres ${esc(email)}.` : `Zapisaliśmy zamówienie. Jeśli e-mail nie dotrze w ciągu kilku minut, napisz do nas: ${esc(CONTACT)}.`} Realizację zaczniemy po zaksięgowaniu wpłaty.</p>`
                 + `<div class="co-pay"><dl><dt>Kwota</dt><dd>${esc(p.amount)}</dd><dt>Rachunek</dt><dd>${esc(p.bankAccount)}${copy(p.bankAccount)}</dd>`
                 + (p.bankName ? `<dt>Bank</dt><dd>${esc(p.bankName)}</dd>` : '')
