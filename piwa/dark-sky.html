@@ -193,15 +193,19 @@
             <a href="/dobierz-piwo.html">Dobierz piwo</a>
             <a href="/blog/">Blog</a>
             <a href="/#galeria">Galeria</a>
+            <a href="/konto.html" class="nav__menu-account" data-account-link="Konto klienta">Konto klienta</a>
             <a href="/#kontakt" class="nav__cta">Kontakt</a>
         </nav>
-        <nav class="langswitch" aria-label="Język">
+        <div class="nav__end">
+            <a class="nav__account" href="/konto.html" data-account-link="Konto" title="Konto klienta"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8.2" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.8 7.2-5.8s6.3 2.2 7.2 5.8"/></svg><span class="nav__account-label" data-account-label>Konto</span></a>
+            <nav class="langswitch" aria-label="Język">
             <a class="langswitch__lang is-current" href="/piwa/dark-sky.html" hreflang="pl" lang="pl" title="Polski" aria-label="Polski" aria-current="page">PL</a>
             <a class="langswitch__lang" href="/en/beers/dark-sky.html" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
             <a class="langswitch__lang" href="/uk/pyva/dark-sky.html" hreflang="uk" lang="uk" title="Українська" aria-label="Українська">UA</a>
             <a class="langswitch__lang" href="/es/cervezas/dark-sky.html" hreflang="es" lang="es" title="Español" aria-label="Español">ES</a>
             <a class="langswitch__lang" href="/de/biere/dark-sky.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch">DE</a>
         </nav>
+        </div>
         <button class="nav__toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
             <span></span><span></span><span></span>
         </button>

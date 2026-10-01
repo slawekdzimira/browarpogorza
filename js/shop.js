@@ -533,8 +533,10 @@
         token: null,
 
         session() { const s = storage.get(SESSION_KEY, null); return s && s.token ? s : null; },
-        signIn(data) { storage.set(SESSION_KEY, { token: data.session, email: data.user.email }); this.cached = null; },
-        signOut() { storage.remove(SESSION_KEY); this.cached = null; },
+        signIn(data) { storage.set(SESSION_KEY, { token: data.session, email: data.user.email }); this.cached = null; this.syncHeader(); },
+        signOut() { storage.remove(SESSION_KEY); this.cached = null; this.syncHeader(); },
+        // The header link (js/script.js) follows the session.
+        syncHeader() { if (typeof window.bpSyncAccountLink === 'function') window.bpSyncAccountLink(); },
 
         async call(path, { method = 'GET', body } = {}) {
             const s = this.session();

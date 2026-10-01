@@ -33,6 +33,22 @@
         navToggle.focus();
     });
 
+    // The customer account link in the header of the Polish pages reads "Moje konto" while a
+    // shop session is kept in this browser (js/shop.js stores it and calls this on sign-in
+    // and sign-out).
+    const syncAccountLink = () => {
+        let signedIn = false;
+        try { signedIn = Boolean(localStorage.getItem('bp_session_v1')); } catch (e) { /* storage blocked */ }
+        document.querySelectorAll('[data-account-link]').forEach((link) => {
+            link.classList.toggle('is-signed-in', signedIn);
+            const label = link.querySelector('[data-account-label]') || link;
+            label.textContent = signedIn ? 'Moje konto' : (link.dataset.accountLink || 'Konto');
+            link.setAttribute('aria-label', signedIn ? 'Moje konto' : 'Konto klienta: zaloguj się');
+        });
+    };
+    window.bpSyncAccountLink = syncAccountLink;
+    syncAccountLink();
+
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const scrollBehavior = () => (reducedMotion.matches ? 'auto' : 'smooth');
 
