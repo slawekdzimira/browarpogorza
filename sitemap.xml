@@ -3,7 +3,7 @@
   <url><loc>https://browarpogorza.pl/</loc><lastmod>2026-09-30</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://browarpogorza.pl/dobierz-piwo.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://browarpogorza.pl/piwo-z-logo-firmy.html</loc><lastmod>2026-09-30</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://browarpogorza.pl/blog/</loc><lastmod>2026-10-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://browarpogorza.pl/blog/</loc><lastmod>2026-10-02</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://browarpogorza.pl/blog/co-to-jest-porter-baltycki.html</loc><lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/blog/jak-smakuje-foreign-extra-stout.html</loc><lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/blog/piwo-rzemieslnicze-podkarpacie-przewodnik.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
@@ -35,26 +35,37 @@
   </url>
 
   <url>
-    <loc>https://browarpogorza.pl/zamow.html</loc><lastmod>2026-10-01</lastmod>
+    <loc>https://browarpogorza.pl/zamow.html</loc><lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://browarpogorza.pl/regulamin-zamowien.html</loc><lastmod>2026-10-01</lastmod>
+    <loc>https://browarpogorza.pl/regulamin-zamowien.html</loc><lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://browarpogorza.pl/ile-piwa-na-wesele.html</loc><lastmod>2026-10-01</lastmod>
+    <loc>https://browarpogorza.pl/ile-piwa-na-wesele.html</loc><lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://browarpogorza.pl/piwo-na-impreze-firmowa.html</loc><lastmod>2026-10-01</lastmod>
+    <loc>https://browarpogorza.pl/piwo-na-impreze-firmowa.html</loc><lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <url>
+    <loc>https://browarpogorza.pl/piwo-na-urodziny.html</loc><lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url><loc>https://browarpogorza.pl/blog/piwo-na-wesele-bar-piwny-ile-piwa.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://browarpogorza.pl/blog/piwo-bezalkoholowe-przewodnik.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://browarpogorza.pl/blog/style-piwa-przewodnik-dla-poczatkujacych.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://browarpogorza.pl/blog/pogorze-dynowskie-dubiecko-atrakcje.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
 
   <!-- i18n:start -->
   <url>

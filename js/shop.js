@@ -26,6 +26,10 @@
     const zl = gr => `${(gr / 100).toFixed(2).replace('.', ',')} zł`;
     const litres = ml => String(ml / 1000).replace('.', ',');
     const webp = src => src.replace(/\.(png|jpe?g)$/i, '.webp');
+    // Polish plural: 1 skrzynka, 2-4 skrzynki (but 12-14 skrzynek), otherwise skrzynek.
+    const plural = (n, one, few, many) => (n === 1 ? one : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? few : many));
+    const crateWord = n => plural(n, 'skrzynka', 'skrzynki', 'skrzynek');
+    const bottleWord = n => plural(n, 'butelka', 'butelki', 'butelek');
     const track = (name, params) => { try { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (e) { /* analytics is optional */ } };
 
     const storage = {
@@ -123,8 +127,8 @@
             if (!s.events.available && this.filter !== 'na') notes.push(`<strong>Piwo z alkoholem na imprezy zamknięte</strong> zamówisz tu wkrótce. Do tego czasu przygotujemy ofertę mailowo: ${esc(CONTACT)}.`);
             if (!s.na.available && this.filter !== 'event') notes.push(`<strong>Wysyłka piw bezalkoholowych</strong> ruszy wkrótce. Napisz, jeśli chcesz zamówić już teraz: ${esc(CONTACT)}.`);
             const calc = storage.get(CALC_KEY, null, true);
-            const fromCalc = calc && calc.bottles ? `<div class="shop-note shop-note--calc">Z kalkulatora: <strong>${calc.bottles} butelek 0,5 l</strong> piwa na ${calc.guests} gości`
-                + `${calc.naBottles ? ` i ${calc.naBottles} butelek piwa bezalkoholowego` : ''}. <a href="/ile-piwa-na-wesele.html">Przelicz jeszcze raz</a></div>` : '';
+            const fromCalc = calc && calc.bottles ? `<div class="shop-note shop-note--calc">Z kalkulatora: <strong>${calc.bottles} ${bottleWord(calc.bottles)} 0,5 l</strong> piwa na ${calc.guests} ${plural(calc.guests, 'gościa', 'gości', 'gości')}`
+                + `${calc.naBottles ? ` i ${calc.naBottles} ${bottleWord(calc.naBottles)} piwa bezalkoholowego` : ''}. <a href="/ile-piwa-na-wesele.html">Przelicz jeszcze raz</a></div>` : '';
             grid.innerHTML = fromCalc + (list.map(card).join('') + notes.map(note).join('')
                 || note(`Nic tu jeszcze nie ma. Napisz do nas: ${esc(CONTACT)}.`));
             // GA4 shop funnel (visitors who consented): the offer seen once per page view.
@@ -535,7 +539,6 @@
 
     // ile-piwa-na-wesele.html: the generator's numbers (data-calc) recomputed as the visitor
     // types; the result waits in this tab's storage for the offer page. An estimate only.
-    const crateWord = n => (n === 1 ? 'skrzynka' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'skrzynki' : 'skrzynek'));
     const calculator = {
         init(form) {
             const cfg = JSON.parse(form.dataset.calc);
@@ -550,8 +553,8 @@
                 const bottles = Math.ceil(litres / cfg.bottleL);
                 const crates = Math.ceil(bottles / cfg.crate);
                 const naBottles = Math.ceil((nonDrinkers * hours * cfg.naRate) / cfg.bottleL);
-                field('calc-result').innerHTML = `<p class="calc-result__main"><strong>${bottles} butelek 0,5 l</strong> piwa (${Math.round(litres)} l, ${crates} ${crateWord(crates)})</p>`
-                    + (naBottles ? `<p>i <strong>${naBottles} butelek</strong> piwa bezalkoholowego dla kierowców</p>` : '');
+                field('calc-result').innerHTML = `<p class="calc-result__main"><strong>${bottles} ${bottleWord(bottles)} 0,5 l</strong> piwa (${Math.round(litres)} l, ${crates} ${crateWord(crates)})</p>`
+                    + (naBottles ? `<p>i <strong>${naBottles} ${bottleWord(naBottles)}</strong> piwa bezalkoholowego dla kierowców</p>` : '');
                 storage.set(CALC_KEY, { guests, bottles, naBottles }, true);
                 if (event && !used) { used = true; track('calculator_use', { guests }); }
             };
