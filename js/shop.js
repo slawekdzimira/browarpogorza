@@ -17,6 +17,9 @@
     const FORM_KEY = 'bp_checkout_v1';
     const CHECKOUT_URL = '/zamowienie.html';
     const CONTACT = 'slawek@browarpogorza.pl, tel. +48 734 180 172';
+    // Event hours as a 24-hour list: a native time input shows AM/PM in an English browser.
+    const HALF_HOURS = Array.from({ length: 48 }, (_, i) => `${String(Math.floor(i / 2)).padStart(2, '0')}:${i % 2 ? '30' : '00'}`);
+    const HOUR_OPTIONS = `<option value="">wybierz</option>${HALF_HOURS.map(h => `<option value="${h}">${h}</option>`).join('')}`;
 
     const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const zl = gr => `${(gr / 100).toFixed(2).replace('.', ',')} zł`;
@@ -124,16 +127,25 @@
         buyBoxes() {
             document.querySelectorAll('[data-shop-product]').forEach((box) => {
                 const p = byId(box.dataset.shopProduct);
-                if (!p || !offered(p) || !catalog.settings.shopOpen) { box.hidden = true; return; }
+                // The page's own "Zamów / Zapytaj" button leads to the contact form; next to a
+                // working buy box it only confuses, so it steps aside while the box is shown.
+                const enquiry = box.parentElement && box.parentElement.querySelector('[data-beer-cta]');
+                if (!p || !offered(p) || !catalog.settings.shopOpen) {
+                    box.hidden = true;
+                    if (enquiry) enquiry.hidden = false;
+                    return;
+                }
+                if (enquiry) enquiry.hidden = true;
                 const inCart = cart.qty(p.id);
                 const s = catalog.settings;
                 const lead = p.alcoholic
                     ? 'Na imprezę zamkniętą: wesele, urodziny, imprezę firmową. Dostarczamy na miejsce imprezy na podstawie umowy, którą zawierasz przy zamówieniu.'
                     : `Wysyłka kurierem. Najmniejsze zamówienie: ${s.na.minItems} szt. (możesz łączyć różne piwa bezalkoholowe).`;
                 box.innerHTML = `<h2>${p.alcoholic ? 'Zamów na imprezę' : 'Zamów z wysyłką'}</h2><p>${esc(lead)}</p>`
-                    + `<div class="shop-buy__row"><div class="shop-buy__price">${zl(p.priceGr)}<small>${packLine(p)}</small></div>`
-                    + `${qtyControl(p.id, 1, p.name)}<button type="button" class="btn btn--sun" data-add="${esc(p.id)}">Dodaj</button></div>`
-                    + (inCart ? `<p style="margin:10px 0 0">W zamówieniu: ${inCart} szt. <a href="${CHECKOUT_URL}">Przejdź do zamówienia</a></p>` : '');
+                    + `<div class="shop-buy__price">${zl(p.priceGr)}<small>${packLine(p)}</small></div>`
+                    + `<div class="shop-buy__row">${qtyControl(p.id, 1, p.name)}<button type="button" class="btn btn--sun" data-add="${esc(p.id)}">Dodaj do zamówienia</button></div>`
+                    + (inCart ? `<p class="shop-buy__in">W zamówieniu: ${inCart} szt. <a href="${CHECKOUT_URL}">Przejdź do zamówienia</a></p>` : '')
+                    + '<p class="shop-buy__ask">Masz pytanie o to piwo? <a href="/#kontakt">Napisz do nas</a>.</p>';
                 box.hidden = false;
             });
         },
@@ -204,7 +216,7 @@
         sending: false,
 
         field(name, label, opts = {}) {
-            const id = `co-${name.replace(/\./g, '-')}`;
+            const id = opts.id || `co-${name.replace(/\./g, '-')}`;
             const type = opts.type || 'text';
             const attrs = `id="${id}" name="${name}" data-field="${opts.errorKey || name}"${opts.autocomplete ? ` autocomplete="${opts.autocomplete}"` : ''}${opts.attrs ? ` ${opts.attrs}` : ''}`;
             const control = type === 'textarea' ? `<textarea ${attrs} rows="3"></textarea>`
@@ -242,26 +254,25 @@
                 + `<div class="co-form-error" id="co-form-error" role="alert" hidden></div>`
                 + `<section class="co-step">${head('Wybrane piwa')}`
                 + `<div class="co-kind co-kind--${t.kind}">${event
-                    ? `<strong>Zamówienie na imprezę zamkniętą.</strong> Piwo z alkoholem dostarczamy własnym transportem na miejsce Twojej imprezy (${esc(ev.areaLabel)}), na podstawie umowy, którą zawierasz w ostatnim kroku. Najmniej ${ev.minItems} szt., najwyżej ${String(ev.maxLitresPerGuest).replace('.', ',')} l piwa na gościa, zamówienie najpóźniej ${ev.leadHours} godzin przed imprezą.`
+                    ? `<strong>Zamówienie na imprezę zamkniętą.</strong> Piwo z alkoholem dostarczamy własnym transportem na miejsce Twojej imprezy (${esc(ev.areaLabel)}), na podstawie umowy, którą zawierasz w ostatnim kroku. Najmniej ${ev.minItems} szt., zamówienie najpóźniej ${ev.leadHours} godzin przed imprezą.`
                     : `<strong>Piwa bezalkoholowe z wysyłką kurierem.</strong> Najmniej ${s.na.minItems} szt.; nadajemy w ciągu ${s.na.dispatchDays} dni roboczych od zaksięgowania wpłaty.`}</div>`
                 + `<table class="co-lines"><tbody>${items.map((i) => { const p = byId(i.id); return `<tr data-id="${esc(p.id)}"><td><strong>${esc(p.name)}</strong><br><small>${esc(p.abvLabel)} · ${packLine(p)}</small></td>`
                     + `<td>${qtyControl(p.id, i.qty, p.name)}</td><td class="num">${zl(p.priceGr * i.qty)}<br><button type="button" class="co-remove" data-remove="${esc(p.id)}">Usuń</button></td></tr>`; }).join('')}</tbody></table>`
                 + `<span class="co-error" data-error-for="items"></span>`
                 + `<p style="margin:12px 0 0"><a href="/zamow.html">Dodaj inne piwa</a></p></section>`
-                + (event ? `<section class="co-step">${head('Twoja impreza', 'Dane imprezy trafiają do umowy: piwo dostarczamy tylko na imprezę zamkniętą, w miejscu i czasie, które wskażesz.')}`
+                + (event ? `<section class="co-step">${head('Twoja impreza', 'Dane imprezy trafiają do umowy: piwo dostarczamy tylko na imprezę zamkniętą, w miejscu i czasie, które wskażesz. Przywozimy je w dniu imprezy, przed jej rozpoczęciem; godzinę dostawy uzgodnimy telefonicznie z osobą odbierającą.')}`
                     + `<div class="co-field co-field--wide"><span class="lbl" style="font-size:.82rem;font-weight:600">Rodzaj imprezy</span><div class="co-types">${types}</div><span class="co-error" data-error-for="event.type"></span></div>`
                     + `<div class="co-grid" style="margin-top:12px">${this.field('event.typeOther', 'Jaka to impreza?', { wide: true, attrs: 'placeholder="np. jubileusz, komunia, spotkanie klubowe"' })}`
                     + `${this.field('event.date', 'Data imprezy', { type: 'date', attrs: `min="${minDate}" max="${maxDate}"` })}`
-                    + `${this.field('event.guests', 'Liczba zaproszonych dorosłych gości', { type: 'number', attrs: 'min="2" max="500" inputmode="numeric"' })}`
-                    + `${this.field('event.timeFrom', 'Początek imprezy', { type: 'time' })}${this.field('event.timeTo', 'Koniec imprezy', { type: 'time' })}`
+                    + `${this.field('event.guests', 'Liczba zaproszonych dorosłych gości', { type: 'number', attrs: 'min="1" inputmode="numeric"' })}`
+                    + `${this.field('event.timeFrom', 'Początek imprezy (godzina)', { type: 'select', options: HOUR_OPTIONS })}${this.field('event.timeTo', 'Koniec imprezy (godzina, może być po północy)', { type: 'select', options: HOUR_OPTIONS })}`
                     + `${this.field('event.venue', 'Miejsce (nazwa obiektu, np. sala, dom, ogród)', { wide: true })}</div>`
                     + `<div style="margin-top:12px">${this.address('event.address')}</div>`
-                    + `<div class="co-grid" style="margin-top:12px">${this.field('event.deliveryFrom', 'Dostawa od (w dniu imprezy)', { type: 'time', errorKey: 'event.delivery' })}${this.field('event.deliveryTo', 'Dostawa do', { type: 'time', errorKey: 'event.delivery' })}`
-                    + `${this.field('event.receiverName', 'Kto odbierze dostawę (pełnoletni, z dowodem)', { autocomplete: 'off' })}${this.field('event.receiverPhone', 'Telefon osoby odbierającej', { type: 'tel', autocomplete: 'off' })}</div></section>`
+                    + `<div class="co-grid" style="margin-top:12px">${this.field('event.receiverName', 'Kto odbierze dostawę (pełnoletni, z dowodem)', { autocomplete: 'off' })}${this.field('event.receiverPhone', 'Telefon osoby odbierającej', { type: 'tel', autocomplete: 'off' })}</div></section>`
                     : `<section class="co-step">${head('Dostawa', 'Wysyłka kurierem na adres w Polsce.')}`
                     + `<label class="co-check"><input type="checkbox" name="shipping.same" checked><span>Wyślij na mój adres z danych zamawiającego</span></label>`
                     + `<div id="co-ship-other" hidden>${this.address('shipping', 'shipping')}</div></section>`)
-                + `<section class="co-step">${head('Twoje dane')}<div class="co-grid">`
+                + `<section class="co-step">${head('Twoje dane')}<div id="co-account-slot"></div><div class="co-grid">`
                 + `${this.field('customer.name', 'Imię i nazwisko', { autocomplete: 'name' })}${this.field('customer.email', 'E-mail', { type: 'email', autocomplete: 'email' })}`
                 + `${this.field('customer.phone', 'Telefon', { type: 'tel', autocomplete: 'tel' })}`
                 + (event ? this.field('customer.birthDate', 'Data urodzenia', { type: 'date', autocomplete: 'bday' }) : '<div></div>')
@@ -283,6 +294,7 @@
 
             this.restore();
             this.preview = null;
+            account.fillCheckout();
         },
 
         summary(t) {
@@ -315,7 +327,7 @@
                 body.event = {
                     type: val('event.type'), typeOther: val('event.typeOther'), date: val('event.date'), timeFrom: val('event.timeFrom'), timeTo: val('event.timeTo'),
                     venue: val('event.venue'), guests: Number(val('event.guests')), address: addr('event.address'),
-                    deliveryFrom: val('event.deliveryFrom'), deliveryTo: val('event.deliveryTo'), receiverName: val('event.receiverName'), receiverPhone: val('event.receiverPhone'),
+                    receiverName: val('event.receiverName'), receiverPhone: val('event.receiverPhone'),
                 };
             } else {
                 body.shipping = val('shipping.same') ? { same: true } : { same: false, ...addr('shipping') };
@@ -426,7 +438,7 @@
                 track('purchase', { transaction_id: data.number, currency: 'PLN', value: data.totals.totalGr / 100, order_kind: data.kind });
                 cart.clear();
                 storage.remove(FORM_KEY, true);
-                this.done(data, body.customer.email);
+                this.done(data, body.customer.email, body.customer);
             } catch (e) {
                 this.showErrors({ form: `Brak połączenia z serwerem zamówień. Spróbuj ponownie albo napisz: ${CONTACT}.` });
             } finally {
@@ -435,16 +447,27 @@
             }
         },
 
-        done(data, email) {
+        // The transfer details are the payment for now; when an online operator is connected
+        // (payment.onlineUrl), it leads and the transfer details open from their own button.
+        done(data, email, customer) {
             const p = data.payment;
-            const copy = v => `<button type="button" class="co-copy" data-copy="${esc(v)}">kopiuj</button>`;
-            this.root.innerHTML = `<div class="co-done" role="status"><h2 style="font-family:var(--font-display);font-weight:500;font-size:2rem;color:var(--green-forest);margin:0 0 8px">Dziękujemy. ${data.kind === 'event' ? `Umowa ${esc(data.number)} zawarta` : `Zamówienie ${esc(data.number)} przyjęte`}.</h2>`
-                + `<p>${data.mailed ? `Wysłaliśmy ${data.kind === 'event' ? 'treść umowy' : 'potwierdzenie'} na adres ${esc(email)}.` : `Zapisaliśmy zamówienie. Jeśli e-mail nie dotrze w ciągu kilku minut, napisz do nas: ${esc(CONTACT)}.`} Realizację zaczniemy po zaksięgowaniu wpłaty.</p>`
-                + `<div class="co-pay"><dl><dt>Kwota</dt><dd>${esc(p.amount)}</dd><dt>Rachunek</dt><dd>${esc(p.bankAccount)}${copy(p.bankAccount)}</dd>`
+            const event = data.kind === 'event';
+            const copy = (value, what) => `<button type="button" class="co-copy" data-copy="${esc(value)}" aria-label="Kopiuj ${what}">kopiuj</button>`;
+            const online = p.onlineUrl ? `<a class="btn btn--sun" href="${esc(p.onlineUrl)}">Zapłać online</a>` : '';
+            this.root.innerHTML = `<div class="co-done" role="status"><h2 style="font-family:var(--font-display);font-weight:500;font-size:2rem;color:var(--green-forest);margin:0 0 8px">Dziękujemy. ${event ? `Umowa ${esc(data.number)} zawarta` : `Zamówienie ${esc(data.number)} przyjęte`}.</h2>`
+                + `<p>${data.mailed ? `Potwierdzenie zamówienia${event ? ' razem z umową' : ''} wysłaliśmy na adres ${esc(email)}.` : `Zapisaliśmy zamówienie. Jeśli e-mail nie dotrze w ciągu kilku minut, napisz do nas: ${esc(CONTACT)}.`} Realizację zaczniemy po zaksięgowaniu wpłaty.</p>`
+                + `<h3 class="co-pay__title">Zapłać ${esc(p.amount)} do ${esc(p.deadline)}</h3>`
+                + (online ? `<div class="co-pay__methods">${online}<button type="button" class="btn btn--ghost-dark" data-pay-transfer aria-expanded="false" aria-controls="co-transfer">Zapłać zwykłym przelewem</button></div>` : '')
+                + `<div class="co-pay" id="co-transfer"${online ? ' hidden' : ''}><p class="co-pay__lead">Zwykły przelew</p><dl>`
+                + `<dt>Odbiorca</dt><dd>${esc(p.recipient)}<br><span class="co-pay__addr">${esc(p.recipientAddress)}</span>${copy(p.recipient, 'nazwę odbiorcy')}</dd>`
+                + `<dt>Numer rachunku</dt><dd>${esc(p.bankAccount)}${copy(p.bankAccount.replace(/\s/g, ''), 'numer rachunku')}</dd>`
                 + (p.bankName ? `<dt>Bank</dt><dd>${esc(p.bankName)}</dd>` : '')
-                + `<dt>Odbiorca</dt><dd>${esc(p.recipient)}</dd><dt>Tytuł przelewu</dt><dd>${esc(p.title)}${copy(p.title)}</dd><dt>Termin</dt><dd>${p.deadlineHours} godzin</dd></dl></div>`
-                + `<p><a class="btn btn--primary" href="${esc(data.documentUrl)}" target="_blank" rel="noopener">${data.kind === 'event' ? 'Otwórz umowę' : 'Otwórz potwierdzenie'}</a> <a class="btn btn--ghost-dark" href="/zamow.html">Wróć do oferty</a></p></div>`;
+                + `<dt>Tytuł przelewu</dt><dd>${esc(p.title)}${copy(p.title, 'tytuł przelewu')}</dd>`
+                + `<dt>Kwota</dt><dd>${esc(p.amount)}${copy(p.amount.replace(/\s*zł$/, ''), 'kwotę')}</dd>`
+                + `<dt>Termin</dt><dd>do ${esc(p.deadline)} (${p.deadlineHours} godzin)</dd></dl></div>`
+                + `<p class="co-done__actions"><a class="btn btn--primary" href="${esc(data.documentUrl)}" target="_blank" rel="noopener">${event ? 'Otwórz umowę' : 'Otwórz potwierdzenie'}</a> <a class="btn btn--ghost-dark" href="/zamow.html">Wróć do oferty</a></p></div>`;
             this.root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            account.afterOrder(email, customer);
         },
 
         bind() {
@@ -453,6 +476,15 @@
                 const rm = event.target.closest('[data-remove]');
                 if (rm) { cart.set(rm.dataset.remove, 0); this.refresh(); return; }
                 if (event.target.id === 'co-place') { this.place(); return; }
+                const offer = event.target.closest('[data-acct-offer]');
+                if (offer) { account.offerSignUp(offer); return; }
+                const transfer = event.target.closest('[data-pay-transfer]');
+                if (transfer) {
+                    const box = document.getElementById('co-transfer');
+                    box.hidden = !box.hidden;
+                    transfer.setAttribute('aria-expanded', String(!box.hidden));
+                    return;
+                }
                 const cp = event.target.closest('[data-copy]');
                 if (cp && navigator.clipboard) navigator.clipboard.writeText(cp.dataset.copy).then(() => { cp.textContent = 'skopiowano'; }).catch(() => {});
             });
@@ -486,11 +518,289 @@
         },
     };
 
+    /* ---------------------------------------------------------- account */
+
+    // The customer account (konto.html) and what the checkout borrows from it. Signing up
+    // only mails a link; the password is set from that link (#aktywuj=, #nowe-haslo=). The
+    // session is a signed token from the Worker, kept in this browser until signing out.
+    const SESSION_KEY = 'bp_session_v1';
+    const plDay = iso => { try { return new Date(iso).toLocaleDateString('pl-PL'); } catch (e) { return ''; } };
+    const isoDay = d => (/^\d{4}-\d{2}-\d{2}$/.test(d || '') ? d.split('-').reverse().join('.') : '');
+
+    const account = {
+        root: null,
+        cached: null,
+        token: null,
+
+        session() { const s = storage.get(SESSION_KEY, null); return s && s.token ? s : null; },
+        signIn(data) { storage.set(SESSION_KEY, { token: data.session, email: data.user.email }); this.cached = null; },
+        signOut() { storage.remove(SESSION_KEY); this.cached = null; },
+
+        async call(path, { method = 'GET', body } = {}) {
+            const s = this.session();
+            const res = await fetch(`${ENDPOINT}/shop/account/${path}`, {
+                method,
+                credentials: 'omit',
+                headers: { ...(body ? { 'Content-Type': 'application/json' } : {}), ...(s ? { Authorization: `Bearer ${s.token}` } : {}) },
+                body: body ? JSON.stringify(body) : undefined,
+            });
+            const data = await res.json().catch(() => ({}));
+            if (res.status === 401 && s && path !== 'login') this.signOut();
+            return { ok: res.ok, status: res.status, data };
+        },
+
+        // The signed-in customer with their orders, or null; asked once per page.
+        me() {
+            if (!this.session()) return Promise.resolve(null);
+            if (!this.cached) this.cached = this.call('me').then(r => (r.ok ? r.data : null)).catch(() => null);
+            return this.cached;
+        },
+
+        /* ---- checkout */
+
+        async fillCheckout() {
+            const slot = document.getElementById('co-account-slot');
+            const me = await this.me();
+            const form = document.getElementById('co-form');
+            if (!slot || !form) return;
+            if (!me) {
+                slot.innerHTML = '<p class="co-hint">Masz konto? <a href="/konto.html?wroc=zamowienie">Zaloguj się</a>, a dane uzupełnią się same.</p>';
+                return;
+            }
+            const p = me.user.profile || {};
+            const a = p.address || {};
+            const known = {
+                'customer.name': p.name, 'customer.phone': p.phone, 'customer.company': p.company, 'customer.nip': p.nip,
+                'customer.address.street': a.street, 'customer.address.postal': a.postal, 'customer.address.city': a.city,
+            };
+            Object.entries(known).forEach(([name, value]) => { const el = form.elements[name]; if (el && !el.value && value) el.value = value; });
+            const email = form.elements['customer.email'];
+            email.value = me.user.email;
+            email.readOnly = true;
+            slot.innerHTML = `<p class="co-hint">Zamawiasz jako <strong>${esc(me.user.email)}</strong>; zamówienie pojawi się w Twoim <a href="/konto.html">koncie</a>.</p>`;
+            checkout.remember();
+        },
+
+        async afterOrder(email, customer) {
+            const box = document.querySelector('.co-done');
+            const me = await this.me();
+            if (!box) return;
+            if (me) {
+                if (!me.user.profile || !me.user.profile.name) {
+                    this.call('profile', { method: 'POST', body: { profile: { name: customer.name, phone: customer.phone, company: customer.company, nip: customer.nip, address: customer.address } } }).catch(() => {});
+                }
+                this.cached = null;
+                box.insertAdjacentHTML('beforeend', '<p class="co-account">Zamówienie jest już w Twoim <a href="/konto.html">koncie klienta</a>, razem z dokumentami.</p>');
+                return;
+            }
+            box.insertAdjacentHTML('beforeend', `<div class="co-account"><strong>Chcesz mieć zamówienia i umowy w jednym miejscu?</strong>`
+                + `<p>Załóż konto dla adresu ${esc(email)}: wyślemy link do ustawienia hasła, a to zamówienie od razu będzie w koncie.</p>`
+                + `<button type="button" class="btn btn--ghost-dark" data-acct-offer="${esc(email)}">Załóż konto</button></div>`);
+        },
+
+        async offerSignUp(button) {
+            button.disabled = true;
+            const { ok } = await this.call('register', { method: 'POST', body: { email: button.dataset.acctOffer } }).catch(() => ({ ok: false }));
+            button.insertAdjacentHTML('afterend', ok
+                ? `<p role="status">Wysłaliśmy link na ${esc(button.dataset.acctOffer)}. Otwórz go, aby ustawić hasło.</p>`
+                : `<p role="alert">Nie udało się wysłać e-maila. Spróbuj później albo napisz: ${esc(CONTACT)}.</p>`);
+            button.remove();
+        },
+
+        /* ---- konto.html */
+
+        form(name, inner, submit, { tone = 'primary' } = {}) {
+            return `<form data-acct="${name}" novalidate><div class="co-form-error" role="alert" hidden></div>${inner}`
+                + `<div><button type="submit" class="btn btn--${tone}">${submit}</button></div></form>`;
+        },
+        // Two forms on one view (sign in, sign up) each have an e-mail field: same name, own id.
+        email(form) { return checkout.field('acct.email', 'E-mail', { id: `acct-${form}-email`, type: 'email', autocomplete: 'email', errorKey: 'email' }); },
+        password(name, label, auto) { return checkout.field(`acct.${name}`, label, { type: 'password', autocomplete: auto, errorKey: name }); },
+
+        views: {
+            signin() {
+                return `<div class="acct"><section class="acct-card"><h2>Zaloguj się</h2>`
+                    + account.form('login', account.email('login') + account.password('password', 'Hasło', 'current-password'), 'Zaloguj się')
+                    + `<p class="acct-more"><button type="button" class="acct-link" data-acct-view="forgot">Nie pamiętasz hasła?</button></p></section>`
+                    + `<section class="acct-card acct-card--sun"><h2>Załóż konto</h2><ul class="acct-benefits">`
+                    + '<li>Wszystkie zamówienia, umowy i potwierdzenia w jednym miejscu.</li><li>Dane do przelewu przy zamówieniach, które czekają na wpłatę.</li><li>Zapisane dane: kolejne zamówienie wypełnia się samo.</li></ul>'
+                    + account.form('register', account.email('register') + '<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="acct-trap">'
+                        + '<p class="co-hint">Wyślemy link do ustawienia hasła. Zamówienia złożone wcześniej tym adresem też pojawią się w koncie.</p>', 'Wyślij link', { tone: 'sun' })
+                    + '</section></div>';
+            },
+            forgot() {
+                return `<div class="acct acct--narrow"><section class="acct-card"><h2>Nowe hasło</h2><p>Podaj adres e-mail konta, a wyślemy link do ustawienia nowego hasła.</p>`
+                    + account.form('forgot', account.email('forgot'), 'Wyślij link')
+                    + '<p class="acct-more"><button type="button" class="acct-link" data-acct-view="signin">Wróć do logowania</button></p></section></div>';
+            },
+            sent({ email }) {
+                return `<div class="acct acct--narrow"><section class="acct-card" role="status"><h2>Sprawdź skrzynkę</h2>`
+                    + `<p>Jeśli adres <strong>${esc(email)}</strong> jest poprawny, za chwilę dostaniesz od nas wiadomość z linkiem. Link działa raz.</p>`
+                    + '<p class="co-hint">Nie widzisz jej po kilku minutach? Zajrzyj do folderu Spam lub Oferty.</p>'
+                    + '<p class="acct-more"><button type="button" class="acct-link" data-acct-view="signin">Wróć do logowania</button></p></section></div>';
+            },
+            set({ activation }) {
+                return `<div class="acct acct--narrow"><section class="acct-card"><h2>${activation ? 'Ustaw hasło do konta' : 'Ustaw nowe hasło'}</h2>`
+                    + account.form('set', account.password('password', 'Hasło (co najmniej 8 znaków)', 'new-password') + account.password('repeat', 'Powtórz hasło', 'new-password')
+                        + (activation ? '<label class="co-check"><input type="checkbox" name="acct.terms" data-field="terms"><span>Akceptuję <a href="/regulamin-zamowien.html" target="_blank" rel="noopener">regulamin</a> (punkt 11: konto klienta) i <a href="/polityka-prywatnosci.html#zamowienia" target="_blank" rel="noopener">politykę prywatności</a>.</span></label><span class="co-error" data-error-for="terms"></span>' : ''),
+                    activation ? 'Załóż konto' : 'Zapisz hasło')
+                    + '</section></div>';
+            },
+            gone({ message }) {
+                return `<div class="acct acct--narrow"><section class="acct-card" role="alert"><h2>Link nie działa</h2><p>${esc(message)}</p>`
+                    + '<p class="acct-more"><button type="button" class="acct-link" data-acct-view="forgot">Wyślij nowy link</button> · <button type="button" class="acct-link" data-acct-view="signin">Zaloguj się</button></p></section></div>';
+            },
+            panel({ me, note }) {
+                const p = me.user.profile || {};
+                const a = p.address || {};
+                const orders = me.orders.length
+                    ? me.orders.map(o => account.orderRow(o)).join('')
+                    : '<p>Nie masz jeszcze zamówień. <a href="/zamow.html">Zobacz ofertę</a>.</p>';
+                const field = (name, label, value, opts = {}) => checkout.field(`acct.profile.${name}`, label, { ...opts, errorKey: `profile.${name}` }).replace('<input ', `<input value="${esc(value || '')}" `);
+                return `<div class="acct-panel">${note ? `<p class="acct-note" role="status">${esc(note)}</p>` : ''}`
+                    + `<div class="acct-head"><div><span class="kicker">Zalogowano</span><strong>${esc(me.user.email)}</strong></div><button type="button" class="btn btn--ghost-dark" data-acct-logout>Wyloguj</button></div>`
+                    + `<section class="acct-card"><h2>Twoje zamówienia</h2>${orders}<p class="co-hint">Nowe zamówienie pojawia się tu w ciągu minuty od złożenia.</p></section>`
+                    + `<section class="acct-card"><h2>Dane do zamówień</h2><p class="co-hint">Uzupełnią formularz przy kolejnym zamówieniu.</p>`
+                    + account.form('profile', `<div class="co-grid">${field('name', 'Imię i nazwisko', p.name, { autocomplete: 'name' })}${field('phone', 'Telefon', p.phone, { type: 'tel', autocomplete: 'tel' })}</div>`
+                        + `<div class="co-grid co-grid--3">${field('address.street', 'Ulica i numer', a.street, { autocomplete: 'street-address' })}${field('address.postal', 'Kod pocztowy', a.postal, { attrs: 'inputmode="numeric" placeholder="00-000" maxlength="6"' })}${field('address.city', 'Miejscowość', a.city)}</div>`
+                        + `<div class="co-grid">${field('company', 'Firma', p.company, { optional: true, autocomplete: 'organization' })}${field('nip', 'NIP', p.nip, { optional: true, attrs: 'inputmode="numeric"' })}</div>`, 'Zapisz dane')
+                    + '</section>'
+                    + `<section class="acct-card"><h2>Hasło</h2>${account.form('password', `<div class="co-grid">${account.password('current', 'Obecne hasło', 'current-password')}${account.password('next', 'Nowe hasło (co najmniej 8 znaków)', 'new-password')}</div>`, 'Zmień hasło', { tone: 'ghost-dark' })}</section>`
+                    + `<details class="acct-card acct-danger"><summary>Usuń konto</summary><p>Usuniemy konto i zapisane dane. Zamówienia i ich dokumenty zostają u nas tak długo, jak wymagają tego przepisy.</p>`
+                    + `${account.form('delete', account.password('confirm', 'Hasło, aby potwierdzić', 'current-password'), 'Usuń konto', { tone: 'ghost-dark' })}</details></div>`;
+            },
+        },
+
+        orderRow(o) {
+            const kind = o.kind === 'event' ? `Impreza ${isoDay(o.eventDate)}` : 'Wysyłka';
+            const pay = o.payment;
+            return `<article class="acct-order"><div><strong>${esc(o.number)}</strong> <span class="acct-badge acct-badge--${esc(o.status)}">${esc(o.statusLabel)}</span>`
+                + `<br><small>${esc(plDay(o.createdAt))} · ${esc(kind)}</small></div><div class="acct-order__total">${esc(o.total)}</div>`
+                + `<div class="acct-order__actions"><a href="${esc(o.documentUrl)}" target="_blank" rel="noopener">${o.kind === 'event' ? 'Umowa' : 'Potwierdzenie'}</a>`
+                + `<a href="${esc(o.documentUrl)}&amp;pdf=1" target="_blank" rel="noopener">PDF</a>`
+                + (pay ? `<button type="button" class="acct-link" data-acct-pay="${esc(o.number)}" aria-expanded="false">Dane do przelewu</button>` : '') + '</div>'
+                + (pay ? `<dl class="co-pay acct-pay" id="pay-${esc(o.number)}" hidden><dt>Odbiorca</dt><dd>${esc(pay.recipient)}, ${esc(pay.recipientAddress)}</dd>`
+                    + `<dt>Numer rachunku</dt><dd>${esc(pay.bankAccount)}</dd><dt>Tytuł</dt><dd>${esc(pay.title)}</dd><dt>Kwota</dt><dd>${esc(pay.amount)}</dd><dt>Termin</dt><dd>do ${esc(pay.deadline)}</dd></dl>` : '')
+                + '</article>';
+        },
+
+        show(view, args = {}) {
+            this.root.innerHTML = this.views[view](args);
+            const first = this.root.querySelector('input:not([type="hidden"]):not(.acct-trap)');
+            if (first && view !== 'panel') first.focus({ preventScroll: true });
+        },
+
+        async showPanel(note) {
+            this.cached = null;
+            const me = await this.me();
+            if (!me) { this.show('signin'); return; }
+            this.show('panel', { me, note });
+        },
+
+        errors(form, errors) {
+            form.querySelectorAll('[data-error-for]').forEach((el) => { el.textContent = ''; });
+            form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+            const box = form.querySelector('.co-form-error');
+            box.hidden = true;
+            Object.entries(errors || {}).forEach(([key, message]) => {
+                const slot = form.querySelector(`[data-error-for="${key}"]`);
+                if (!slot) { box.textContent = message; box.hidden = false; return; }
+                slot.textContent = message;
+                const input = form.querySelector(`[data-field="${key}"]`);
+                if (input) input.setAttribute('aria-invalid', 'true');
+            });
+        },
+
+        async submit(form) {
+            const v = name => (form.elements[`acct.${name}`] || {}).value || '';
+            const button = form.querySelector('button[type="submit"]');
+            const fail = (status, data) => this.errors(form, data.errors || { form: status === 429 ? 'Za dużo prób w krótkim czasie. Spróbuj za kilka minut.' : status === 502 ? `Nie udało się wysłać e-maila. Spróbuj później albo napisz: ${CONTACT}.` : `Coś poszło nie tak. Spróbuj ponownie albo napisz: ${CONTACT}.` });
+            button.disabled = true;
+            try {
+                const kind = form.dataset.acct;
+                if (kind === 'login') {
+                    const { ok, status, data } = await this.call('login', { method: 'POST', body: { email: v('email'), password: v('password') } });
+                    if (!ok) { fail(status, data); return; }
+                    this.signIn(data);
+                    if (new URLSearchParams(location.search).get('wroc') === 'zamowienie') { location.href = CHECKOUT_URL; return; }
+                    await this.showPanel();
+                } else if (kind === 'register' || kind === 'forgot') {
+                    const { ok, status, data } = await this.call(kind === 'register' ? 'register' : 'reset-request', { method: 'POST', body: { email: v('email'), website: (form.elements.website || {}).value || '' } });
+                    if (!ok) { fail(status, data); return; }
+                    this.show('sent', { email: v('email') });
+                } else if (kind === 'set') {
+                    if (v('password') !== v('repeat')) { this.errors(form, { repeat: 'Hasła się różnią.' }); return; }
+                    const terms = form.elements['acct.terms'];
+                    const { ok, status, data } = await this.call('set-password', { method: 'POST', body: { token: this.token, password: v('password'), terms: Boolean(terms && terms.checked) } });
+                    if (status === 410) { this.show('gone', { message: data.message || 'Ten link wygasł albo został już użyty.' }); return; }
+                    if (!ok) { fail(status, data); return; }
+                    this.signIn(data);
+                    await this.showPanel(terms ? 'Konto założone. Witamy w Browarze Pogórza.' : 'Hasło zmienione.');
+                } else if (kind === 'profile') {
+                    const profile = { name: v('profile.name'), phone: v('profile.phone'), company: v('profile.company'), nip: v('profile.nip'), address: { street: v('profile.address.street'), postal: v('profile.address.postal'), city: v('profile.address.city') } };
+                    const { ok, status, data } = await this.call('profile', { method: 'POST', body: { profile } });
+                    if (status === 401) { this.show('signin'); return; }
+                    if (!ok) { fail(status, data); return; }
+                    await this.showPanel('Dane zapisane.');
+                } else if (kind === 'password') {
+                    const { ok, status, data } = await this.call('password', { method: 'POST', body: { current: v('current'), password: v('next') } });
+                    if (status === 401) { this.show('signin'); return; }
+                    if (!ok) { fail(status, { errors: data.errors && { current: data.errors.current, next: data.errors.password } }); return; }
+                    this.signIn(data);
+                    await this.showPanel('Hasło zmienione. Na innych urządzeniach trzeba zalogować się ponownie.');
+                } else if (kind === 'delete') {
+                    const { ok, status, data } = await this.call('delete', { method: 'POST', body: { password: v('confirm') } });
+                    if (!ok) { fail(status, { errors: data.errors && { confirm: data.errors.password } }); return; }
+                    this.signOut();
+                    this.show('signin');
+                    this.root.insertAdjacentHTML('afterbegin', '<p class="acct-note" role="status">Konto usunięte.</p>');
+                }
+            } catch (e) {
+                this.errors(form, { form: `Brak połączenia z serwerem. Spróbuj ponownie albo napisz: ${CONTACT}.` });
+            } finally {
+                if (button.isConnected) button.disabled = false;
+            }
+        },
+
+        async init(root) {
+            this.root = root;
+            root.addEventListener('submit', (event) => { event.preventDefault(); this.submit(event.target); });
+            root.addEventListener('click', async (event) => {
+                const view = event.target.closest('[data-acct-view]');
+                if (view) { this.show(view.dataset.acctView); return; }
+                const pay = event.target.closest('[data-acct-pay]');
+                if (pay) {
+                    const box = document.getElementById(`pay-${pay.dataset.acctPay}`);
+                    box.hidden = !box.hidden;
+                    pay.setAttribute('aria-expanded', String(!box.hidden));
+                    return;
+                }
+                if (event.target.closest('[data-acct-logout]')) {
+                    await this.call('logout', { method: 'POST' }).catch(() => {});
+                    this.signOut();
+                    this.show('signin');
+                }
+            });
+            // A link from the e-mail: keep its token in memory and take it out of the address bar.
+            const link = location.hash.match(/^#(aktywuj|nowe-haslo)=([\w.-]+)$/);
+            if (link) {
+                this.token = link[2];
+                history.replaceState(null, '', location.pathname + location.search);
+                this.show('set', { activation: link[1] === 'aktywuj' });
+                return;
+            }
+            if (this.session()) await this.showPanel();
+            else this.show('signin');
+        },
+    };
+
     /* ------------------------------------------------------------- boot */
 
     const boot = async () => {
         const grid = document.getElementById('shop-catalog');
         const checkoutRoot = document.getElementById('shop-checkout');
+        const accountRoot = document.getElementById('shop-account');
+        if (accountRoot) account.init(accountRoot);
         const hash = location.hash.replace('#', '');
         if (hash === 'bezalkoholowe' || hash === 'impreza') {
             render.filter = hash === 'impreza' ? 'event' : 'na';
