@@ -859,12 +859,20 @@
         launcher.focus();
     };
 
-    // The age gate and the cookie banner own the screen until they are answered.
-    const blocked = () => Boolean(document.querySelector('.age-gate, .cookie-banner'));
+    // The age gate and the cookie banner own the screen until they are answered, but only
+    // while they are on screen: browsers with a cookie-notice blocker (Opera, Brave, Samsung
+    // Internet, Mi Browser) hide the banner with CSS and leave it in the page, and a banner
+    // nobody sees is never answered - on such a phone Kapsel never appeared (1.10.2026).
+    const onScreen = el => el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+    const blocked = () => Array.from(document.querySelectorAll('.age-gate, .cookie-banner')).some(onScreen);
+    let recheck = 0;
     const refreshVisibility = () => {
         const hide = blocked();
         if (hide && state.open) closePanel();
         root.hidden = hide;
+        // Some blockers hide the banner a moment after it arrives, which no mutation reports.
+        clearTimeout(recheck);
+        if (hide) recheck = setTimeout(refreshVisibility, 1500);
     };
 
     // ----------------------------------------------------------------- events
