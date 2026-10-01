@@ -149,6 +149,11 @@ body.has-shop-bar .back-to-top { bottom: 168px; }
 /* Customer account (konto.html) */
 .acct { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 18px; align-items: start; }
 .acct--narrow { max-width: 560px; grid-template-columns: 1fr; }
+.acct-google { display: grid; justify-items: start; gap: 8px; margin: 0 0 18px; padding: 18px 22px; background: var(--paper); border: 1px solid rgba(15, 58, 34, 0.12); border-radius: var(--radius-lg); }
+.acct-google__btn { min-height: 44px; }
+.acct-google__note { margin: 0; color: var(--text-muted); font-size: .9rem; }
+.acct-google .co-form-error { margin: 0; }
+.acct-head__via { display: block; color: var(--text-muted); font-size: .82rem; margin-top: 2px; }
 .acct-card { background: var(--paper); border: 1px solid rgba(15, 58, 34, 0.12); border-radius: var(--radius-lg); padding: 22px; }
 .acct-card--sun { background: var(--sun-pale); border-color: rgba(92, 62, 0, 0.16); }
 .acct-card h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.65rem; line-height: 1.2; color: var(--green-forest); margin: 0 0 12px; }

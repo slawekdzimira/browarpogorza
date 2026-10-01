@@ -621,7 +621,11 @@
 
         views: {
             signin() {
-                return `<div class="acct"><section class="acct-card"><h2>Zaloguj się</h2>`
+                // The Google button appears once the catalogue has given the client ID (mountGoogle).
+                return '<div class="acct-google" id="acct-google" hidden><div class="acct-google__btn" id="acct-google-btn"></div>'
+                    + '<p class="acct-google__note">Szybciej: kontem Google zalogujesz się albo założysz konto jednym kliknięciem. Google przekaże nam tylko adres e-mail i imię.</p>'
+                    + '<p class="co-form-error" id="acct-google-error" role="alert" hidden></p></div>'
+                    + `<div class="acct"><section class="acct-card"><h2>Zaloguj się</h2>`
                     + account.form('login', account.email('login') + account.password('password', 'Hasło', 'current-password'), 'Zaloguj się')
                     + `<p class="acct-more"><button type="button" class="acct-link" data-acct-view="forgot">Nie pamiętasz hasła?</button></p></section>`
                     + `<section class="acct-card acct-card--sun"><h2>Załóż konto</h2><ul class="acct-benefits">`
@@ -648,6 +652,12 @@
                     activation ? 'Załóż konto' : 'Zapisz hasło')
                     + '</section></div>';
             },
+            googleTerms({ email }) {
+                return `<div class="acct acct--narrow"><section class="acct-card"><h2>Załóż konto przez Google</h2>`
+                    + `<p>Nie masz jeszcze konta dla adresu <strong>${esc(email)}</strong>. Zaakceptuj regulamin, a założymy je od razu, bez hasła.</p>`
+                    + account.form('googleTerms', '<label class="co-check"><input type="checkbox" name="acct.terms" data-field="terms"><span>Akceptuję <a href="/regulamin-zamowien.html" target="_blank" rel="noopener">regulamin</a> (punkt 11: konto klienta) i <a href="/polityka-prywatnosci.html#zamowienia" target="_blank" rel="noopener">politykę prywatności</a>.</span></label><span class="co-error" data-error-for="terms"></span>', 'Załóż konto')
+                    + '<p class="acct-more"><button type="button" class="acct-link" data-acct-view="signin">Wróć do logowania</button></p></section></div>';
+            },
             gone({ message }) {
                 return `<div class="acct acct--narrow"><section class="acct-card" role="alert"><h2>Link nie działa</h2><p>${esc(message)}</p>`
                     + '<p class="acct-more"><button type="button" class="acct-link" data-acct-view="forgot">Wyślij nowy link</button> · <button type="button" class="acct-link" data-acct-view="signin">Zaloguj się</button></p></section></div>';
@@ -660,16 +670,20 @@
                     : '<p>Nie masz jeszcze zamówień. <a href="/zamow.html">Zobacz ofertę</a>.</p>';
                 const field = (name, label, value, opts = {}) => checkout.field(`acct.profile.${name}`, label, { ...opts, errorKey: `profile.${name}` }).replace('<input ', `<input value="${esc(value || '')}" `);
                 return `<div class="acct-panel">${note ? `<p class="acct-note" role="status">${esc(note)}</p>` : ''}`
-                    + `<div class="acct-head"><div><span class="kicker">Zalogowano</span><strong>${esc(me.user.email)}</strong></div><button type="button" class="btn btn--ghost-dark" data-acct-logout>Wyloguj</button></div>`
+                    + `<div class="acct-head"><div><span class="kicker">Zalogowano</span><strong>${esc(me.user.email)}</strong>${me.user.google ? '<small class="acct-head__via">konto połączone z Google</small>' : ''}</div><button type="button" class="btn btn--ghost-dark" data-acct-logout>Wyloguj</button></div>`
                     + `<section class="acct-card"><h2>Twoje zamówienia</h2>${orders}<p class="co-hint">Nowe zamówienie pojawia się tu w ciągu minuty od złożenia.</p></section>`
                     + `<section class="acct-card"><h2>Dane do zamówień</h2><p class="co-hint">Uzupełnią formularz przy kolejnym zamówieniu.</p>`
                     + account.form('profile', `<div class="co-grid">${field('name', 'Imię i nazwisko', p.name, { autocomplete: 'name' })}${field('phone', 'Telefon', p.phone, { type: 'tel', autocomplete: 'tel' })}</div>`
                         + `<div class="co-grid co-grid--3">${field('address.street', 'Ulica i numer', a.street, { autocomplete: 'street-address' })}${field('address.postal', 'Kod pocztowy', a.postal, { attrs: 'inputmode="numeric" placeholder="00-000" maxlength="6"' })}${field('address.city', 'Miejscowość', a.city)}</div>`
                         + `<div class="co-grid">${field('company', 'Firma', p.company, { optional: true, autocomplete: 'organization' })}${field('nip', 'NIP', p.nip, { optional: true, attrs: 'inputmode="numeric"' })}</div>`, 'Zapisz dane')
                     + '</section>'
-                    + `<section class="acct-card"><h2>Hasło</h2>${account.form('password', `<div class="co-grid">${account.password('current', 'Obecne hasło', 'current-password')}${account.password('next', 'Nowe hasło (co najmniej 8 znaków)', 'new-password')}</div>`, 'Zmień hasło', { tone: 'ghost-dark' })}</section>`
+                    // An account opened with Google has no password until one is set through the link.
+                    + (me.user.hasPassword
+                        ? `<section class="acct-card"><h2>Hasło</h2>${account.form('password', `<div class="co-grid">${account.password('current', 'Obecne hasło', 'current-password')}${account.password('next', 'Nowe hasło (co najmniej 8 znaków)', 'new-password')}</div>`, 'Zmień hasło', { tone: 'ghost-dark' })}</section>`
+                        : `<section class="acct-card"><h2>Hasło</h2><p>Logujesz się kontem Google. Jeśli chcesz logować się też hasłem, wyślemy link do jego ustawienia na ${esc(me.user.email)}.</p>${account.form('addPassword', '', 'Wyślij link', { tone: 'ghost-dark' })}</section>`)
                     + `<details class="acct-card acct-danger"><summary>Usuń konto</summary><p>Usuniemy konto i zapisane dane. Zamówienia i ich dokumenty zostają u nas tak długo, jak wymagają tego przepisy.</p>`
-                    + `${account.form('delete', account.password('confirm', 'Hasło, aby potwierdzić', 'current-password'), 'Usuń konto', { tone: 'ghost-dark' })}</details></div>`;
+                    + `${account.form('delete', me.user.hasPassword ? account.password('confirm', 'Hasło, aby potwierdzić', 'current-password')
+                        : checkout.field('acct.confirmWord', 'Wpisz USUŃ, aby potwierdzić', { errorKey: 'confirmWord', autocomplete: 'off' }), 'Usuń konto', { tone: 'ghost-dark' })}</details></div>`;
             },
         },
 
@@ -690,6 +704,66 @@
             this.root.innerHTML = this.views[view](args);
             const first = this.root.querySelector('input:not([type="hidden"]):not(.acct-trap)');
             if (first && view !== 'panel') first.focus({ preventScroll: true });
+            if (view === 'signin') this.mountGoogle();
+        },
+
+        /* ---- Zaloguj przez Google (Google Identity Services, only on the account page) */
+
+        googleClientId: null,
+        googleScript: null,
+        googleReady: false,
+        pendingCredential: '',
+
+        googleSetup(clientId) {
+            this.googleClientId = clientId || null;
+            this.mountGoogle();
+        },
+        loadGoogle() {
+            if (!this.googleScript) {
+                this.googleScript = new Promise((resolve, reject) => {
+                    if (window.google && window.google.accounts && window.google.accounts.id) { resolve(); return; }
+                    const script = document.createElement('script');
+                    script.src = 'https://accounts.google.com/gsi/client';
+                    script.async = true;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            }
+            return this.googleScript;
+        },
+        async mountGoogle() {
+            if (!this.googleClientId || !document.getElementById('acct-google')) return;
+            try { await this.loadGoogle(); } catch (e) { return; }
+            const target = document.getElementById('acct-google-btn');
+            if (!target || !window.google || !window.google.accounts) return;
+            if (!this.googleReady) {
+                window.google.accounts.id.initialize({
+                    client_id: this.googleClientId,
+                    callback: response => this.googleCredential(response.credential),
+                    ux_mode: 'popup',
+                    auto_select: false,
+                    context: 'signin',
+                });
+                this.googleReady = true;
+            }
+            window.google.accounts.id.renderButton(target, { type: 'standard', theme: 'outline', size: 'large', text: 'continue_with', shape: 'pill', logo_alignment: 'left', locale: 'pl', width: 320 });
+            document.getElementById('acct-google').hidden = false;
+        },
+        async googleCredential(credential, terms = false) {
+            this.pendingCredential = credential;
+            const { ok, status, data } = await this.call('google', { method: 'POST', body: { credential, terms } }).catch(() => ({ ok: false, status: 0, data: {} }));
+            if (status === 409 && data.needsTerms) { this.show('googleTerms', { email: data.email }); return; }
+            if (!ok) {
+                const message = (data.errors && data.errors.form) || `Logowanie przez Google się nie udało. Spróbuj ponownie albo napisz: ${CONTACT}.`;
+                const box = document.getElementById('acct-google-error');
+                if (box) { box.textContent = message; box.hidden = false; } else { this.show('signin'); }
+                return;
+            }
+            this.pendingCredential = '';
+            this.signIn(data);
+            if (new URLSearchParams(location.search).get('wroc') === 'zamowienie') { location.href = CHECKOUT_URL; return; }
+            await this.showPanel(terms ? 'Konto założone przez Google. Witamy w Browarze Pogórza.' : '');
         },
 
         async showPanel(note) {
@@ -750,9 +824,18 @@
                     if (!ok) { fail(status, { errors: data.errors && { current: data.errors.current, next: data.errors.password } }); return; }
                     this.signIn(data);
                     await this.showPanel('Hasło zmienione. Na innych urządzeniach trzeba zalogować się ponownie.');
+                } else if (kind === 'googleTerms') {
+                    if (!(form.elements['acct.terms'] || {}).checked) { this.errors(form, { terms: 'Zaakceptuj regulamin, aby założyć konto.' }); return; }
+                    await this.googleCredential(this.pendingCredential, true);
+                } else if (kind === 'addPassword') {
+                    const me = await this.me();
+                    const { ok, status, data } = await this.call('reset-request', { method: 'POST', body: { email: me ? me.user.email : '' } });
+                    if (!ok) { fail(status, data); return; }
+                    form.innerHTML = '<p class="acct-note" role="status">Wysłaliśmy link. Otwórz go, aby ustawić hasło.</p>';
                 } else if (kind === 'delete') {
-                    const { ok, status, data } = await this.call('delete', { method: 'POST', body: { password: v('confirm') } });
-                    if (!ok) { fail(status, { errors: data.errors && { confirm: data.errors.password } }); return; }
+                    const word = form.elements['acct.confirmWord'];
+                    const { ok, status, data } = await this.call('delete', { method: 'POST', body: word ? { confirm: word.value } : { password: v('confirm') } });
+                    if (!ok) { fail(status, { errors: data.errors && (word ? { confirmWord: data.errors.confirm } : { confirm: data.errors.password }) }); return; }
                     this.signOut();
                     this.show('signin');
                     this.root.insertAdjacentHTML('afterbegin', '<p class="acct-note" role="status">Konto usunięte.</p>');
@@ -818,6 +901,7 @@
             return;
         }
         if (checkoutRoot) checkout.init(checkoutRoot);
+        if (accountRoot) account.googleSetup(catalog.settings.googleClientId);
         render.all();
         document.addEventListener('change', (event) => {
             const q = event.target.closest('input[data-qty]');
