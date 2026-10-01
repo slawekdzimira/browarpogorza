@@ -154,7 +154,7 @@ body.has-shop-bar .back-to-top { bottom: 168px; }
 .acct-card h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.65rem; line-height: 1.2; color: var(--green-forest); margin: 0 0 12px; }
 .acct-card form { display: grid; gap: 12px; }
 .acct-card p { margin: 0 0 10px; }
-.acct-benefits { margin: 0 0 14px; padding-left: 20px; line-height: 1.6; }
+.acct-benefits { margin: 0 0 14px; padding-left: 20px; line-height: 1.6; list-style: disc; }
 .acct-more { margin: 14px 0 0 !important; }
 .acct-link { background: none; border: 0; padding: 0; font: inherit; color: var(--green-leaf); font-weight: 600; text-decoration: underline; cursor: pointer; }
 .acct-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
