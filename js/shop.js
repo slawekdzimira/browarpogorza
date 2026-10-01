@@ -15,6 +15,7 @@
 
     const CART_KEY = 'bp_cart_v1';
     const FORM_KEY = 'bp_checkout_v1';
+    const CALC_KEY = 'bp_calc_v1';
     const CHECKOUT_URL = '/zamowienie.html';
     const CONTACT = 'slawek@browarpogorza.pl, tel. +48 734 180 172';
     // Event hours as a 24-hour list: a native time input shows AM/PM in an English browser.
@@ -121,8 +122,16 @@
             const notes = [];
             if (!s.events.available && this.filter !== 'na') notes.push(`<strong>Piwo z alkoholem na imprezy zamknięte</strong> zamówisz tu wkrótce. Do tego czasu przygotujemy ofertę mailowo: ${esc(CONTACT)}.`);
             if (!s.na.available && this.filter !== 'event') notes.push(`<strong>Wysyłka piw bezalkoholowych</strong> ruszy wkrótce. Napisz, jeśli chcesz zamówić już teraz: ${esc(CONTACT)}.`);
-            grid.innerHTML = list.map(card).join('') + notes.map(note).join('')
-                || note(`Nic tu jeszcze nie ma. Napisz do nas: ${esc(CONTACT)}.`);
+            const calc = storage.get(CALC_KEY, null, true);
+            const fromCalc = calc && calc.bottles ? `<div class="shop-note shop-note--calc">Z kalkulatora: <strong>${calc.bottles} butelek 0,5 l</strong> piwa na ${calc.guests} gości`
+                + `${calc.naBottles ? ` i ${calc.naBottles} butelek piwa bezalkoholowego` : ''}. <a href="/ile-piwa-na-wesele.html">Przelicz jeszcze raz</a></div>` : '';
+            grid.innerHTML = fromCalc + (list.map(card).join('') + notes.map(note).join('')
+                || note(`Nic tu jeszcze nie ma. Napisz do nas: ${esc(CONTACT)}.`));
+            // GA4 shop funnel (visitors who consented): the offer seen once per page view.
+            if (list.length && !this.listTracked) {
+                this.listTracked = true;
+                track('view_item_list', { item_list_name: 'oferta', items: list.map(p => ({ item_id: p.id, item_name: p.name, price: p.priceGr / 100 })) });
+            }
         },
         buyBoxes() {
             document.querySelectorAll('[data-shop-product]').forEach((box) => {
@@ -136,6 +145,10 @@
                     return;
                 }
                 if (enquiry) enquiry.hidden = true;
+                if (!box.dataset.tracked) {
+                    box.dataset.tracked = '1';
+                    track('view_item', { currency: 'PLN', value: p.priceGr / 100, items: [{ item_id: p.id, item_name: p.name, price: p.priceGr / 100 }] });
+                }
                 const inCart = cart.qty(p.id);
                 const s = catalog.settings;
                 const lead = p.alcoholic
@@ -518,6 +531,37 @@
         },
     };
 
+    /* ------------------------------------------------------- calculator */
+
+    // ile-piwa-na-wesele.html: the generator's numbers (data-calc) recomputed as the visitor
+    // types; the result waits in this tab's storage for the offer page. An estimate only.
+    const crateWord = n => (n === 1 ? 'skrzynka' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'skrzynki' : 'skrzynek'));
+    const calculator = {
+        init(form) {
+            const cfg = JSON.parse(form.dataset.calc);
+            const field = id => form.querySelector(`#${id}`);
+            const int = (id, max) => Math.max(0, Math.min(max, parseInt(field(id).value, 10) || 0));
+            let used = false;
+            const run = (event) => {
+                const guests = int('calc-guests', 2000);
+                const nonDrinkers = Math.min(guests, int('calc-nondrinkers', 2000));
+                const hours = Number(field('calc-hours').value);
+                const litres = (guests - nonDrinkers) * hours * cfg.rates[field('calc-rate').value] * (field('calc-other').checked ? cfg.otherAlcohol : 1);
+                const bottles = Math.ceil(litres / cfg.bottleL);
+                const crates = Math.ceil(bottles / cfg.crate);
+                const naBottles = Math.ceil((nonDrinkers * hours * cfg.naRate) / cfg.bottleL);
+                field('calc-result').innerHTML = `<p class="calc-result__main"><strong>${bottles} butelek 0,5 l</strong> piwa (${Math.round(litres)} l, ${crates} ${crateWord(crates)})</p>`
+                    + (naBottles ? `<p>i <strong>${naBottles} butelek</strong> piwa bezalkoholowego dla kierowców</p>` : '');
+                storage.set(CALC_KEY, { guests, bottles, naBottles }, true);
+                if (event && !used) { used = true; track('calculator_use', { guests }); }
+            };
+            form.addEventListener('input', run);
+            form.addEventListener('change', run);
+            form.addEventListener('submit', (event) => { event.preventDefault(); run(event); });
+            run();
+        },
+    };
+
     /* ---------------------------------------------------------- account */
 
     // The customer account (konto.html) and what the checkout borrows from it. Signing up
@@ -762,6 +806,7 @@
             }
             this.pendingCredential = '';
             this.signIn(data);
+            track(terms ? 'sign_up' : 'login', { method: 'google' });
             if (new URLSearchParams(location.search).get('wroc') === 'zamowienie') { location.href = CHECKOUT_URL; return; }
             await this.showPanel(terms ? 'Konto założone przez Google. Witamy w Browarze Pogórza.' : '');
         },
@@ -798,6 +843,7 @@
                     const { ok, status, data } = await this.call('login', { method: 'POST', body: { email: v('email'), password: v('password') } });
                     if (!ok) { fail(status, data); return; }
                     this.signIn(data);
+                    track('login', { method: 'email' });
                     if (new URLSearchParams(location.search).get('wroc') === 'zamowienie') { location.href = CHECKOUT_URL; return; }
                     await this.showPanel();
                 } else if (kind === 'register' || kind === 'forgot') {
@@ -811,6 +857,7 @@
                     if (status === 410) { this.show('gone', { message: data.message || 'Ten link wygasł albo został już użyty.' }); return; }
                     if (!ok) { fail(status, data); return; }
                     this.signIn(data);
+                    if (terms) track('sign_up', { method: 'email' });
                     await this.showPanel(terms ? 'Konto założone. Witamy w Browarze Pogórza.' : 'Hasło zmienione.');
                 } else if (kind === 'profile') {
                     const profile = { name: v('profile.name'), phone: v('profile.phone'), company: v('profile.company'), nip: v('profile.nip'), address: { street: v('profile.address.street'), postal: v('profile.address.postal'), city: v('profile.address.city') } };
@@ -886,6 +933,8 @@
         const checkoutRoot = document.getElementById('shop-checkout');
         const accountRoot = document.getElementById('shop-account');
         if (accountRoot) account.init(accountRoot);
+        const calcForm = document.getElementById('beer-calc');
+        if (calcForm) calculator.init(calcForm);
         const hash = location.hash.replace('#', '');
         if (hash === 'bezalkoholowe' || hash === 'impreza') {
             render.filter = hash === 'impreza' ? 'event' : 'na';

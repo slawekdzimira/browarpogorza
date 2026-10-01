@@ -146,6 +146,22 @@ body.has-shop-bar .back-to-top { bottom: 168px; }
 .co-pay dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 0; }
 .co-pay dt { color: #5C3E00; font-size: 0.86rem; }
 .co-pay dd { margin: 0; font-weight: 600; word-break: break-word; }
+/* Beer calculator (ile-piwa-na-wesele.html) */
+.calc { background: var(--paper); border: 1px solid rgba(15, 58, 34, 0.12); border-radius: var(--radius-lg); padding: 22px; margin: 18px 0 28px; display: grid; gap: 14px; max-width: 880px; }
+.calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 12px 16px; }
+.calc-field { display: grid; gap: 6px; }
+.calc-field label { font-size: .82rem; font-weight: 600; }
+.calc-field input, .calc-field select { width: 100%; padding: 11px 12px; border: 1px solid rgba(15, 58, 34, 0.28); border-radius: 10px; font: 400 0.95rem var(--font-sans); color: var(--ink); background: #fff; }
+.calc-result { background: var(--sun-pale); border-radius: 14px; padding: 14px 18px; }
+.calc-result p { margin: 0; }
+.calc-result__main { font-size: 1.25rem; }
+.calc-table-wrap { margin: 10px 0 28px; }
+.calc-table-scroll { overflow-x: auto; }
+.calc-table { border-collapse: collapse; width: 100%; max-width: 720px; font-variant-numeric: tabular-nums; }
+.calc-table th, .calc-table td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(15, 58, 34, 0.12); white-space: nowrap; }
+.calc-table th { font-size: .82rem; color: var(--text-muted); }
+.shop-note--calc { grid-column: 1 / -1; }
+
 /* Customer account (konto.html) */
 .acct { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 18px; align-items: start; }
 .acct--narrow { max-width: 560px; grid-template-columns: 1fr; }
