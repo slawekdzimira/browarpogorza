@@ -554,7 +554,7 @@
                 const crates = Math.ceil(bottles / cfg.crate);
                 const naBottles = Math.ceil((nonDrinkers * hours * cfg.naRate) / cfg.bottleL);
                 field('calc-result').innerHTML = `<p class="calc-result__main"><strong>${bottles} ${bottleWord(bottles)} 0,5 l</strong> piwa (${Math.round(litres)} l, ${crates} ${crateWord(crates)})</p>`
-                    + (naBottles ? `<p>i <strong>${naBottles} ${bottleWord(naBottles)}</strong> piwa bezalkoholowego dla kierowców</p>` : '');
+                    + (naBottles ? `<p>i <strong>${naBottles} ${bottleWord(naBottles)}</strong> piwa bezalkoholowego dla gości, którzy nie piją alkoholu</p>` : '');
                 storage.set(CALC_KEY, { guests, bottles, naBottles }, true);
                 if (event && !used) { used = true; track('calculator_use', { guests }); }
             };
