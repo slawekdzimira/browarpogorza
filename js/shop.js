@@ -989,7 +989,8 @@
             this.root.innerHTML = `<div class="co-done pay-state" role="${tone}"><h2 style="${PAY_TITLE}">${title}</h2>${body}</div>`;
         },
         links(d) {
-            return `<p class="co-done__actions">${d && d.documentUrl ? `<a class="btn btn--primary" href="${esc(d.documentUrl)}" target="_blank" rel="noopener">Otwórz potwierdzenie</a> ` : ''}<a class="btn btn--ghost-dark" href="/konto.html">Moje konto</a></p>`;
+            const label = d && d.kind === 'event' ? 'Otwórz umowę' : 'Otwórz potwierdzenie';
+            return `<p class="co-done__actions">${d && d.documentUrl ? `<a class="btn btn--primary" href="${esc(d.documentUrl)}" target="_blank" rel="noopener">${label}</a> ` : ''}<a class="btn btn--ghost-dark" href="/konto.html">Moje konto</a></p>`;
         },
         transferToggle(d, open) {
             if (!d.transfer) return '';
