@@ -43,11 +43,14 @@
         gtag('config', 'G-BE132JG40J');
     </script>
 
-    <!-- Title and description answer the two regional queries this page already
-         ranks for but never named: "browar w dolinie sanu" (pos 1.7, 2.6% CTR) and
-         "browar nad sanem" (pos 4.7, 0 clicks), plus the "piwo podkarpackie"
-         cluster. Both strings are dictionary KEYS in i18n/translations.index.json -
-         changing them here means renaming the key there too. -->
+    <!-- The title names the brewery, not the "piwo podkarpackie" cluster. From 28.08 both
+         this page and the blog guide carried that phrase in the title; within a week the
+         guide fell from 288 impressions a week to zero (none since 07.09) while this page
+         kept the queries at position 9-11 with no click (GSC, 90 days to 29.09: "piwo
+         podkarpackie" 538 impressions, "podkarpackie piwo" 290, 0 clicks). The guide owns the
+         informational cluster now; test-seo-targeting.js keeps the phrase out of this title.
+         Both strings are dictionary KEYS in i18n/translations.index.json - changing them here
+         means renaming the key there too. -->
     <title>Craft-Brauerei im San-Tal, Podkarpackie | Browar Pogórza</title>
     <meta name="description" content="Craft-Brauerei am San in Südostpolen: Pils, Weizenbier, Baltic Porter, alkoholfreie Biere. Entdecken Sie unsere Biere oder bestellen Sie Bier mit Logo.">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -112,6 +115,8 @@
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Przedmieście Dubieckie 15A",
+            "postalCode": "37-750",
+            "addressLocality": "Dubiecko",
             "addressRegion": "Podkarpackie",
             "addressCountry": "PL"
           },
@@ -471,12 +476,12 @@
 </section>
 
 <!-- ====== CZYTELNIA (Polish search demand only) ======
-     The "piwo podkarpackie" cluster (~1180 impressions, 1 click, positions 6-11)
-     is answered by the blog guide, which until now had a single inbound link - the
-     blog index. This block gives it, and the two Polish landing pages, a home-page
-     link in the language people actually search in. data-pl-only: generate_i18n.js
-     drops the whole section from the localized builds, because the pages it points
-     at are Polish. -->
+     The "piwo podkarpackie" cluster (~1090 impressions in 90 days, 0 clicks, positions
+     9-11) belongs to the blog guide. This block links it from the home page with the
+     query in the anchor; the heading stays neutral so the home page does not compete
+     with the guide for the phrase (from 28.08 it did, and the guide dropped out).
+     data-pl-only: generate_i18n.js drops the whole section from the localized builds,
+     because the pages it points at are Polish. -->
 
 <!-- ====== GALERIA ====== -->
 <section class="section section--cream" id="galeria">

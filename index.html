@@ -43,12 +43,15 @@
         gtag('config', 'G-BE132JG40J');
     </script>
 
-    <!-- Title and description answer the two regional queries this page already
-         ranks for but never named: "browar w dolinie sanu" (pos 1.7, 2.6% CTR) and
-         "browar nad sanem" (pos 4.7, 0 clicks), plus the "piwo podkarpackie"
-         cluster. Both strings are dictionary KEYS in i18n/translations.index.json -
-         changing them here means renaming the key there too. -->
-    <title>Browar w Dolinie Sanu - piwo podkarpackie | Browar Pogórza</title>
+    <!-- The title names the brewery, not the "piwo podkarpackie" cluster. From 28.08 both
+         this page and the blog guide carried that phrase in the title; within a week the
+         guide fell from 288 impressions a week to zero (none since 07.09) while this page
+         kept the queries at position 9-11 with no click (GSC, 90 days to 29.09: "piwo
+         podkarpackie" 538 impressions, "podkarpackie piwo" 290, 0 clicks). The guide owns the
+         informational cluster now; test-seo-targeting.js keeps the phrase out of this title.
+         Both strings are dictionary KEYS in i18n/translations.index.json - changing them here
+         means renaming the key there too. -->
+    <title>Browar Pogórza - browar rzemieślniczy nad Sanem, Podkarpacie</title>
     <meta name="description" content="Rzemieślniczy browar nad Sanem, na Podkarpaciu: pils, pszeniczne, porter bałtycki, piwa bezalkoholowe. Sprawdź nasze piwa albo zamów piwo z logo firmy.">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
@@ -112,6 +115,8 @@
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Przedmieście Dubieckie 15A",
+            "postalCode": "37-750",
+            "addressLocality": "Dubiecko",
             "addressRegion": "Podkarpackie",
             "addressCountry": "PL"
           },
@@ -493,19 +498,19 @@
 </section>
 
 <!-- ====== CZYTELNIA (Polish search demand only) ======
-     The "piwo podkarpackie" cluster (~1180 impressions, 1 click, positions 6-11)
-     is answered by the blog guide, which until now had a single inbound link - the
-     blog index. This block gives it, and the two Polish landing pages, a home-page
-     link in the language people actually search in. data-pl-only: generate_i18n.js
-     drops the whole section from the localized builds, because the pages it points
-     at are Polish. -->
+     The "piwo podkarpackie" cluster (~1090 impressions in 90 days, 0 clicks, positions
+     9-11) belongs to the blog guide. This block links it from the home page with the
+     query in the anchor; the heading stays neutral so the home page does not compete
+     with the guide for the phrase (from 28.08 it did, and the guide dropped out).
+     data-pl-only: generate_i18n.js drops the whole section from the localized builds,
+     because the pages it points at are Polish. -->
 <section class="section section--paper" data-pl-only id="czytelnia">
     <div class="container">
         <div class="kicker">Czytelnia</div>
-        <h2 class="h2">Piwo podkarpackie - co warto wiedzieć</h2>
+        <h2 class="h2">Przewodniki i artykuły o piwie</h2>
         <p class="lead">Warzymy nad Sanem, na Pogórzu Dynowsko-Przemyskim, i całą produkcję prowadzimy na Podkarpaciu. Jeśli szukasz piwa z Podkarpacia, zacznij od tych stron.</p>
         <div class="prose">
-            <p><a href="/blog/piwo-rzemieslnicze-podkarpacie-przewodnik.html">Piwo podkarpackie - przewodnik po browarach Podkarpacia</a>: które browary w województwie podkarpackim warto znać, jakie style z regionu wybrać i gdzie ich spróbować.</p>
+            <p><a href="/blog/piwo-rzemieslnicze-podkarpacie-przewodnik.html">Piwo podkarpackie: browary na Podkarpaciu</a> - przewodnik po browarach rzemieślniczych regionu, od Bieszczadów po Łańcut, z tradycją Leżajska i miejscami, gdzie spróbować piwa z Podkarpacia.</p>
             <p>O stylach, które warzymy: <a href="/blog/co-to-jest-porter-baltycki.html">czym jest porter bałtycki</a> - jak <a href="/piwa/dark-sky.html">Dark Sky</a>, oraz <a href="/blog/jak-smakuje-foreign-extra-stout.html">jak smakuje foreign extra stout</a> - jak <a href="/piwa/coffee-fes.html">Coffee Fes</a>.</p>
             <p>Na konkretne okazje: <a href="/piwa-bezalkoholowe.html">piwa bezalkoholowe</a> dla gości, którzy nie piją alkoholu, oraz <a href="/piwo-na-wesele.html">piwo na wesele i event</a> z etykietą pod okazję.</p>
             <p>Dla firm: <a href="/blog/piwo-z-wlasna-etykieta-jak-zamowic.html">piwo z własną etykietą - od ilu sztuk i ile kosztuje</a>. Wszystkie artykuły znajdziesz na <a href="/blog/">blogu Browaru Pogórza</a>.</p>
