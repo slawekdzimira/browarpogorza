@@ -46,8 +46,7 @@
 .shop-card.is-in-cart { border-color: var(--green-leaf); box-shadow: 0 0 0 2px rgba(45, 122, 61, 0.18); }
 /* The bottom group of every card (pack + price + buy row, or "Zobacz piwo" + enquiry) sits on the
    card's floor, so the buttons of one row line up whatever the text above them. */
-.shop-card__more { margin-top: auto; }
-.shop-card__more { font-weight: 600; font-size: 0.92rem; color: var(--green-leaf); text-decoration: underline; text-underline-offset: 3px; }
+.shop-card__more { margin-top: auto; font-weight: 600; font-size: 0.92rem; color: var(--green-leaf); text-decoration: underline; text-underline-offset: 3px; }
 
 .shop-qty { display: inline-flex; align-items: center; border: 1px solid rgba(15, 58, 34, 0.25); border-radius: 999px; background: #fff; }
 .shop-qty button { width: 34px; height: 38px; border: 0; background: none; font-size: 1.15rem; color: var(--green-forest); cursor: pointer; }
