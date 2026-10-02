@@ -190,8 +190,12 @@
                 const lead = p.alcoholic
                     ? 'Na imprezę zamkniętą: wesele, urodziny, imprezę firmową. Dostarczamy na miejsce imprezy na podstawie umowy, którą zawierasz przy zamówieniu.'
                     : `Wysyłka kurierem. Najmniejsze zamówienie: ${s.na.minItems} szt. (możesz łączyć różne piwa bezalkoholowe).`;
+                // The smallest shipped order at its price: Google Shopping lists that set, and its
+                // rules want the same total shown on the page it links to (the beer page).
+                const set = !p.alcoholic && s.na.minItems > 1 ? s.na.minItems : 0;
                 box.innerHTML = `<h2>${p.alcoholic ? 'Zamów na imprezę' : 'Zamów z wysyłką'}</h2><p>${esc(lead)}</p>`
                     + `<div class="shop-buy__price">${zl(p.priceGr)}<small>${packLine(p)}</small></div>`
+                    + (set ? `<p class="shop-buy__set">${set} ${bottleWord(set)}: <strong>${zl(set * p.priceGr)}</strong>${p.depositGr ? ` + kaucja ${zl(set * p.depositGr)}` : ''}</p>` : '')
                     + `<div class="shop-buy__row">${qtyControl(p.id, 1, p.name)}<button type="button" class="btn btn--sun" data-add="${esc(p.id)}">Dodaj do zamówienia</button></div>`
                     + (inCart ? `<p class="shop-buy__in">W zamówieniu: ${inCart} szt. <a href="${CHECKOUT_URL}">Przejdź do zamówienia</a></p>` : '')
                     + '<p class="shop-buy__ask">Masz pytanie o to piwo? <a href="/#kontakt">Napisz do nas</a>.</p>';
