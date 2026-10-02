@@ -98,7 +98,6 @@
 
     <!-- LCP preload: beer photo -->
     <link rel="preload" as="image" href="/images/beer-herb-apa.webp" type="image/webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/beer-herb-apa.png" fetchpriority="high">
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -277,7 +276,7 @@
 <section class="plabel-cta" aria-label="Cerveza con el logo de tu empresa">
     <div class="container">
         <a class="picker-cta" href="/es/cerveza-marca-propia.html" onclick="gtag('event','generate_lead',{source:'product_page_private_label'})">
-            <span class="picker-cta__icon"><picture><source srcset="/images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="" loading="lazy"></picture></span>
+            <span class="picker-cta__icon"><picture><source srcset="/images/puszki-ikona.webp" type="image/webp"><img src="/images/puszki-ikona.jpg" alt="" loading="lazy" width="216" height="216"></picture></span>
             <span class="picker-cta__text">
                 <span class="picker-cta__title">¿Quieres esta cerveza con tu propia etiqueta?</span>
                 <span class="picker-cta__sub">Elaboramos cerveza con etiqueta propia para empresas: desde 200 unidades, para eventos y para venta. Envío a toda la UE.</span>
@@ -402,6 +401,6 @@
         window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
     }
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c12505e5fedb462faf82642c7f1a3c8b"}'></script>
+<script async src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c12505e5fedb462faf82642c7f1a3c8b"}'></script>
 </body>
 </html>

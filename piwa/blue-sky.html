@@ -98,7 +98,6 @@
 
     <!-- LCP preload: beer photo -->
     <link rel="preload" as="image" href="/images/puszka-blue-sky.webp" type="image/webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/puszka-blue-sky.png" fetchpriority="high">
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -292,7 +291,7 @@
 <section class="plabel-cta order-cta" aria-label="Piwo na imprezę">
     <div class="container">
         <a class="picker-cta calc-cta" href="/ile-piwa-na-wesele.html">
-            <span class="picker-cta__icon"><picture><source srcset="/images/zestaw.webp" type="image/webp"><img src="/images/zestaw.jpg" alt="" loading="lazy" width="440" height="440"></picture></span>
+            <span class="picker-cta__icon"><picture><source srcset="/images/zestaw-ikona.webp" type="image/webp"><img src="/images/zestaw-ikona.jpg" alt="" loading="lazy" width="216" height="216"></picture></span>
             <span class="picker-cta__text">
                 <span class="picker-cta__title">Ile piwa na wesele albo imprezę?</span>
                 <span class="picker-cta__sub">Podaj liczbę gości i czas przyjęcia, a kalkulator policzy litry, butelki 0,5 l i skrzynki, razem z piwem bez alkoholu dla gości, którzy nie piją.</span>
@@ -306,7 +305,7 @@
 <section class="plabel-cta" aria-label="Piwo z logo firmy">
     <div class="container">
         <a class="picker-cta" href="/piwo-z-logo-firmy.html" onclick="gtag('event','generate_lead',{source:'product_page_private_label'})">
-            <span class="picker-cta__icon"><picture><source srcset="/images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="" loading="lazy"></picture></span>
+            <span class="picker-cta__icon"><picture><source srcset="/images/puszki-ikona.webp" type="image/webp"><img src="/images/puszki-ikona.jpg" alt="" loading="lazy" width="216" height="216"></picture></span>
             <span class="picker-cta__text">
                 <span class="picker-cta__title">Chcesz to piwo z własną etykietą?</span>
                 <span class="picker-cta__sub">Warzymy piwo z własną etykietą dla firm - od 200 sztuk, na eventy i do sprzedaży. Wysyłka w całej UE.</span>
@@ -432,6 +431,6 @@
         window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
     }
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c12505e5fedb462faf82642c7f1a3c8b"}'></script>
+<script async src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c12505e5fedb462faf82642c7f1a3c8b"}'></script>
 </body>
 </html>

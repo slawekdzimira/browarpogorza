@@ -91,8 +91,8 @@
           imagesrcset="/images/hero-pogorze-rzepak-640.webp 640w, /images/hero-pogorze-rzepak-1024.webp 1024w, /images/hero-pogorze-rzepak-1440.webp 1440w, /images/hero-pogorze-rzepak.webp 2000w" imagesizes="100vw">
 
     <!-- Fonts (self-hosted) -->
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-latin-ext.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-500-latin-ext.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-400-latin.woff2" crossorigin>
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- JSON-LD: Brewery + LocalBusiness + WebSite -->
@@ -296,7 +296,7 @@
     <div class="container split split--reverse">
         <div class="split__visual">
             <figure class="biznes-photo">
-                <picture><source srcset="/images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="Limitierte Serie von Browar Pogórza mit dem Etikett eines Geschäftskunden"></picture>
+                <picture><source srcset="/images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="/images/puszki-rzjs.jpg" alt="Limitierte Serie von Browar Pogórza mit dem Etikett eines Geschäftskunden" loading="lazy"></picture>
                 <figcaption>
                     <span class="biznes-photo__tag">Limitierte Serie</span>
                     <span class="biznes-photo__caption">Eigene Editionen für unsere Partner</span>
@@ -697,6 +697,6 @@
         window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
     }
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c12505e5fedb462faf82642c7f1a3c8b"}'></script>
+<script async src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c12505e5fedb462faf82642c7f1a3c8b"}'></script>
 </body>
 </html>

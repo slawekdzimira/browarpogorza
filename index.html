@@ -91,8 +91,8 @@
           imagesrcset="/images/hero-pogorze-rzepak-640.webp 640w, /images/hero-pogorze-rzepak-1024.webp 1024w, /images/hero-pogorze-rzepak-1440.webp 1440w, /images/hero-pogorze-rzepak.webp 2000w" imagesizes="100vw">
 
     <!-- Fonts (self-hosted) -->
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-latin-ext.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-500-latin-ext.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-400-latin.woff2" crossorigin>
     <link rel="stylesheet" href="css/style.css">
 
     <!-- JSON-LD: Brewery + LocalBusiness + WebSite -->
@@ -304,7 +304,7 @@
     <div class="container split split--reverse">
         <div class="split__visual">
             <figure class="biznes-photo">
-                <picture><source srcset="images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="images/puszki-rzjs.jpg" alt="Limitowana seria piwa Browaru Pogórza z etykietą klienta biznesowego"></picture>
+                <picture><source srcset="images/puszki-rzjs.webp" type="image/webp"><img width="1400" height="714" src="images/puszki-rzjs.jpg" alt="Limitowana seria piwa Browaru Pogórza z etykietą klienta biznesowego" loading="lazy"></picture>
                 <figcaption>
                     <span class="biznes-photo__tag">Limitowana seria</span>
                     <span class="biznes-photo__caption">Dedykowane wydania dla naszych partnerów</span>
@@ -390,7 +390,7 @@
         </a>
 
         <a class="picker-cta calc-cta" href="/ile-piwa-na-wesele.html">
-            <span class="picker-cta__icon"><picture><source srcset="/images/zestaw.webp" type="image/webp"><img src="/images/zestaw.jpg" alt="" loading="lazy" width="440" height="440"></picture></span>
+            <span class="picker-cta__icon"><picture><source srcset="/images/zestaw-ikona.webp" type="image/webp"><img src="/images/zestaw-ikona.jpg" alt="" loading="lazy" width="216" height="216"></picture></span>
             <span class="picker-cta__text">
                 <span class="picker-cta__title">Ile piwa na wesele albo imprezę?</span>
                 <span class="picker-cta__sub">Podaj liczbę gości i czas przyjęcia, a kalkulator policzy litry, butelki 0,5 l i skrzynki, razem z piwem bez alkoholu dla gości, którzy nie piją.</span>
@@ -732,6 +732,6 @@
         window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
     }
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c12505e5fedb462faf82642c7f1a3c8b"}'></script>
+<script async src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c12505e5fedb462faf82642c7f1a3c8b"}'></script>
 </body>
 </html>
