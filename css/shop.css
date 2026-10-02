@@ -40,11 +40,14 @@
 .shop-card__price strong { font: 700 1.35rem var(--font-sans); color: var(--ink); }
 .shop-card__price span { font-size: 0.8rem; color: var(--text-muted); }
 .shop-card__buy { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
-.shop-card__buy .btn { flex: 1; padding: 11px 14px; font-size: 0.92rem; justify-content: center; }
+/* "Dodaj" is a <button> (line-height normal) and an enquiry is an <a> (the page's line-height):
+   one explicit line-height gives both the same height on one line. */
+.shop-card__buy .btn { flex: 1; padding: 11px 14px; font-size: 0.92rem; line-height: 1.2; white-space: nowrap; justify-content: center; }
 .shop-card.is-in-cart { border-color: var(--green-leaf); box-shadow: 0 0 0 2px rgba(45, 122, 61, 0.18); }
-.shop-card__ask { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 6px; }
-.shop-card__ask .btn { padding: 11px 14px; font-size: 0.92rem; justify-content: center; text-align: center; }
-.shop-card__more { align-self: center; font-weight: 600; font-size: 0.92rem; color: var(--green-leaf); }
+/* The bottom group of every card (pack + price + buy row, or "Zobacz piwo" + enquiry) sits on the
+   card's floor, so the buttons of one row line up whatever the text above them. */
+.shop-card__more { margin-top: auto; }
+.shop-card__more { font-weight: 600; font-size: 0.92rem; color: var(--green-leaf); text-decoration: underline; text-underline-offset: 3px; }
 
 .shop-qty { display: inline-flex; align-items: center; border: 1px solid rgba(15, 58, 34, 0.25); border-radius: 999px; background: #fff; }
 .shop-qty button { width: 34px; height: 38px; border: 0; background: none; font-size: 1.15rem; color: var(--green-forest); cursor: pointer; }

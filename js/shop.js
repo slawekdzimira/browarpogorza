@@ -123,8 +123,9 @@
         + `<h3 class="shop-card__name"><a href="${esc(p.url)}">${esc(p.name)}</a></h3>`
         + `<p class="shop-card__style">${esc(p.style)} · ${esc(p.abvLabel)} alk.</p>`
         + (p.tagline ? `<p class="shop-card__tagline">${esc(p.tagline)}.</p>` : '')
-        + `<div class="shop-card__ask"><a class="btn btn--sun" href="/#kontakt">${p.alcoholic ? 'Zapytaj o wycenę na imprezę' : 'Zapytaj o zamówienie'}</a>`
-        + `<a class="shop-card__more" href="${esc(p.url)}">Zobacz piwo</a></div>`
+        // Same bottom row as an orderable card: one button of the same height, on the card's floor.
+        + `<a class="shop-card__more" href="${esc(p.url)}">Zobacz piwo</a>`
+        + `<div class="shop-card__buy"><a class="btn btn--sun" href="/#kontakt">${p.alcoholic ? 'Zapytaj o wycenę' : 'Zapytaj o zamówienie'}</a></div>`
         + '</div></article>';
     const range = (() => {
         try { return JSON.parse(document.getElementById('shop-range').textContent); } catch (e) { return []; }
