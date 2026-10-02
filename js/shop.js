@@ -31,6 +31,8 @@
     const crateWord = n => plural(n, 'skrzynka', 'skrzynki', 'skrzynek');
     const bottleWord = n => plural(n, 'butelka', 'butelki', 'butelek');
     const track = (name, params) => { try { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (e) { /* analytics is optional */ } };
+    // An order number or an amount inside a display heading, set in the sans (lining figures).
+    const ref = value => `<span class="shop-ref">${esc(value)}</span>`;
     const copyButton = (value, what) => `<button type="button" class="co-copy" data-copy="${esc(value)}" aria-label="Kopiuj ${what}">kopiuj</button>`;
     // The transfer details, the same after the order and on the payment page.
     const transferBox = (p, { id, hidden }) => `<div class="co-pay" id="${id}"${hidden ? ' hidden' : ''}><p class="co-pay__lead">Zwykły przelew</p><dl>`
@@ -502,7 +504,7 @@
             const p = data.payment;
             const event = data.kind === 'event';
             const online = p.onlineUrl ? `<a class="btn btn--sun" href="${esc(p.onlineUrl)}">Zapłać online</a>` : '';
-            this.root.innerHTML = `<div class="co-done" role="status"><h2 style="font-family:var(--font-display);font-weight:500;font-size:2rem;color:var(--green-forest);margin:0 0 8px">Dziękujemy. ${event ? `Umowa ${esc(data.number)} zawarta` : `Zamówienie ${esc(data.number)} przyjęte`}.</h2>`
+            this.root.innerHTML = `<div class="co-done" role="status"><h2 style="font-family:var(--font-display);font-weight:500;font-size:2rem;color:var(--green-forest);margin:0 0 8px">Dziękujemy. ${event ? `Umowa ${ref(data.number)} zawarta` : `Zamówienie ${ref(data.number)} przyjęte`}.</h2>`
                 + `<p>${data.mailed ? `Potwierdzenie zamówienia${event ? ' razem z umową' : ''} wysłaliśmy na adres ${esc(email)}.` : `Zapisaliśmy zamówienie. Jeśli e-mail nie dotrze w ciągu kilku minut, napisz do nas: ${esc(CONTACT)}.`} Realizację zaczniemy po zaksięgowaniu wpłaty.</p>`
                 + `<h3 class="co-pay__title">Zapłać ${esc(p.amount)} do ${esc(p.deadline)}</h3>`
                 + (online ? `<p class="co-hint" style="margin:0 0 10px">Online: BLIK, szybki przelew albo karta.</p><div class="co-pay__methods">${online}<button type="button" class="btn btn--ghost-dark" data-pay-transfer aria-expanded="false" aria-controls="co-transfer">Zapłać zwykłym przelewem</button></div>` : '')
@@ -1027,11 +1029,11 @@
                     + `<p><button type="button" class="btn btn--sun" data-pay-check>Sprawdź ponownie</button></p>${payment.links(d)}`);
             },
             transferOnly(d) {
-                payment.box(`Zapłać ${esc(d.total)} przelewem`, `<p>${d.kind === 'event' ? `Zamówienie na imprezę <strong>${esc(d.number)}</strong> opłacasz zwykłym przelewem.` : `Płatność online jest teraz niedostępna. Zamówienie <strong>${esc(d.number)}</strong> opłacisz zwykłym przelewem.`}</p>`
+                payment.box(`Zapłać ${ref(d.total)} przelewem`, `<p>${d.kind === 'event' ? `Zamówienie na imprezę <strong>${esc(d.number)}</strong> opłacasz zwykłym przelewem.` : `Płatność online jest teraz niedostępna. Zamówienie <strong>${esc(d.number)}</strong> opłacisz zwykłym przelewem.`}</p>`
                     + payment.transferToggle(d, true) + payment.links(d));
             },
             pay(d) {
-                payment.box(`Zapłać ${esc(d.total)}`, `<p>Zamówienie <strong>${esc(d.number)}</strong>. Wybierz BLIK, szybki przelew albo kartę w formularzu operatora płatności.</p>`
+                payment.box(`Zapłać ${ref(d.total)}`, `<p>Zamówienie <strong>${esc(d.number)}</strong>. Wybierz BLIK, szybki przelew albo kartę w formularzu operatora płatności.</p>`
                     + '<div id="pay-slot" class="pay-slot"><p class="shop-loading">Wczytuję formularz płatności...</p></div>' + payment.transferToggle(d, false));
             },
         },

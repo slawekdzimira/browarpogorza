@@ -212,6 +212,9 @@ body.has-shop-bar .back-to-top { bottom: 168px; }
 .co-copy { margin-left: 8px; border: 1px solid rgba(15, 58, 34, 0.3); background: #fff; border-radius: 999px; padding: 2px 10px; font-size: 0.78rem; cursor: pointer; }
 .co-empty { text-align: center; padding: 40px 20px; }
 
+/* Numbers inside a display heading: Cormorant draws old-style figures that dance on the line */
+.shop-ref { font-family: var(--font-sans); font-size: 0.8em; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap; }
+
 /* platnosc.html: the operator's payment form (an iframe it sizes itself), the waiting state */
 .pay-state { max-width: 760px; }
 .pay-slot { margin: 16px 0; }
