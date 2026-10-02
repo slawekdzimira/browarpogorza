@@ -31,6 +31,15 @@
     const crateWord = n => plural(n, 'skrzynka', 'skrzynki', 'skrzynek');
     const bottleWord = n => plural(n, 'butelka', 'butelki', 'butelek');
     const track = (name, params) => { try { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (e) { /* analytics is optional */ } };
+    const copyButton = (value, what) => `<button type="button" class="co-copy" data-copy="${esc(value)}" aria-label="Kopiuj ${what}">kopiuj</button>`;
+    // The transfer details, the same after the order and on the payment page.
+    const transferBox = (p, { id, hidden }) => `<div class="co-pay" id="${id}"${hidden ? ' hidden' : ''}><p class="co-pay__lead">Zwykły przelew</p><dl>`
+        + `<dt>Odbiorca</dt><dd>${esc(p.recipient)}<br><span class="co-pay__addr">${esc(p.recipientAddress)}</span>${copyButton(p.recipient, 'nazwę odbiorcy')}</dd>`
+        + `<dt>Numer rachunku</dt><dd>${esc(p.bankAccount)}${copyButton(p.bankAccount.replace(/\s/g, ''), 'numer rachunku')}</dd>`
+        + (p.bankName ? `<dt>Bank</dt><dd>${esc(p.bankName)}</dd>` : '')
+        + `<dt>Tytuł przelewu</dt><dd>${esc(p.title)}${copyButton(p.title, 'tytuł przelewu')}</dd>`
+        + `<dt>Kwota</dt><dd>${esc(p.amount)}${copyButton(p.amount.replace(/\s*zł$/, ''), 'kwotę')}</dd>`
+        + `<dt>Termin</dt><dd>do ${esc(p.deadline)} (${p.deadlineHours} godzin)</dd></dl></div>`;
 
     const storage = {
         get(key, fallback, session) {
@@ -327,7 +336,9 @@
                 + `<div class="co-doc" id="co-doc" tabindex="0" aria-label="${event ? 'Treść umowy' : 'Podsumowanie zamówienia'}"></div>`
                 + `<div class="co-accept">${event ? this.field('acceptName', 'Wpisz imię i nazwisko, aby zawrzeć umowę', { autocomplete: 'off' }) : ''}`
                 + `<div class="co-actions"><button type="button" class="btn btn--sun" id="co-place">${event ? 'Zawieram umowę z obowiązkiem zapłaty' : 'Zamawiam z obowiązkiem zapłaty'}</button></div>`
-                + `<p class="co-hint" style="margin:0;font-size:.84rem;color:var(--text-muted)">Płatność przelewem w ciągu ${s.paymentHours} godzin; dane do przelewu pokażemy po złożeniu zamówienia i wyślemy e-mailem.</p></div></section>`
+                + `<p class="co-hint" style="margin:0;font-size:.84rem;color:var(--text-muted)">${!event && s.na.online
+                    ? `Zapłacisz online (BLIK, szybki przelew, karta) albo zwykłym przelewem w ciągu ${s.paymentHours} godzin; po złożeniu zamówienia przejdziesz do płatności.`
+                    : `Płatność przelewem w ciągu ${s.paymentHours} godzin; dane do przelewu pokażemy po złożeniu zamówienia i wyślemy e-mailem.`}</p></div></section>`
                 + `</div><aside class="co-summary" aria-label="Podsumowanie kwot">${this.summary(t)}</aside></form>`;
 
             this.restore();
@@ -485,24 +496,17 @@
             }
         },
 
-        // The transfer details are the payment for now; when an online operator is connected
-        // (payment.onlineUrl), it leads and the transfer details open from their own button.
+        // A non-alcoholic order with online payment on (payment.onlineUrl): online leads and the
+        // transfer details open from their own button. Otherwise the transfer details are the payment.
         done(data, email, customer) {
             const p = data.payment;
             const event = data.kind === 'event';
-            const copy = (value, what) => `<button type="button" class="co-copy" data-copy="${esc(value)}" aria-label="Kopiuj ${what}">kopiuj</button>`;
             const online = p.onlineUrl ? `<a class="btn btn--sun" href="${esc(p.onlineUrl)}">Zapłać online</a>` : '';
             this.root.innerHTML = `<div class="co-done" role="status"><h2 style="font-family:var(--font-display);font-weight:500;font-size:2rem;color:var(--green-forest);margin:0 0 8px">Dziękujemy. ${event ? `Umowa ${esc(data.number)} zawarta` : `Zamówienie ${esc(data.number)} przyjęte`}.</h2>`
                 + `<p>${data.mailed ? `Potwierdzenie zamówienia${event ? ' razem z umową' : ''} wysłaliśmy na adres ${esc(email)}.` : `Zapisaliśmy zamówienie. Jeśli e-mail nie dotrze w ciągu kilku minut, napisz do nas: ${esc(CONTACT)}.`} Realizację zaczniemy po zaksięgowaniu wpłaty.</p>`
                 + `<h3 class="co-pay__title">Zapłać ${esc(p.amount)} do ${esc(p.deadline)}</h3>`
-                + (online ? `<div class="co-pay__methods">${online}<button type="button" class="btn btn--ghost-dark" data-pay-transfer aria-expanded="false" aria-controls="co-transfer">Zapłać zwykłym przelewem</button></div>` : '')
-                + `<div class="co-pay" id="co-transfer"${online ? ' hidden' : ''}><p class="co-pay__lead">Zwykły przelew</p><dl>`
-                + `<dt>Odbiorca</dt><dd>${esc(p.recipient)}<br><span class="co-pay__addr">${esc(p.recipientAddress)}</span>${copy(p.recipient, 'nazwę odbiorcy')}</dd>`
-                + `<dt>Numer rachunku</dt><dd>${esc(p.bankAccount)}${copy(p.bankAccount.replace(/\s/g, ''), 'numer rachunku')}</dd>`
-                + (p.bankName ? `<dt>Bank</dt><dd>${esc(p.bankName)}</dd>` : '')
-                + `<dt>Tytuł przelewu</dt><dd>${esc(p.title)}${copy(p.title, 'tytuł przelewu')}</dd>`
-                + `<dt>Kwota</dt><dd>${esc(p.amount)}${copy(p.amount.replace(/\s*zł$/, ''), 'kwotę')}</dd>`
-                + `<dt>Termin</dt><dd>do ${esc(p.deadline)} (${p.deadlineHours} godzin)</dd></dl></div>`
+                + (online ? `<p class="co-hint" style="margin:0 0 10px">Online: BLIK, szybki przelew albo karta.</p><div class="co-pay__methods">${online}<button type="button" class="btn btn--ghost-dark" data-pay-transfer aria-expanded="false" aria-controls="co-transfer">Zapłać zwykłym przelewem</button></div>` : '')
+                + transferBox(p, { id: 'co-transfer', hidden: Boolean(online) })
                 + `<p class="co-done__actions"><a class="btn btn--primary" href="${esc(data.documentUrl)}" target="_blank" rel="noopener">${event ? 'Otwórz umowę' : 'Otwórz potwierdzenie'}</a> <a class="btn btn--ghost-dark" href="/zamow.html">Wróć do oferty</a></p></div>`;
             this.root.scrollIntoView({ behavior: 'smooth', block: 'start' });
             account.afterOrder(email, customer);
@@ -759,9 +763,10 @@
             const kind = o.kind === 'event' ? `Impreza ${isoDay(o.eventDate)}` : 'Wysyłka';
             const pay = o.payment;
             return `<article class="acct-order"><div><strong>${esc(o.number)}</strong> <span class="acct-badge acct-badge--${esc(o.status)}">${esc(o.statusLabel)}</span>`
-                + `<br><small>${esc(plDay(o.createdAt))} · ${esc(kind)}</small></div><div class="acct-order__total">${esc(o.total)}</div>`
+                + `<br><small>${esc(plDay(o.createdAt))} · ${esc(kind)}${o.paidOnline ? ' · zapłacone online' : ''}</small></div><div class="acct-order__total">${esc(o.total)}</div>`
                 + `<div class="acct-order__actions"><a href="${esc(o.documentUrl)}" target="_blank" rel="noopener">${o.kind === 'event' ? 'Umowa' : 'Potwierdzenie'}</a>`
                 + `<a href="${esc(o.documentUrl)}&amp;pdf=1" target="_blank" rel="noopener">PDF</a>`
+                + (pay && pay.onlineUrl ? `<a class="acct-order__pay" href="${esc(pay.onlineUrl)}">Zapłać online</a>` : '')
                 + (pay ? `<button type="button" class="acct-link" data-acct-pay="${esc(o.number)}" aria-expanded="false">Dane do przelewu</button>` : '') + '</div>'
                 + (pay ? `<dl class="co-pay acct-pay" id="pay-${esc(o.number)}" hidden><dt>Odbiorca</dt><dd>${esc(pay.recipient)}, ${esc(pay.recipientAddress)}</dd>`
                     + `<dt>Numer rachunku</dt><dd>${esc(pay.bankAccount)}</dd><dt>Tytuł</dt><dd>${esc(pay.title)}</dd><dt>Kwota</dt><dd>${esc(pay.amount)}</dd><dt>Termin</dt><dd>do ${esc(pay.deadline)}</dd></dl>` : '')
@@ -950,6 +955,172 @@
         },
     };
 
+    /* ---------------------------------------------------------- payment */
+
+    // platnosc.html: online payment of a non-alcoholic order, and where the payment operator
+    // sends the customer back (#nr=..&t=..&powrot=1). The Worker says how the payment stands;
+    // the page shows the operator's form (SIBS: widget.js fills form.paymentSPG with its iframe),
+    // a button to an operator's own page, the result, or the transfer details. Status and start
+    // are POST, because on staging the service worker answers same-origin GETs from its cache.
+    const ORDER_NUMBER_RE = /^BP-\d{8}-[A-Z0-9]{4}$/;
+    // Only the operator's own script may draw the payment form, whatever an answer says.
+    const WIDGET_HOSTS = ['https://api.sibsgateway.com', 'https://stargate.qly.site1.sibs.pt'];
+    // About a minute of asking after the customer comes back, sooner at first.
+    const POLL_MS = [1500, 2000, 2500, 3000, 3000, 4000, 4000, 5000, 5000, 6000, 8000, 8000, 10000];
+    const PAY_TITLE = 'font-family:var(--font-display);font-weight:500;font-size:2rem;color:var(--green-forest);margin:0 0 8px';
+
+    const payment = {
+        root: null,
+        number: '',
+        token: '',
+        returning: false,
+        polls: 0,
+
+        async call(path) {
+            const res = await fetch(`${ENDPOINT}/shop/payment/${path}`, {
+                method: 'POST', credentials: 'omit', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ number: this.number, token: this.token }),
+            });
+            return { ok: res.ok, status: res.status, data: await res.json().catch(() => ({})) };
+        },
+
+        box(title, body, { tone = 'status' } = {}) {
+            this.root.innerHTML = `<div class="co-done pay-state" role="${tone}"><h2 style="${PAY_TITLE}">${title}</h2>${body}</div>`;
+        },
+        links(d) {
+            return `<p class="co-done__actions">${d && d.documentUrl ? `<a class="btn btn--primary" href="${esc(d.documentUrl)}" target="_blank" rel="noopener">Otwórz potwierdzenie</a> ` : ''}<a class="btn btn--ghost-dark" href="/konto.html">Moje konto</a></p>`;
+        },
+        transferToggle(d, open) {
+            if (!d.transfer) return '';
+            return (open ? '' : `<p><button type="button" class="btn btn--ghost-dark" data-pay-transfer aria-expanded="false" aria-controls="pay-transfer">Wolę zwykły przelew</button></p>`)
+                + transferBox(d.transfer, { id: 'pay-transfer', hidden: !open });
+        },
+
+        views: {
+            missing() {
+                payment.box('Nie znaleziono płatności', `<p>Otwórz przycisk „Zapłać online” z e-maila z potwierdzeniem zamówienia albo zamówienie w <a href="/konto.html">koncie klienta</a>. Pytania: ${esc(CONTACT)}.</p>`, { tone: 'alert' });
+            },
+            offline() {
+                payment.box('Nie udało się sprawdzić płatności', `<p>Odśwież stronę za chwilę. Jeśli to się powtarza, napisz do nas: ${esc(CONTACT)}.</p>`, { tone: 'alert' });
+            },
+            paid(d) {
+                payment.box('Płatność przyjęta', `<p>Zamówienie <strong>${esc(d.number)}</strong> jest opłacone${d.paidOnline ? ' online' : ''}${d.method ? ` (${esc(d.method)})` : ''}. `
+                    + `Przesyłkę nadamy w ciągu ${esc(d.dispatchDays)} dni roboczych; status zamówienia widzisz w koncie klienta.</p>${payment.links(d)}`);
+            },
+            closed(d) {
+                payment.box('Zamówienie jest anulowane', `<p>Zamówienia <strong>${esc(d.number)}</strong> nie trzeba już opłacać. Jeśli to pomyłka, napisz do nas: ${esc(CONTACT)}.</p>${payment.links(d)}`);
+            },
+            review(d) {
+                payment.box('Płatność wymaga wyjaśnienia', `<p>Operator płatności potwierdził wpłatę za zamówienie <strong>${esc(d.number)}</strong>, ale kwota nie zgadza się z zamówieniem. Skontaktujemy się z Tobą; możesz też napisać: ${esc(CONTACT)}.</p>${payment.links(d)}`, { tone: 'alert' });
+            },
+            failed(d) {
+                payment.box('Płatność nie doszła do skutku', `<p>Operator płatności nie potwierdził wpłaty za zamówienie <strong>${esc(d.number)}</strong>: płatność została odrzucona albo przerwana. `
+                    + `${d.online ? 'Możesz spróbować jeszcze raz albo zapłacić zwykłym przelewem.' : 'Zapłać zwykłym przelewem.'}</p>`
+                    + (d.online ? '<p><button type="button" class="btn btn--sun" data-pay-retry>Spróbuj jeszcze raz</button></p>' : '')
+                    + payment.transferToggle(d, !d.online), { tone: 'alert' });
+            },
+            waiting(d) {
+                payment.box('Czekamy na potwierdzenie płatności', `<p class="pay-wait"><span class="pay-spinner" aria-hidden="true"></span>Operator płatności jeszcze nie potwierdził wpłaty ${esc(d.total)} za zamówienie <strong>${esc(d.number)}</strong>. `
+                    + 'Ta strona sprawdza to sama co kilka sekund. Nie płać drugi raz.</p>');
+            },
+            slow(d) {
+                payment.box('Potwierdzenie płatności się opóźnia', `<p>Jeśli zapłaciłeś, nic więcej nie musisz robić: gdy operator potwierdzi wpłatę za zamówienie <strong>${esc(d.number)}</strong>, zmieni się jego status w koncie klienta. Nie płać drugi raz.</p>`
+                    + `<p><button type="button" class="btn btn--sun" data-pay-check>Sprawdź ponownie</button></p>${payment.links(d)}`);
+            },
+            transferOnly(d) {
+                payment.box(`Zapłać ${esc(d.total)} przelewem`, `<p>${d.kind === 'event' ? `Zamówienie na imprezę <strong>${esc(d.number)}</strong> opłacasz zwykłym przelewem.` : `Płatność online jest teraz niedostępna. Zamówienie <strong>${esc(d.number)}</strong> opłacisz zwykłym przelewem.`}</p>`
+                    + payment.transferToggle(d, true) + payment.links(d));
+            },
+            pay(d) {
+                payment.box(`Zapłać ${esc(d.total)}`, `<p>Zamówienie <strong>${esc(d.number)}</strong>. Wybierz BLIK, szybki przelew albo kartę w formularzu operatora płatności.</p>`
+                    + '<div id="pay-slot" class="pay-slot"><p class="shop-loading">Wczytuję formularz płatności...</p></div>' + payment.transferToggle(d, false));
+            },
+        },
+
+        render(d) {
+            this.last = d;
+            if (['paid', 'closed', 'review', 'failed'].includes(d.state)) { this.views[d.state](d); return; }
+            if (d.state === 'pending' && this.returning) { this.views.waiting(d); this.poll(); return; }
+            if (!d.online || !d.transfer) { this.views.transferOnly(d); return; }
+            this.views.pay(d);
+            this.start();
+        },
+
+        async refresh() {
+            let r;
+            try { r = await this.call('status'); } catch (e) { this.views.offline(); return; }
+            if (r.status === 404) { this.views.missing(); return; }
+            if (!r.ok) { this.views.offline(); return; }
+            this.render(r.data);
+        },
+
+        // While the operator has not answered: ask again, each time a little later.
+        poll() {
+            if (this.polls >= POLL_MS.length) { this.views.slow(this.last); return; }
+            setTimeout(async () => {
+                this.polls += 1;
+                const r = await this.call('status').catch(() => null);
+                if (r && r.ok) this.last = r.data;
+                if (r && r.ok && r.data.state !== 'pending') this.render(r.data);
+                else this.poll();
+            }, POLL_MS[this.polls]);
+        },
+
+        async start() {
+            const slot = document.getElementById('pay-slot');
+            const fail = (message) => {
+                slot.innerHTML = `<p class="co-form-error" role="alert">${esc(message)}</p>`;
+                const transfer = document.getElementById('pay-transfer');
+                if (transfer) transfer.hidden = false;
+            };
+            let r;
+            try { r = await this.call('start'); } catch (e) { fail(`Brak połączenia z serwerem płatności. Spróbuj za chwilę albo zapłać zwykłym przelewem.`); return; }
+            if (r.ok && r.data.pay) { this.mount(r.data.pay, slot, fail); return; }
+            if (r.ok) { this.refresh(); return; }
+            fail(r.data.error || 'Płatność online jest teraz niedostępna. Zapłać zwykłym przelewem.');
+        },
+
+        mount(pay, slot, fail) {
+            track('add_payment_info', { payment_type: 'online', transaction_id: this.number });
+            if (pay.kind === 'redirect') {
+                slot.innerHTML = `<p><a class="btn btn--sun" href="${esc(pay.url)}">Przejdź do płatności</a></p>`;
+                return;
+            }
+            let widget;
+            try { widget = new URL(pay.widgetUrl); } catch (e) { widget = null; }
+            if (!widget || !WIDGET_HOSTS.includes(widget.origin) || widget.pathname !== '/assets/js/widget.js') { fail('Nie udało się wczytać formularza płatności. Zapłać zwykłym przelewem.'); return; }
+            // The form first, then the operator's script, which finds it and puts its iframe inside.
+            slot.innerHTML = `<form class="paymentSPG pay-form" spg-context="${esc(pay.formContext)}" spg-config="${esc(JSON.stringify(pay.formConfig))}"></form>`;
+            const script = document.createElement('script');
+            script.src = widget.href;
+            script.onerror = () => fail('Nie udało się wczytać formularza płatności. Spróbuj za chwilę albo zapłać zwykłym przelewem.');
+            document.body.appendChild(script);
+        },
+
+        init(root) {
+            this.root = root;
+            const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+            this.number = params.get('nr') || '';
+            this.token = params.get('t') || '';
+            this.returning = params.get('powrot') === '1';
+            root.addEventListener('click', (event) => {
+                const transfer = event.target.closest('[data-pay-transfer]');
+                if (transfer) {
+                    const box = document.getElementById('pay-transfer');
+                    box.hidden = !box.hidden;
+                    transfer.setAttribute('aria-expanded', String(!box.hidden));
+                    return;
+                }
+                // The failed view never loaded the operator's script, so the form can be shown here.
+                if (event.target.closest('[data-pay-retry]')) { this.returning = false; this.views.pay(this.last); this.start(); return; }
+                if (event.target.closest('[data-pay-check]')) { this.polls = 0; this.refresh(); return; }
+                const cp = event.target.closest('[data-copy]');
+                if (cp && navigator.clipboard) navigator.clipboard.writeText(cp.dataset.copy).then(() => { cp.textContent = 'skopiowano'; }).catch(() => {});
+            });
+            if (!ORDER_NUMBER_RE.test(this.number) || !/^[\w-]{20,100}$/.test(this.token)) { this.views.missing(); return; }
+            this.refresh();
+        },
+    };
+
     /* ------------------------------------------------------------- boot */
 
     const boot = async () => {
@@ -957,6 +1128,9 @@
         const checkoutRoot = document.getElementById('shop-checkout');
         const accountRoot = document.getElementById('shop-account');
         if (accountRoot) account.init(accountRoot);
+        // The payment page needs no catalogue: it asks the Worker about one order.
+        const paymentRoot = document.getElementById('shop-payment');
+        if (paymentRoot) payment.init(paymentRoot);
         const calcForm = document.getElementById('beer-calc');
         if (calcForm) calculator.init(calcForm);
         const hash = location.hash.replace('#', '');

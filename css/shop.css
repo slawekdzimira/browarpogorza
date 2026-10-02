@@ -212,6 +212,16 @@ body.has-shop-bar .back-to-top { bottom: 168px; }
 .co-copy { margin-left: 8px; border: 1px solid rgba(15, 58, 34, 0.3); background: #fff; border-radius: 999px; padding: 2px 10px; font-size: 0.78rem; cursor: pointer; }
 .co-empty { text-align: center; padding: 40px 20px; }
 
+/* platnosc.html: the operator's payment form (an iframe it sizes itself), the waiting state */
+.pay-state { max-width: 760px; }
+.pay-slot { margin: 16px 0; }
+.pay-form { display: block; min-height: 200px; margin: 0; }
+.pay-form iframe { display: block; width: 100%; border: 0; }
+.pay-wait { display: flex; gap: 12px; align-items: flex-start; }
+.pay-spinner { flex: none; width: 22px; height: 22px; margin-top: 2px; border-radius: 50%; border: 3px solid rgba(15, 58, 34, 0.15); border-top-color: var(--green-leaf); animation: pay-spin 0.9s linear infinite; }
+@keyframes pay-spin { to { transform: rotate(360deg); } }
+.acct-order__actions .acct-order__pay { color: var(--green-forest); background: var(--sun); border-radius: 999px; padding: 0 12px; text-decoration: none; }
+
 @media (max-width: 960px) {
     .shop-hero, .checkout { grid-template-columns: 1fr; }
     .co-summary { position: static; }
@@ -231,4 +241,5 @@ body.has-shop-bar .back-to-top { bottom: 168px; }
 @media (prefers-reduced-motion: reduce) {
     .shop-card, .shop-bar { transition: none; }
     .shop-card:hover { transform: none; }
+    .pay-spinner { animation-duration: 3s; }
 }
