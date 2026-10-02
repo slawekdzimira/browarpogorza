@@ -113,6 +113,23 @@
             + '</div></article>';
     };
 
+    // A beer that cannot be ordered online yet (hidden or unpriced in the panel, or its kind
+    // switched off): still shown, with its page and an enquiry, so the offer is never empty.
+    const previewCard = p => `<article class="shop-card shop-card--preview" data-preview="${esc(p.id)}">`
+        + `<span class="shop-card__tag ${p.alcoholic ? 'shop-card__tag--event">Na imprezę zamkniętą' : 'shop-card__tag--na">Bezalkoholowe'}</span>`
+        + `<a class="shop-card__media" href="${esc(p.url)}" tabindex="-1" aria-hidden="true"><picture><source type="image/webp" srcset="${esc(webp(p.image))}">`
+        + `<img src="${esc(p.image)}" alt="" loading="lazy" width="300" height="340"></picture></a>`
+        + '<div class="shop-card__body">'
+        + `<h3 class="shop-card__name"><a href="${esc(p.url)}">${esc(p.name)}</a></h3>`
+        + `<p class="shop-card__style">${esc(p.style)} · ${esc(p.abvLabel)} alk.</p>`
+        + (p.tagline ? `<p class="shop-card__tagline">${esc(p.tagline)}.</p>` : '')
+        + `<div class="shop-card__ask"><a class="btn btn--sun" href="/#kontakt">${p.alcoholic ? 'Zapytaj o wycenę na imprezę' : 'Zapytaj o zamówienie'}</a>`
+        + `<a class="shop-card__more" href="${esc(p.url)}">Zobacz piwo</a></div>`
+        + '</div></article>';
+    const range = (() => {
+        try { return JSON.parse(document.getElementById('shop-range').textContent); } catch (e) { return []; }
+    })();
+
     const note = html => `<div class="shop-note" style="grid-column:1/-1">${html}</div>`;
 
     const render = {
@@ -122,14 +139,17 @@
             if (!grid) return;
             const s = catalog.settings;
             if (!s.shopOpen) { grid.innerHTML = note(`<strong>Przyjmowanie zamówień jest chwilowo wstrzymane.</strong> Napisz do nas: ${esc(CONTACT)}.`); return; }
-            const list = catalog.products.filter(offered).filter(p => this.filter === 'all' || (this.filter === 'event' ? p.alcoholic : !p.alcoholic));
+            const inFilter = p => this.filter === 'all' || (this.filter === 'event' ? p.alcoholic : !p.alcoholic);
+            const list = catalog.products.filter(offered).filter(inFilter);
+            const orderable = new Set(list.map(p => p.id));
+            const previews = range.filter(inFilter).filter(p => !orderable.has(p.id));
             const notes = [];
             if (!s.events.available && this.filter !== 'na') notes.push(`<strong>Piwo z alkoholem na imprezy zamknięte</strong> zamówisz tu wkrótce. Do tego czasu przygotujemy ofertę mailowo: ${esc(CONTACT)}.`);
             if (!s.na.available && this.filter !== 'event') notes.push(`<strong>Wysyłka piw bezalkoholowych</strong> ruszy wkrótce. Napisz, jeśli chcesz zamówić już teraz: ${esc(CONTACT)}.`);
             const calc = storage.get(CALC_KEY, null, true);
             const fromCalc = calc && calc.bottles ? `<div class="shop-note shop-note--calc">Z kalkulatora: <strong>${calc.bottles} ${bottleWord(calc.bottles)} 0,5 l</strong> piwa na ${calc.guests} ${plural(calc.guests, 'gościa', 'gości', 'gości')}`
                 + `${calc.naBottles ? ` i ${calc.naBottles} ${bottleWord(calc.naBottles)} piwa bezalkoholowego` : ''}. <a href="/ile-piwa-na-wesele.html">Przelicz jeszcze raz</a></div>` : '';
-            grid.innerHTML = fromCalc + (list.map(card).join('') + notes.map(note).join('')
+            grid.innerHTML = fromCalc + (notes.map(note).join('') + list.map(card).join('') + previews.map(previewCard).join('')
                 || note(`Nic tu jeszcze nie ma. Napisz do nas: ${esc(CONTACT)}.`));
             // GA4 shop funnel (visitors who consented): the offer seen once per page view.
             if (list.length && !this.listTracked) {

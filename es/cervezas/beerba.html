@@ -108,7 +108,7 @@
   "@type": "Product",
   "@id": "https://browarpogorza.pl/es/cervezas/beerba.html#product",
   "name": "BEERBA",
-  "description": "Una base cervecera, infusión de yerba mate y un toque de zumo de grosella roja y manzana. Herbal, seca y refrescante, con un ligero amargor cítrico: más cerca de una buena bebida de hierbas que de una cerveza clásica. Tiene 0,0% de alcohol, pero la yerba aporta su cafeína, así que funciona mejor por la mañana que como última copa.",
+  "description": "Una base cervecera, infusión de yerba mate y un toque de zumo de grosella roja y manzana. Herbal, seca y refrescante, con un ligero amargor cítrico: más cerca de una buena bebida de hierbas que de una cerveza clásica. Tiene 0,0% de alcohol y contiene cafeína de la yerba mate.",
   "image": "https://browarpogorza.pl/images/beer-beerba.png",
   "category": "Yerbamate & Beer · 0,0%",
   "brand": {
@@ -211,6 +211,7 @@
             <a href="/es/">Inicio</a><span>›</span><a href="/es/#piwa">Nuestras cervezas</a><span>›</span>BEERBA
         </nav>
 
+        <div class="warning-area" data-warning-area>
         <div class="product__hero">
             <div class="product__photo">
                 <picture><source srcset="/images/beer-beerba.webp" type="image/webp"><img width="562" height="746" src="/images/beer-beerba.png" alt="BEERBA - Yerba Mate &amp; Beer · 0,0%" fetchpriority="high" style="view-transition-name: beer-beerba"></picture>
@@ -219,7 +220,7 @@
                 <div class="product__style">Yerba Mate &amp; Beer · 0,0%</div>
                 <h1 class="product__name">BEERBA</h1>
                 <p class="product__tagline">Cerveza con yerba mate, cero alcohol</p>
-                <p class="product__desc">Una base cervecera, infusión de yerba mate y un toque de zumo de grosella roja y manzana. Herbal, seca y refrescante, con un ligero amargor cítrico: más cerca de una buena bebida de hierbas que de una cerveza clásica. Tiene 0,0% de alcohol, pero la yerba aporta su cafeína, así que funciona mejor por la mañana que como última copa.</p>
+                <p class="product__desc">Una base cervecera, infusión de yerba mate y un toque de zumo de grosella roja y manzana. Herbal, seca y refrescante, con un ligero amargor cítrico: más cerca de una buena bebida de hierbas que de una cerveza clásica. Tiene 0,0% de alcohol y contiene cafeína de la yerba mate.</p>
                 <dl class="product__stats">
                     <div class="product__stat">
                         <dt>Alcohol</dt>
@@ -240,6 +241,7 @@
                 </div>
             </div>
         </div>
+        </div>
 
         <nav class="beer-nav" aria-label="Otras cervezas">
             <a class="beer-nav__link beer-nav__link--prev" href="blue-sky.html" style="--beer-accent:#223c88;--beer-tint:#dcdbdc;--beer-deep:#1b3b64">
@@ -257,8 +259,8 @@
 
         <section class="product__story">
             <h2>Más sobre BEERBA</h2>
-            <p>BEERBA es nuestra idea más rara que acabó funcionando: una base cervecera con té Earl Grey, infusión de yerba mate y zumos de grosella roja y manzana. Sale algo herbal y seco, con amargor cítrico y fondo afrutado. No tiene nada de alcohol (0,0%), pero la yerba aporta cafeína natural.</p>
-            <p>Por eso es más una bebida de día que de noche: desayuno, brunch, una tarde de trabajo, calor cuando el café resulta imposible. En la mesa va con huevos, fruta, ensaladas ligeras y tabla de quesos. Sírvela muy fría, a 4-6°C, y si quieres con hielo y una rodaja de limón.</p>
+            <p>BEERBA es nuestra idea más rara que acabó funcionando: una base cervecera con té Earl Grey, infusión de yerba mate y zumos de grosella roja y manzana. Sale algo herbal y seco, con amargor cítrico y fondo afrutado. No tiene nada de alcohol (0,0%), y la yerba mate aporta cafeína.</p>
+            <p>Es una bebida para el desayuno, el brunch y una tarde de calor. En la mesa va con huevos, fruta, ensaladas ligeras y tabla de quesos. Sírvela fría, a 10-14°C, y si quieres con una rodaja de limón.</p>
         </section>
 
 
@@ -273,9 +275,37 @@
             </div>
             <div class="product__detail">
                 <h3>Con qué maridar</h3>
-                <p>Perfecta para el desayuno y el brunch: huevos, fruta, una ensalada ligera, tabla de quesos. Con calor también sustituye al café helado.</p>
+                <p>Perfecta para el desayuno y el brunch: huevos, fruta, una ensalada ligera, tabla de quesos.</p>
             </div>
         </div>
+
+        <section class="label-info" aria-labelledby="label-info-title">
+            <h2 id="label-info-title">Información de la etiqueta</h2>
+            <div class="label-info__grid">
+                <dl class="label-info__facts">
+                    <div><dt>Denominación</dt><dd>Bebida a base de cerveza sin alcohol</dd></div>
+                    <div><dt>Ingredientes</dt><dd>60% (agua, <strong>maltas de cebada</strong>, lúpulo, té Earl Grey, levadura), 28% de infusión de yerba mate, 6% de zumo de grosella roja, 4,6% de zumo de manzana, 1,4% de azúcar de caña</dd></div>
+                    <div><dt>Alcohol</dt><dd>sin alcohol</dd></div>
+                    <div><dt>Volumen neto</dt><dd>330 ml (botella no retornable)</dd></div>
+                    <div><dt>Temperatura de servicio</dt><dd>10-14°C</dd></div>
+                    <div><dt>Consumir preferentemente antes del</dt><dd>ver envase</dd></div>
+                    <div><dt>Operador responsable</dt><dd>Browar Pogórza (Manufaktura Pogórza Sławomir Dzimira), Przedmieście Dubieckie 15A, 37-750 Dubiecko, Polonia</dd></div>
+                </dl>
+                <table class="label-info__nutrition">
+                    <caption>Información nutricional por 100 ml</caption>
+                    <tbody>
+                        <tr><th scope="row">Valor energético</th><td>109 kJ / 26 kcal</td></tr>
+                        <tr><th scope="row">Grasas</th><td>&lt;0,04 g</td></tr>
+                        <tr class="label-info__sub"><th scope="row">de las cuales saturadas</th><td>&lt;0,04 g</td></tr>
+                        <tr><th scope="row">Hidratos de carbono</th><td>6,26 g</td></tr>
+                        <tr class="label-info__sub"><th scope="row">de los cuales azúcares</th><td>4,68 g</td></tr>
+                        <tr><th scope="row">Proteínas</th><td>&lt;0,08 g</td></tr>
+                        <tr><th scope="row">Sal</th><td>0,004 g</td></tr>
+                        <tr><th scope="row">Cafeína</th><td>11,2 mg</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </div>
 </main>
 
@@ -371,6 +401,15 @@
             <p class="footer__small" style="margin-top: 14px;">Promovemos el consumo responsable de alcohol. Venta solo a mayores de edad.</p>
         </div>
     </div>
+    <aside class="warnings" aria-label="Advertencias">
+        <div class="container">
+            <ul class="warnings__list">
+                <li class="warnings__item"><svg class="warnings__icon" viewBox="0 0 48 48" role="img" aria-label="No conduzcas después de beber alcohol" focusable="false"><circle cx="24" cy="24" r="22" fill="#fff"/><path d="M13 23.5 15.6 17a2.5 2.5 0 0 1 2.3-1.5h12.2a2.5 2.5 0 0 1 2.3 1.5l2.6 6.5h.5a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H12.5A1.5 1.5 0 0 1 11 31v-6a1.5 1.5 0 0 1 1.5-1.5z" fill="#1F2A18"/><path d="M16.6 23.5 18.4 18.6h11.2l1.8 4.9z" fill="#fff"/><circle cx="15.5" cy="27.5" r="1.6" fill="#fff"/><circle cx="32.5" cy="27.5" r="1.6" fill="#fff"/><rect x="13" y="32" width="4.5" height="3.5" rx="1" fill="#1F2A18"/><rect x="30.5" y="32" width="4.5" height="3.5" rx="1" fill="#1F2A18"/><circle cx="24" cy="24" r="20" fill="none" stroke="#D7262E" stroke-width="4"/><path d="M9.9 9.9 38.1 38.1" stroke="#D7262E" stroke-width="4"/></svg><span class="warnings__text">No conduzcas después de beber alcohol</span></li>
+                <li class="warnings__item"><svg class="warnings__icon" viewBox="0 0 48 48" role="img" aria-label="No bebas alcohol durante el embarazo" focusable="false"><circle cx="24" cy="24" r="22" fill="#fff"/><circle cx="22.6" cy="12.6" r="3.1" fill="#1F2A18"/><path d="M20.2 16.8C22 16 24 16.2 25 17.6c.8 1.2.6 3 .6 3.8 3 1 5 3.2 4.8 5.8-.2 2.4-2.4 3.8-4.6 4L25.2 37h-3.8l-.8-6c-1-2.4-1.4-5-1.2-7.8.1-2.4 0-5.2.8-6.4z" fill="#1F2A18"/><path d="M22.4 18.4c.2 3.1 1.2 5.4 4 6.2" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><circle cx="24" cy="24" r="20" fill="none" stroke="#D7262E" stroke-width="4"/><path d="M9.9 9.9 38.1 38.1" stroke="#D7262E" stroke-width="4"/></svg><span class="warnings__text">No bebas alcohol durante el embarazo</span></li>
+                <li class="warnings__item"><svg class="warnings__icon" viewBox="0 0 48 48" role="img" aria-label="Solo vendemos alcohol a mayores de edad" focusable="false"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="none" stroke="#1F2A18" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.4 19.6 15.4 17.3v13.9"/><circle cx="22" cy="20.5" r="3.2"/><circle cx="22" cy="27.4" r="3.7"/><path d="M29 24.3h7M32.5 20.8v7"/></g><circle cx="24" cy="24" r="20" fill="none" stroke="#D7262E" stroke-width="4"/></svg><span class="warnings__text">Solo vendemos alcohol a mayores de edad</span></li>
+            </ul>
+        </div>
+    </aside>
     <div class="footer__bottom">
         <div class="container">
             <span>© <span id="year"></span> Browar Pogórza · Todos los derechos reservados</span>
