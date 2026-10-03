@@ -107,6 +107,9 @@
 
     const unitPrice = p => `${(p.priceGr / (p.volumeMl / 1000) / 100).toFixed(2).replace('.', ',')} zł/l`;
     const packLine = p => `${esc(p.packagingLabel)} ${litres(p.volumeMl)} l · ${unitPrice(p)}${p.depositGr ? ` · kaucja ${zl(p.depositGr)}` : ''}`;
+    // BEERBA's style already ends in its ABV ("Yerbamate & Beer · 0,0%"): appending it again
+    // printed "0,0% · 0,0% alk." on its card.
+    const styleLine = p => `<p class="shop-card__style">${esc(p.style)}${p.style.includes(p.abvLabel) ? '' : ` · ${esc(p.abvLabel)}`} alk.</p>`;
     // The same beer's live Allegro offer, from the Worker's catalog. Non-alcoholic only: a beer with
     // alcohol is never sold at a distance, so it never gets a marketplace link.
     const ALLEGRO_OFFER = /^https:\/\/allegro\.pl\/oferta\/\d+$/;
@@ -121,7 +124,7 @@
             + `<img src="${esc(p.image)}" alt="" loading="lazy" width="300" height="340"></picture></a>`
             + '<div class="shop-card__body">'
             + `<h3 class="shop-card__name"><a href="${esc(p.url)}">${esc(p.name)}</a></h3>`
-            + `<p class="shop-card__style">${esc(p.style)} · ${esc(p.abvLabel)} alk.</p>`
+            + styleLine(p)
             + (p.tagline ? `<p class="shop-card__tagline">${esc(p.tagline)}.</p>` : '')
             // Above the bottom group, so the buttons of one row still share a floor.
             + (onAllegro(p) ? `<p class="shop-card__allegro">Także na ${allegroLink(p, 'Allegro')}</p>` : '')
@@ -139,7 +142,7 @@
         + `<img src="${esc(p.image)}" alt="" loading="lazy" width="300" height="340"></picture></a>`
         + '<div class="shop-card__body">'
         + `<h3 class="shop-card__name"><a href="${esc(p.url)}">${esc(p.name)}</a></h3>`
-        + `<p class="shop-card__style">${esc(p.style)} · ${esc(p.abvLabel)} alk.</p>`
+        + styleLine(p)
         + (p.tagline ? `<p class="shop-card__tagline">${esc(p.tagline)}.</p>` : '')
         // Same bottom row as an orderable card: one button of the same height, on the card's floor.
         + `<a class="shop-card__more" href="${esc(p.url)}">Zobacz piwo</a>`
