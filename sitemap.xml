@@ -4,10 +4,10 @@
   <url><loc>https://browarpogorza.pl/dobierz-piwo.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://browarpogorza.pl/piwo-z-logo-firmy.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://browarpogorza.pl/blog/</loc><lastmod>2026-10-03</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://browarpogorza.pl/blog/co-to-jest-porter-baltycki.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://browarpogorza.pl/blog/co-to-jest-porter-baltycki.html</loc><lastmod>2026-10-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/blog/jak-smakuje-foreign-extra-stout.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/blog/piwo-rzemieslnicze-podkarpacie-przewodnik.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://browarpogorza.pl/blog/piwo-z-wlasna-etykieta-jak-zamowic.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://browarpogorza.pl/blog/piwo-z-wlasna-etykieta-jak-zamowic.html</loc><lastmod>2026-10-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/piwa/hills-pils.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://browarpogorza.pl/piwa/wheat-valley.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://browarpogorza.pl/piwa/herb-apa.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -69,6 +69,9 @@
 
   <url><loc>https://browarpogorza.pl/blog/piwo-z-bergamotka-herbata-earl-grey.html</loc><lastmod>2026-10-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/blog/piwo-z-kawa-kawowy-stout-porter.html</loc><lastmod>2026-10-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+
+  <url><loc>https://browarpogorza.pl/blog/prezenty-swiateczne-dla-klientow-piwo-z-etykieta.html</loc><lastmod>2026-10-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://browarpogorza.pl/blog/piwo-na-swieta-do-karpia-pierogow-makowca.html</loc><lastmod>2026-10-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
 
   <!-- i18n:start -->
   <url>
