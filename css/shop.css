@@ -35,6 +35,8 @@
 .shop-card__name a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .shop-card__style { margin: 0; font-size: 0.86rem; color: var(--text-muted); }
 .shop-card__tagline { margin: 2px 0 0; font-size: 0.9rem; line-height: 1.45; color: var(--text); }
+.shop-card__allegro { margin: 0; font-size: 0.82rem; color: var(--text-muted); }
+.shop-card__allegro a, .shop-buy__allegro a { color: var(--green-leaf); font-weight: 600; text-underline-offset: 3px; }
 .shop-card__pack { margin: auto 0 0; padding-top: 8px; font-size: 0.82rem; color: var(--text-muted); }
 .shop-card__price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .shop-card__price strong { font: 700 1.35rem var(--font-sans); color: var(--ink); }
@@ -90,6 +92,7 @@ body.has-shop-bar .back-to-top { bottom: 168px; }
 .shop-buy__row .btn { flex: 1; justify-content: center; padding: 11px 16px; white-space: nowrap; }
 .shop-buy p.shop-buy__in { margin: 12px 0 0; color: var(--text); font-weight: 600; }
 .shop-buy p.shop-buy__ask { margin: 10px 0 0; }
+.shop-buy p.shop-buy__allegro { margin: 6px 0 0; }
 .shop-buy a { color: var(--green-leaf); text-decoration: underline; text-underline-offset: 2px; }
 .product__cta [data-beer-cta][hidden] { display: none !important; }
 

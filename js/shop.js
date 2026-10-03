@@ -107,6 +107,11 @@
 
     const unitPrice = p => `${(p.priceGr / (p.volumeMl / 1000) / 100).toFixed(2).replace('.', ',')} zł/l`;
     const packLine = p => `${esc(p.packagingLabel)} ${litres(p.volumeMl)} l · ${unitPrice(p)}${p.depositGr ? ` · kaucja ${zl(p.depositGr)}` : ''}`;
+    // The same beer's live Allegro offer, from the Worker's catalog. Non-alcoholic only: a beer with
+    // alcohol is never sold at a distance, so it never gets a marketplace link.
+    const ALLEGRO_OFFER = /^https:\/\/allegro\.pl\/oferta\/\d+$/;
+    const onAllegro = p => !p.alcoholic && ALLEGRO_OFFER.test(p.allegroUrl || '');
+    const allegroLink = (p, label) => `<a href="${esc(p.allegroUrl)}" target="_blank" rel="noopener">${label}</a>`;
 
     const card = (p) => {
         const inCart = cart.qty(p.id);
@@ -118,6 +123,8 @@
             + `<h3 class="shop-card__name"><a href="${esc(p.url)}">${esc(p.name)}</a></h3>`
             + `<p class="shop-card__style">${esc(p.style)} · ${esc(p.abvLabel)} alk.</p>`
             + (p.tagline ? `<p class="shop-card__tagline">${esc(p.tagline)}.</p>` : '')
+            // Above the bottom group, so the buttons of one row still share a floor.
+            + (onAllegro(p) ? `<p class="shop-card__allegro">Także na ${allegroLink(p, 'Allegro')}</p>` : '')
             + `<p class="shop-card__pack">${packLine(p)}</p>`
             + `<div class="shop-card__price"><strong>${zl(p.priceGr)}</strong><span>za sztukę, z VAT${inCart ? ` · w zamówieniu: ${inCart} szt.` : ''}</span></div>`
             + `<div class="shop-card__buy">${qtyControl(p.id, 1, p.name)}<button type="button" class="btn btn--sun" data-add="${esc(p.id)}" aria-label="Dodaj do zamówienia: ${esc(p.name)}">Dodaj</button></div>`
@@ -198,7 +205,8 @@
                     + (set ? `<p class="shop-buy__set">${set} ${bottleWord(set)}: <strong>${zl(set * p.priceGr)}</strong>${p.depositGr ? ` + kaucja ${zl(set * p.depositGr)}` : ''}</p>` : '')
                     + `<div class="shop-buy__row">${qtyControl(p.id, 1, p.name)}<button type="button" class="btn btn--sun" data-add="${esc(p.id)}">Dodaj do zamówienia</button></div>`
                     + (inCart ? `<p class="shop-buy__in">W zamówieniu: ${inCart} szt. <a href="${CHECKOUT_URL}">Przejdź do zamówienia</a></p>` : '')
-                    + '<p class="shop-buy__ask">Masz pytanie o to piwo? <a href="/#kontakt">Napisz do nas</a>.</p>';
+                    + '<p class="shop-buy__ask">Masz pytanie o to piwo? <a href="/#kontakt">Napisz do nas</a>.</p>'
+                    + (onAllegro(p) ? `<p class="shop-buy__allegro">Wolisz Allegro? ${allegroLink(p, 'To piwo jest też na Allegro')}.</p>` : '');
                 box.hidden = false;
             });
         },
