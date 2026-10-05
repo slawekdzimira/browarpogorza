@@ -81,7 +81,8 @@
     // ...and it waits for the age gate on a first visit: an intro that plays
     // behind the gate is one nobody sees. consent.js fires the event on close.
     let gated = false;
-    try { gated = !localStorage.getItem('bp_age_verified'); } catch (e) { /* private mode: gate shows, event follows */ gated = true; }
+    // Same key as consent.js: remembered in localStorage, or for this tab only in sessionStorage.
+    try { gated = !(localStorage.getItem('bp_age_ok') || sessionStorage.getItem('bp_age_ok')); } catch (e) { /* private mode: gate shows, event follows */ gated = true; }
     if (gated) {
         if (lenis) lenis.stop();
         document.addEventListener('bp:age-verified', () => {

@@ -1,7 +1,10 @@
 (() => {
     'use strict';
 
-    const STORAGE_AGE = 'bp_age_verified';
+    // The owner, 05.10.2026: the question comes on every visit unless the visitor ticks "Zapamiętaj
+    // mnie" (as on other brewery sites). Remembered = localStorage, otherwise sessionStorage (this
+    // tab). A new key, so the old permanent "bp_age_verified" asks once more. motion.js reads it too.
+    const STORAGE_AGE = 'bp_age_ok';
     const STORAGE_COOKIE = 'bp_cookie_consent';
 
     // The overlays are injected at runtime, so generate_i18n.js never sees them:
@@ -14,6 +17,7 @@
             ageQuestion: 'Czy masz ukończone 18 lat?',
             ageYes: 'Tak, mam 18+ lat',
             ageNo: 'Nie, opuść stronę',
+            ageRemember: 'Zapamiętaj mnie na tym urządzeniu',
             ageWarning: 'Promujemy odpowiedzialne spożywanie alkoholu. Alkohol szkodzi zdrowiu.',
             cookieRegion: 'Zgoda na pliki cookies',
             cookieTitle: 'Używamy plików cookies',
@@ -30,6 +34,7 @@
             ageQuestion: 'Are you 18 or older?',
             ageYes: 'Yes, I am 18+',
             ageNo: 'No, leave the site',
+            ageRemember: 'Remember me on this device',
             ageWarning: 'We promote responsible drinking. Alcohol is harmful to your health.',
             cookieRegion: 'Cookie consent',
             cookieTitle: 'We use cookies',
@@ -46,6 +51,7 @@
             ageQuestion: 'Вам виповнилося 18 років?',
             ageYes: 'Так, мені є 18',
             ageNo: 'Ні, покинути сайт',
+            ageRemember: 'Запам’ятати мене на цьому пристрої',
             ageWarning: 'Ми пропагуємо відповідальне вживання алкоголю. Алкоголь шкодить здоров’ю.',
             cookieRegion: 'Згода на файли cookie',
             cookieTitle: 'Ми використовуємо файли cookie',
@@ -62,6 +68,7 @@
             ageQuestion: '¿Tienes 18 años o más?',
             ageYes: 'Sí, tengo 18+',
             ageNo: 'No, salir del sitio',
+            ageRemember: 'Recordarme en este dispositivo',
             ageWarning: 'Promovemos el consumo responsable. El alcohol perjudica la salud.',
             cookieRegion: 'Consentimiento de cookies',
             cookieTitle: 'Usamos cookies',
@@ -78,6 +85,7 @@
             ageQuestion: 'Bist du 18 Jahre oder älter?',
             ageYes: 'Ja, ich bin 18+',
             ageNo: 'Nein, Seite verlassen',
+            ageRemember: 'Auf diesem Gerät merken',
             ageWarning: 'Wir stehen für verantwortungsvollen Alkoholkonsum. Alkohol schadet der Gesundheit.',
             cookieRegion: 'Cookie-Einwilligung',
             cookieTitle: 'Wir verwenden Cookies',
@@ -161,6 +169,7 @@
                     <button type="button" class="btn btn--sun age-gate__yes" data-age-yes>${escape(t.ageYes)}</button>
                     <a href="https://www.google.com" class="btn btn--ghost age-gate__no">${escape(t.ageNo)}</a>
                 </div>
+                <label class="age-gate__remember"><input type="checkbox" data-age-remember checked> <span>${escape(t.ageRemember)}</span></label>
                 <p class="age-gate__warning">${escape(t.ageWarning)}</p>
             </div>
             <div class="age-gate__bg" aria-hidden="true">
@@ -190,7 +199,8 @@
             }, 550);
         };
         modal.querySelector('[data-age-yes]').addEventListener('click', () => {
-            try { localStorage.setItem(STORAGE_AGE, String(Date.now())); } catch (e) {}
+            const remember = modal.querySelector('[data-age-remember]').checked;
+            try { (remember ? localStorage : sessionStorage).setItem(STORAGE_AGE, String(Date.now())); } catch (e) {}
             closeAgeGate();
         });
         window.addEventListener('pagehide', restoreScroll, { once: true });
@@ -266,7 +276,7 @@
         if (navigator.webdriver) return;
 
         let ageVerified = null;
-        try { ageVerified = localStorage.getItem(STORAGE_AGE); } catch (e) {}
+        try { ageVerified = localStorage.getItem(STORAGE_AGE) || sessionStorage.getItem(STORAGE_AGE); } catch (e) {}
         if (!ageVerified) {
             showAgeGate();
         } else {
