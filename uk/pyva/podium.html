@@ -104,22 +104,95 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ItemPage",
-  "@id": "https://browarpogorza.pl/uk/pyva/podium.html#webpage",
-  "url": "https://browarpogorza.pl/uk/pyva/podium.html",
-  "name": "Podium - Безалкогольна IPA",
-  "description": "IPA 0,5%, створена разом із громадським проєктом PODIUM, який заохочує до активності. Цитрусово-тропічний хміль, легке тіло й делікатна гіркота - для гостей, які не п’ють алкоголю.",
-  "inLanguage": "uk-UA",
-  "primaryImageOfPage": {
-    "@type": "ImageObject",
-    "url": "https://browarpogorza.pl/images/beer-podium.png"
+  "@type": "Product",
+  "@id": "https://browarpogorza.pl/uk/pyva/podium.html#product",
+  "name": "Podium 6 x 500 ml",
+  "description": "Безалкогольна IPA з хмелем Citra і Mosaic",
+  "image": "https://browarpogorza.pl/images/beer-podium.png",
+  "category": "Безалкогольна IPA",
+  "brand": {
+    "@type": "Brand",
+    "name": "Browar Pogórza"
   },
-  "isPartOf": {
-    "@id": "https://browarpogorza.pl/#website"
-  },
-  "publisher": {
+  "manufacturer": {
     "@id": "https://browarpogorza.pl/#brewery"
-  }
+  },
+  "sku": "bp-podium",
+  "gtin13": "5904224479145",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://browarpogorza.pl/uk/pyva/podium.html",
+    "price": "71.94",
+    "priceCurrency": "PLN",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "71.94",
+      "priceCurrency": "PLN",
+      "referenceQuantity": {
+        "@type": "QuantitativeValue",
+        "value": 3000,
+        "unitCode": "MLT",
+        "valueReference": {
+          "@type": "QuantitativeValue",
+          "value": 1,
+          "unitCode": "LTR"
+        }
+      }
+    },
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@id": "https://browarpogorza.pl/#brewery"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "24.99",
+        "currency": "PLN"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "PL"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 3,
+          "unitCode": "DAY"
+        }
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "PL",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 14,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
+    }
+  },
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "ABV",
+      "value": 0.5,
+      "unitText": "%"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Гіркота",
+      "value": "1/5"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Екстракт",
+      "value": 10,
+      "unitText": "°Plato"
+    }
+  ]
 }
     </script>
     <script type="application/ld+json">
