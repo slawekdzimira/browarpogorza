@@ -105,6 +105,10 @@
 
     /* ----------------------------------------------------------- render */
 
+    // Cards show the bottle at card size (generate_card_images.js makes <name>-card.* for every
+    // beer-/puszka- image): the full bottles weighed 27-89 KB each, eleven of them on the offer.
+    const cardImage = src => (/^\/images\/(beer|puszka)-[\w-]+\.(png|jpe?g)$/i.test(src) && !/-front\./i.test(src)
+        ? src.replace(/\.(png|jpe?g)$/i, '-card.$1') : src);
     const unitPrice = p => `${(p.priceGr / (p.volumeMl / 1000) / 100).toFixed(2).replace('.', ',')} zł/l`;
     const packLine = p => `${esc(p.packagingLabel)} ${litres(p.volumeMl)} l · ${unitPrice(p)}${p.depositGr ? ` · kaucja ${zl(p.depositGr)}` : ''}`;
     // BEERBA's style already ends in its ABV ("Yerbamate & Beer · 0,0%"): appending it again
@@ -120,8 +124,8 @@
         const inCart = cart.qty(p.id);
         return `<article class="shop-card${inCart ? ' is-in-cart' : ''}" data-id="${esc(p.id)}">`
             + `<span class="shop-card__tag ${p.alcoholic ? 'shop-card__tag--event">Na imprezę zamkniętą' : 'shop-card__tag--na">Wysyłka kurierem'}</span>`
-            + `<a class="shop-card__media" href="${esc(p.url)}" tabindex="-1" aria-hidden="true"><picture><source type="image/webp" srcset="${esc(webp(p.image))}">`
-            + `<img src="${esc(p.image)}" alt="" loading="lazy" width="300" height="340"></picture></a>`
+            + `<a class="shop-card__media" href="${esc(p.url)}" tabindex="-1" aria-hidden="true"><picture><source type="image/webp" srcset="${esc(webp(cardImage(p.image)))}">`
+            + `<img src="${esc(cardImage(p.image))}" alt="" loading="lazy" width="300" height="340"></picture></a>`
             + '<div class="shop-card__body">'
             + `<h3 class="shop-card__name"><a href="${esc(p.url)}">${esc(p.name)}</a></h3>`
             + styleLine(p)
@@ -138,8 +142,8 @@
     // switched off): still shown, with its page and an enquiry, so the offer is never empty.
     const previewCard = p => `<article class="shop-card shop-card--preview" data-preview="${esc(p.id)}">`
         + `<span class="shop-card__tag ${p.alcoholic ? 'shop-card__tag--event">Na imprezę zamkniętą' : 'shop-card__tag--na">Bezalkoholowe'}</span>`
-        + `<a class="shop-card__media" href="${esc(p.url)}" tabindex="-1" aria-hidden="true"><picture><source type="image/webp" srcset="${esc(webp(p.image))}">`
-        + `<img src="${esc(p.image)}" alt="" loading="lazy" width="300" height="340"></picture></a>`
+        + `<a class="shop-card__media" href="${esc(p.url)}" tabindex="-1" aria-hidden="true"><picture><source type="image/webp" srcset="${esc(webp(cardImage(p.image)))}">`
+        + `<img src="${esc(cardImage(p.image))}" alt="" loading="lazy" width="300" height="340"></picture></a>`
         + '<div class="shop-card__body">'
         + `<h3 class="shop-card__name"><a href="${esc(p.url)}">${esc(p.name)}</a></h3>`
         + styleLine(p)
@@ -1160,8 +1164,10 @@
             catalog = await (await fetch(`${ENDPOINT}/shop/catalog`, { credentials: 'omit' })).json();
             if (!catalog || !Array.isArray(catalog.products)) throw new Error('catalog');
         } catch (e) {
-            const msg = `<div class="shop-note"><strong>Nie udało się wczytać oferty.</strong> Odśwież stronę albo napisz do nas: ${esc(CONTACT)}.</div>`;
-            if (grid) grid.innerHTML = msg;
+            const failed = `<strong>Nie udało się wczytać oferty.</strong> Odśwież stronę albo napisz do nas: ${esc(CONTACT)}.`;
+            const msg = `<div class="shop-note">${failed}</div>`;
+            // The range written into the page at build time stays, so the beers and their pages remain.
+            if (grid) grid.insertAdjacentHTML('afterbegin', note(failed));
             if (checkoutRoot) checkoutRoot.innerHTML = msg;
             return;
         }
