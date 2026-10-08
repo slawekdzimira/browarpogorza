@@ -356,7 +356,11 @@
         toggleBackToTop();
     }
 
-    const urlParams = new URLSearchParams(location.search);
+    // A beer page's "Zamów / Zapytaj" opens /#kontakt&beer=<slug>&name=<name>: in the fragment,
+    // so crawlers see one home page instead of a URL per beer and language (55 duplicates in the
+    // SETPROFIT audit, 07.10.2026). Links from before carry the query string and still work.
+    const hashParams = new URLSearchParams(location.hash.slice(1));
+    const urlParams = hashParams.has('beer') ? hashParams : new URLSearchParams(location.search);
     const beerParam = urlParams.get('beer');
     if (beerParam) {
         const msgField = document.getElementById('f-msg');
@@ -375,6 +379,8 @@
             msgField.value = (templates[lang] || templates.pl)(beerName);
             const kontakt = document.getElementById('kontakt');
             if (kontakt) {
+                // No element carries the fragment's id, so the browser does not jump there itself.
+                if (hashParams.has('beer')) kontakt.scrollIntoView({ behavior: 'instant' });
                 setTimeout(() => {
                     kontakt.scrollIntoView({ behavior: scrollBehavior() });
                     msgField.focus();

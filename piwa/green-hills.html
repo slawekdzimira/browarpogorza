@@ -104,95 +104,22 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "@id": "https://browarpogorza.pl/piwa/green-hills.html#product",
-  "name": "Green Hills 6 x 500 ml",
-  "description": "IPA z Earl Greyem, bez alkoholu",
-  "image": "https://browarpogorza.pl/images/beer-green-hills.png",
-  "category": "Earl Grey IPA · bezalkoholowe",
-  "brand": {
-    "@type": "Brand",
-    "name": "Browar Pogórza"
+  "@type": "ItemPage",
+  "@id": "https://browarpogorza.pl/piwa/green-hills.html#webpage",
+  "url": "https://browarpogorza.pl/piwa/green-hills.html",
+  "name": "Green Hills - Earl Grey IPA · bezalkoholowe",
+  "description": "Ma chmielowy charakter IPA i bergamotkę z Earl Greya, tylko bez alkoholu - 0,5%. Nie udaje piwa mocnego, po prostu smakuje jak porządne piwo. Lekkie, cytrusowe i naprawdę orzeźwiające.",
+  "inLanguage": "pl-PL",
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://browarpogorza.pl/images/beer-green-hills.png"
   },
-  "manufacturer": {
+  "isPartOf": {
+    "@id": "https://browarpogorza.pl/#website"
+  },
+  "publisher": {
     "@id": "https://browarpogorza.pl/#brewery"
-  },
-  "sku": "bp-green-hills",
-  "gtin13": "5905090427124",
-  "offers": {
-    "@type": "Offer",
-    "url": "https://browarpogorza.pl/piwa/green-hills.html",
-    "price": "71.94",
-    "priceCurrency": "PLN",
-    "priceSpecification": {
-      "@type": "UnitPriceSpecification",
-      "price": "71.94",
-      "priceCurrency": "PLN",
-      "referenceQuantity": {
-        "@type": "QuantitativeValue",
-        "value": 3000,
-        "unitCode": "MLT",
-        "valueReference": {
-          "@type": "QuantitativeValue",
-          "value": 1,
-          "unitCode": "LTR"
-        }
-      }
-    },
-    "availability": "https://schema.org/InStock",
-    "itemCondition": "https://schema.org/NewCondition",
-    "seller": {
-      "@id": "https://browarpogorza.pl/#brewery"
-    },
-    "shippingDetails": {
-      "@type": "OfferShippingDetails",
-      "shippingRate": {
-        "@type": "MonetaryAmount",
-        "value": "24.99",
-        "currency": "PLN"
-      },
-      "shippingDestination": {
-        "@type": "DefinedRegion",
-        "addressCountry": "PL"
-      },
-      "deliveryTime": {
-        "@type": "ShippingDeliveryTime",
-        "handlingTime": {
-          "@type": "QuantitativeValue",
-          "minValue": 1,
-          "maxValue": 3,
-          "unitCode": "DAY"
-        }
-      }
-    },
-    "hasMerchantReturnPolicy": {
-      "@type": "MerchantReturnPolicy",
-      "applicableCountry": "PL",
-      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-      "merchantReturnDays": 14,
-      "returnMethod": "https://schema.org/ReturnByMail",
-      "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
-    }
-  },
-  "additionalProperty": [
-    {
-      "@type": "PropertyValue",
-      "name": "ABV",
-      "value": 0.5,
-      "unitText": "%"
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Goryczka",
-      "value": "1/5"
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Ekstrakt",
-      "value": 12,
-      "unitText": "°Plato"
-    }
-  ]
+  }
 }
     </script>
     <script type="application/ld+json">
@@ -300,7 +227,7 @@
                 </dl>
                 <div class="shop-buy" data-shop-product="green-hills" hidden></div>
                 <div class="product__cta">
-                    <a href="/?beer=green-hills&name=Green%20Hills#kontakt" class="btn btn--sun" data-beer-cta="green-hills" onclick="gtag('event','generate_lead',{beer_slug:'green-hills',beer_name:'Green Hills',source:'product_page_cta'})">Zamów / Zapytaj</a>
+                    <a href="/#kontakt&beer=green-hills&name=Green%20Hills" class="btn btn--sun" data-beer-cta="green-hills" onclick="gtag('event','generate_lead',{beer_slug:'green-hills',beer_name:'Green Hills',source:'product_page_cta'})">Zamów / Zapytaj</a>
                     <a href="/#piwa" class="btn btn--ghost"><svg class="icon-arrow icon-arrow--left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 6 5 12 11 18"/></svg>Wszystkie piwa</a>
                 </div>
             </div>
