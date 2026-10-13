@@ -267,7 +267,8 @@
 
         // Skip age gate + cookie banner for automated audits (Lighthouse, headless Chrome).
         // PageSpeed Insights uses HeadlessChromium - measuring the age-gate modal as LCP
-        // gives misleading scores. Real users still see the modal.
+        // gives misleading scores. Real users still see the modal. motion.js repeats this
+        // test so its intro does not wait for a gate these visitors never get.
         const ua = navigator.userAgent || '';
         if (/Lighthouse|Headless|PageSpeed|GoogleBot|bingbot|YandexBot|crawler|spider|bot/i.test(ua)) {
             return;

@@ -33,9 +33,12 @@
             ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
                 window.addEventListener(evt, loadGtag, { once: true, passive: true });
             });
-            // First interaction only, by the owner's decision: the idle timer used to
-            // pull 181 KB of analytics into the critical window on mobile. A visitor
-            // who never interacts is not measured - that trade was made deliberately.
+            // First interaction only on every other page, by the owner's decision: the idle
+            // timer used to pull 181 KB of analytics into the critical window on mobile.
+            // Not here: after sending a form nobody clicks the thank-you page, so its
+            // form_submit never left the queue. This noindex page loads analytics once it
+            // has parsed, after consent.js has applied the visitor's stored choice.
+            document.addEventListener('DOMContentLoaded', loadGtag, { once: true });
         })();
     </script>
     <script>

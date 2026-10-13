@@ -64,11 +64,6 @@
     });
 
     const INTRO_TARGETS = '.hero__title, .hero__tagline, .hero__lead, .hero__mark, .hero__actions, .product__name, .product__style, .product__tagline, .product__desc, .product__stats, .product__cta, .product__photo, .beer-nav, .thanks__title, .legal h1';
-    // Hidden right away so the intro has somewhere to start from...
-    document.querySelectorAll(INTRO_TARGETS).forEach((el, i) => {
-        el.classList.add('intro');
-        el.style.setProperty('--intro', i);
-    });
     const playIntro = () => {
         document.querySelectorAll('.intro').forEach(el => {
             // Reading a computed value forces the hidden state to be resolved
@@ -78,21 +73,38 @@
             requestAnimationFrame(() => el.classList.add('is-visible'));
         });
     };
-    // ...and it waits for the age gate on a first visit: an intro that plays
-    // behind the gate is one nobody sees. consent.js fires the event on close.
-    let gated = false;
-    // Same key as consent.js: remembered in localStorage, or for this tab only in sessionStorage.
-    try { gated = !(localStorage.getItem('bp_age_ok') || sessionStorage.getItem('bp_age_ok')); } catch (e) { /* private mode: gate shows, event follows */ gated = true; }
-    if (gated) {
-        if (lenis) lenis.stop();
-        document.addEventListener('bp:age-verified', () => {
-            if (lenis) lenis.start();
+    const startIntro = () => {
+        // Hidden right away so the intro has somewhere to start from...
+        document.querySelectorAll(INTRO_TARGETS).forEach((el, i) => {
+            el.classList.add('intro');
+            el.style.setProperty('--intro', i);
+        });
+        // ...and it waits for the age gate on a first visit: an intro that plays
+        // behind the gate is one nobody sees. consent.js fires the event on close.
+        let gated = false;
+        // Same key as consent.js: remembered in localStorage, or for this tab only in sessionStorage.
+        try { gated = !(localStorage.getItem('bp_age_ok') || sessionStorage.getItem('bp_age_ok')); } catch (e) { /* private mode: gate shows, event follows */ gated = true; }
+        if (gated) {
+            if (lenis) lenis.stop();
+            document.addEventListener('bp:age-verified', () => {
+                if (lenis) lenis.start();
+                playIntro();
+            }, { once: true });
+        } else if (document.readyState === 'complete') {
             playIntro();
-        }, { once: true });
-    } else if (document.readyState === 'complete') {
-        playIntro();
+        } else {
+            window.addEventListener('load', playIntro, { once: true });
+        }
+    };
+    // consent.js shows no age gate to crawlers and audits (Googlebot, Lighthouse, PageSpeed)
+    // and so never fires the event the intro waits for: in their render the hero and product
+    // copy stayed at opacity 0 for good (Googlebot render, 12.10.2026). They get the copy as
+    // painted, words included, with no entrance. Same test as consent.js init().
+    const AUTOMATED_UA = /Lighthouse|Headless|PageSpeed|GoogleBot|bingbot|YandexBot|crawler|spider|bot/i;
+    if (navigator.webdriver || AUTOMATED_UA.test(navigator.userAgent || '')) {
+        document.querySelectorAll(INTRO_TARGETS).forEach(el => el.classList.add('is-visible'));
     } else {
-        window.addEventListener('load', playIntro, { once: true });
+        startIntro();
     }
 
     // --- parallax and hero drift, one pass per frame from the scroll position.
