@@ -147,7 +147,7 @@
     </script>
     <!-- Kapsel, the AI assistant, in general mode: the brewery, its beers and brewing;
          what it cannot answer goes to the contact form below. -->
-    <script src="/js/kapsel.js" defer data-endpoint="https://kapsel.browarpogorza.workers.dev" data-mode="general"></script>
+    <script type="text/plain" data-on-interaction data-src="/js/kapsel.js" data-endpoint="https://kapsel.browarpogorza.workers.dev" data-mode="general"></script>
 
     <link rel="alternate" hreflang="pl" href="https://browarpogorza.pl/">
     <link rel="alternate" hreflang="en" href="https://browarpogorza.pl/en/">
@@ -155,6 +155,7 @@
     <link rel="alternate" hreflang="es" href="https://browarpogorza.pl/es/">
     <link rel="alternate" hreflang="de" href="https://browarpogorza.pl/de/">
     <link rel="alternate" hreflang="x-default" href="https://browarpogorza.pl/">
+<script data-on-interaction-loader>(function(){var done=false;function inject(){document.querySelectorAll("script[data-on-interaction]").forEach(function(tag){var s=document.createElement("script");for(var i=0;i<tag.attributes.length;i++){var a=tag.attributes[i];if(a.name!=="type"&&a.name!=="data-on-interaction"&&a.name!=="data-src")s.setAttribute(a.name,a.value)}s.src=tag.getAttribute("data-src");s.async=false;document.head.appendChild(s)})}function load(){if(done)return;done=true;if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",inject);else inject()}["pointerdown","pointermove","keydown","scroll","touchstart","wheel"].forEach(function(e){addEventListener(e,load,{once:true,passive:true})})})();</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Ir al contenido</a>
