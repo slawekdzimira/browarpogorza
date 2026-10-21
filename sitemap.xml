@@ -16,9 +16,9 @@
   <url><loc>https://browarpogorza.pl/piwa/podium.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/piwa/blue-sky.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://browarpogorza.pl/piwa/beerba.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://browarpogorza.pl/piwa/coffee-fes.html</loc><lastmod>2026-10-12</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://browarpogorza.pl/piwa/coffee-fes.html</loc><lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://browarpogorza.pl/piwa/dark-sky.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://browarpogorza.pl/piwa/dark-sky-coconut-coffee.html</loc><lastmod>2026-10-05</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://browarpogorza.pl/piwa/dark-sky-coconut-coffee.html</loc><lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://browarpogorza.pl/polityka-prywatnosci.html</loc><lastmod>2026-10-02</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://browarpogorza.pl/regulamin.html</loc><lastmod>2026-08-28</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://browarpogorza.pl/cookies.html</loc><lastmod>2026-10-01</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
@@ -35,7 +35,7 @@
   </url>
 
   <url>
-    <loc>https://browarpogorza.pl/zamow.html</loc><lastmod>2026-10-02</lastmod>
+    <loc>https://browarpogorza.pl/zamow.html</loc><lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -46,7 +46,7 @@
   </url>
 
   <url>
-    <loc>https://browarpogorza.pl/ile-piwa-na-wesele.html</loc><lastmod>2026-10-02</lastmod>
+    <loc>https://browarpogorza.pl/ile-piwa-na-wesele.html</loc><lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
