@@ -482,7 +482,7 @@
                 const final = document.getElementById('co-final');
                 final.hidden = false;
                 final.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                track('begin_checkout', { currency: 'PLN', value: data.totals.totalGr / 100, order_kind: data.kind });
+                track('add_shipping_info', { currency: 'PLN', value: data.totals.totalGr / 100, order_kind: data.kind });
             } catch (e) {
                 this.showErrors({ form: `Brak połączenia z serwerem zamówień. Spróbuj ponownie albo napisz: ${CONTACT}.` });
             } finally {
@@ -574,10 +574,17 @@
             this.remember();
             this.render();
         },
+        // GA4 funnel: begin_checkout is the order form opened with beers in it, once per page load;
+        // the server check of the filled form is add_shipping_info. Until 21.10.2026 the check was sent
+        // as begin_checkout, so the step from the cart to the form could not be seen (10 add_to_cart, 0 after).
         init(root) {
             this.root = root;
             this.render();
             this.bind();
+            const items = cart.valid();
+            if (!catalog.settings.shopOpen || !items.length) return;
+            const t = cart.totals(items);
+            track('begin_checkout', { currency: 'PLN', value: t.totalGr / 100, order_kind: t.kind });
         },
     };
 
